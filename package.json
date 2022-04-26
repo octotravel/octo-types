@@ -1,5 +1,5 @@
 {
-  "name": "@octo/types",
+  "name": "@octocloud/types",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -20,8 +20,5 @@
   "bugs": {
     "url": "https://github.com/octotravel/octo-types/issues"
   },
-  "homepage": "https://github.com/octotravel/octo-types#readme",
-  "devDependencies": {
-    "typescript": "^4.6.3"
-  }
+  "homepage": "https://github.com/octotravel/octo-types#readme"
 }
