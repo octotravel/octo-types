@@ -1,0 +1,27 @@
+{
+  "name": "@octo/types",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "pretest": "npm run build",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/octotravel/octo-types.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/octotravel/octo-types/issues"
+  },
+  "homepage": "https://github.com/octotravel/octo-types#readme",
+  "devDependencies": {
+    "typescript": "^4.6.3"
+  }
+}
