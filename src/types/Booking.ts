@@ -1,5 +1,5 @@
 import { PickupPoint } from "./PickupPoint";
-import { Unit, UnitId } from "./Unit";
+import { Unit } from "./Unit";
 import { OpeningHours } from "./Availability";
 import { Option } from "./Option";
 import {
@@ -89,7 +89,7 @@ export interface UnitItem extends UnitItemPricing {
   uuid: string;
   resellerReference: Nullable<string>;
   supplierReferecne: Nullable<string>;
-  unitId: UnitId;
+  unitId: string;
   unit: Unit;
   status: BookingStatus;
   utcRedeemedAt: Nullable<string>;
@@ -98,7 +98,7 @@ export interface UnitItem extends UnitItemPricing {
 }
 
 interface UnitItemPricing {
-  pricing?: Array<Pricing>;
+  pricing?: Pricing;
 }
 
 interface BookingPricing {
