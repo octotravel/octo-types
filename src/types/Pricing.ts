@@ -11,15 +11,6 @@ export interface Pricing {
   includedTaxes: Array<Tax>;
 }
 
-export const defaultPricing = {
-  original: 0,
-  retail: 0,
-  net: 0,
-  currency: "",
-  currencyPrecision: 0,
-  includedTaxes: [],
-};
-
 export interface PricingUnit extends Pricing {
   unitId: string;
 }
