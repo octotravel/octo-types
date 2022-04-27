@@ -1,16 +1,16 @@
 import { Pricing } from "./Pricing";
 
-export enum UnitId {
-  Adult = "adult",
-  Youth = "youth",
-  Child = "child",
-  Infant = "infant",
-  Family = "family",
-  Senior = "senior",
-  Student = "student",
-  Military = "military",
+export enum UnitType {
+  ADULT = 'ADULT',
+  YOUTH = 'YOUTH',
+  CHILD = 'CHILD',
+  INFANT = 'INFANT',
+  FAMILY = 'FAMILY',
+  SENIOR = 'SENIOR',
+  STUDENT = 'STUDENT',
+  MILITARY = 'MILITARY',
+  OTHER = 'OTHER',
 }
-
 export interface Restrictions {
   minAge: number;
   maxAge: number;
@@ -22,10 +22,10 @@ export interface Restrictions {
 }
 
 export interface Unit extends UnitContent, UnitPricing {
-  id: UnitId;
+  id: string;
   internalName: string;
   reference: string;
-  type: Nullable<string>;
+  type: UnitType;
   restrictions: Restrictions;
   requiredContactFields: string[];
 }
