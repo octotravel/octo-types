@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/octotravel/octo-types/issues"
   },
-  "homepage": "https://github.com/octotravel/octo-types#readme"
+  "homepage": "https://github.com/octotravel/octo-types#readme",
+  "devDependencies": {
+    "typescript": "^4.6.3"
+  }
 }
