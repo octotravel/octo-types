@@ -88,7 +88,7 @@ export interface DeliveryOption {
 export interface UnitItem extends UnitItemPricing {
   uuid: string;
   resellerReference: Nullable<string>;
-  supplierReferecne: Nullable<string>;
+  supplierReference: Nullable<string>;
   unitId: string;
   unit: Unit;
   status: BookingStatus;
