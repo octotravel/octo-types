@@ -1,5 +1,6 @@
 import { PickupPoint } from "./PickupPoint";
 import { Pricing, PricingUnit } from "./Pricing";
+
 export enum AvailabilityType {
   START_TIME = "START_TIME",
   OPENING_HOURS = "OPENING_HOURS",

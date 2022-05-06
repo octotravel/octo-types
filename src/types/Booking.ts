@@ -74,7 +74,7 @@ export interface Voucher {
   deliveryOptions: DeliveryOption[];
 }
 
-interface Ticket {
+export interface Ticket {
   redemptionMethod: RedemptionMethod;
   utcRedeemedAt: Nullable<string>;
   deliveryOptions: DeliveryOption[];
