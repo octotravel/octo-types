@@ -41,6 +41,26 @@ export type Itinerary = {
   durationUnit: string;
 };
 
+interface GoogleOptions {
+  landing_page: {
+    url: string;
+  };
+  option_categories: Array<OptionCategories>;
+  related_locations: Array<RelatedLocations>;
+}
+interface OptionCategories {
+  label: string;
+}
+interface RelatedLocations {
+  location: {
+    location: {
+      place_id: string;
+    };
+  };
+  relation_type: string;
+}
+
+
 export interface Option extends OptionContent, OptionPickup, OptionPricing {
   id: string;
   default: boolean;
@@ -75,4 +95,8 @@ interface OptionPickup {
   pickupRequired?: boolean;
   pickupAvailable?: boolean;
   pickupPoints?: Array<PickupPoint>;
+}
+
+interface OptionGoogle {
+  googleOptions?: GoogleOptions;
 }
