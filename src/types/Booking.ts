@@ -15,6 +15,7 @@ export enum BookingStatus {
   CONFIRMED = "CONFIRMED",
   EXPIRED = "EXPIRED",
   CANCELLED = "CANCELLED",
+  REDEEMED = "REDEEMED",
 }
 
 export interface Booking extends BookingPricing, BookingPickup, BookingContent {

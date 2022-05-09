@@ -10,6 +10,8 @@ export enum CapabilityId {
   Webhooks = "octo/webhooks",
   Mappings = "octo/mappings",
   Redemption = "octo/redemption",
+  Google = 'octo/google',
+
 }
 
 export interface Capability {
