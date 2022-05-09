@@ -61,7 +61,7 @@ interface RelatedLocations {
 }
 
 
-export interface Option extends OptionContent, OptionPickup, OptionPricing {
+export interface Option extends OptionContent, OptionPickup, OptionPricing, OptionGoogle {
   id: string;
   default: boolean;
   internalName: string;
