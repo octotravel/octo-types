@@ -6,6 +6,7 @@ import { Option } from "./Option";
 export enum DeliveryFormat {
   PDF_URL = "PDF_URL",
   QRCODE = "QRCODE",
+  CODE128 = "CODE128",
 }
 
 export enum DeliveryMethod {
