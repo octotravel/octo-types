@@ -11,6 +11,7 @@ export enum AvailabilityStatus {
   FREESALE = "FREESALE",
   SOLD_OUT = "SOLD_OUT",
   LIMITED = "LIMITED",
+  CLOSED = "CLOSED",
 }
 
 export interface OpeningHours extends OpeningHoursContent {
