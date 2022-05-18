@@ -1,5 +1,5 @@
 export enum DurationUnit {
-  HOURS = "hours",
-  MINUTES = "minutes",
-  SECONDS = "seconds",
+  HOUR = "hour",
+  MINUTE = "minute",
+  SECOND = "second",
 }
