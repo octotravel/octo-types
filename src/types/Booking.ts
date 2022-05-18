@@ -97,7 +97,7 @@ export interface UnitItem extends UnitItemPricing {
   status: BookingStatus;
   utcRedeemedAt: Nullable<string>;
   contact: Contact;
-  ticket: Ticket;
+  ticket: Nullable<Ticket>;
 }
 
 interface UnitItemPricing {
