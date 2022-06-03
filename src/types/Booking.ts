@@ -44,7 +44,7 @@ export interface Booking extends BookingPricing, BookingPickup, BookingContent {
   contact: Contact;
   notes: Nullable<string>;
   deliveryMethods: DeliveryMethod[];
-  voucher: Ticket;
+  voucher: Nullable<Ticket>;
   unitItems: UnitItem[];
 }
 export interface Cancellation {
@@ -91,7 +91,7 @@ export interface UnitItem extends UnitItemPricing {
   status: BookingStatus;
   utcRedeemedAt: Nullable<string>;
   contact: Contact;
-  ticket: Ticket;
+  ticket: Nullable<Ticket>;
 }
 
 interface UnitItemPricing {
