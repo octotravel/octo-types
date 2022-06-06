@@ -1,12 +1,13 @@
 {
   "name": "@octocloud/types",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
+    "format": "prettier --write \"**/*.{ts,js,css,json,md}\"",
     "pretest": "npm run build",
     "prepare": "npm run build"
   },
@@ -22,6 +23,16 @@
   },
   "homepage": "https://github.com/octotravel/octo-types#readme",
   "devDependencies": {
-    "typescript": "^4.6.3"
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "eslint": "^8.17.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "prettier": "^2.6.2",
+    "typescript": "^4.6.3",
+    "yup": "*"
+  },
+  "peerDependencies": {
+    "yup": "^0.32.11"
   }
 }
