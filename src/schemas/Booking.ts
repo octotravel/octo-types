@@ -37,12 +37,12 @@ export const getBookingsQueryParamsSchema: yup.SchemaOf<GetBookingsQueryParamsSc
         localDateStart,
         localDateEnd,
       }) => {
-        return !Boolean(
+        return Boolean(
           resellerReference ||
             supplierReference ||
             localDate ||
             (localDateStart && localDateEnd)
-        ).valueOf();
+        );
       }
     );
 
@@ -171,9 +171,8 @@ export interface ConfirmBookingBodySchema extends BookingPickupBodySchema {
   contact?: BookingContactSchema;
 }
 
-export const confirmBookingBodySchema: yup.SchemaOf<ConfirmBookingBodySchema> = yup
-  .object()
-  .shape({
+export const confirmBookingBodySchema: yup.SchemaOf<ConfirmBookingBodySchema> =
+  yup.object().shape({
     resellerReference: yup.string().notRequired(),
     notes: yup.string().notRequired(),
     emailReceipt: yup.bool().notRequired(),
@@ -196,9 +195,8 @@ export type CancelBookingBodySchema = {
   force?: boolean;
 };
 
-export const cancelBookingBodySchema: yup.SchemaOf<CancelBookingBodySchema> = yup
-  .object()
-  .shape({
+export const cancelBookingBodySchema: yup.SchemaOf<CancelBookingBodySchema> =
+  yup.object().shape({
     reason: yup.string().notRequired(),
     force: yup.boolean().notRequired(),
   });
@@ -216,9 +214,8 @@ export type ExtendBookingBodySchema = {
   expirationMinutes?: number;
 };
 
-export const extendBookingBodySchema: yup.SchemaOf<ExtendBookingBodySchema> = yup
-  .object()
-  .shape({
+export const extendBookingBodySchema: yup.SchemaOf<ExtendBookingBodySchema> =
+  yup.object().shape({
     expirationMinutes: yup.number().integer().notRequired(),
   });
 
