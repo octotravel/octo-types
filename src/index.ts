@@ -22,6 +22,10 @@ export * from "./types/Supplier";
 
 export * from "./types/Unit";
 
+export * from "./schemas/Product";
+
+export * from "./schemas/Supplier";
+
 export * from "./schemas/Availability";
 
 export * from "./schemas/AvailabilityCalendar";
