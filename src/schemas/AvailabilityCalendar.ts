@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import { AvailabilityUnit, availabilityUnitSchema } from "./Availability";
 
-export interface AvailabilityCalendarSchema {
+export interface AvailabilityCalendarBodySchema {
   productId: string;
   optionId: string;
   localDateStart: string;
@@ -9,7 +9,7 @@ export interface AvailabilityCalendarSchema {
   units?: Array<AvailabilityUnit>;
 }
 
-export const availabilityCalendarSchema: yup.SchemaOf<AvailabilityCalendarSchema> =
+export const availabilityCalendarBodySchema: yup.SchemaOf<AvailabilityCalendarBodySchema> =
   yup
     .object()
     .shape({

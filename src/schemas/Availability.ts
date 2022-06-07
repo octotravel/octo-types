@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export interface AvailabilitySchema extends AvailabilityPickupSchema {
+export interface AvailabilityBodySchema extends AvailabilityPickupBodySchema {
   productId: string;
   optionId: string;
   localDate?: string;
@@ -10,7 +10,7 @@ export interface AvailabilitySchema extends AvailabilityPickupSchema {
   units?: Array<AvailabilityUnit>;
 }
 
-interface AvailabilityPickupSchema {
+interface AvailabilityPickupBodySchema {
   pickupRequested?: Nullable<boolean>;
   pickupPointId?: Nullable<string>;
 }
@@ -27,7 +27,7 @@ export const availabilityUnitSchema: yup.SchemaOf<AvailabilityUnit> = yup
     quantity: yup.number().required(),
   });
 
-export const availabilitySchema: yup.SchemaOf<AvailabilitySchema> = yup
+export const availabilityBodySchema: yup.SchemaOf<AvailabilityBodySchema> = yup
   .object()
   .shape({
     productId: yup.string().required(),

@@ -1,5 +1,51 @@
 import * as yup from "yup";
 
+export type GetBookingPathParamsSchema = {
+  uuid: string;
+};
+
+export const getBookingPathParamsSchema: yup.SchemaOf<GetBookingPathParamsSchema> =
+  yup.object().shape({
+    uuid: yup.string().required(),
+  });
+
+export type GetBookingsQueryParamsSchema = {
+  resellerReference?: string;
+  supplierReference?: string;
+  localDate?: string;
+  localDateStart?: string;
+  localDateEnd?: string;
+};
+
+export const getBookingsQueryParamsSchema: yup.SchemaOf<GetBookingsQueryParamsSchema> =
+  yup
+    .object()
+    .shape({
+      resellerReference: yup.string().notRequired(),
+      supplierReference: yup.string().notRequired(),
+      localDate: yup.string().notRequired(),
+      localDateStart: yup.string().notRequired(),
+      localDateEnd: yup.string().notRequired(),
+    })
+    .test(
+      "",
+      "either resellerReference, supplierReference, localDate or localDateStart/localDateEnd is required",
+      ({
+        resellerReference,
+        supplierReference,
+        localDate,
+        localDateStart,
+        localDateEnd,
+      }) => {
+        return !Boolean(
+          resellerReference ||
+            supplierReference ||
+            localDate ||
+            (localDateStart && localDateEnd)
+        ).valueOf();
+      }
+    );
+
 export type BookingContactSchema = {
   fullName?: string;
   firstName?: string;
@@ -40,7 +86,7 @@ export const bookingUnitItemSchema: yup.SchemaOf<BookingUnitItemSchema> = yup
     contact: bookingContactSchema.notRequired(),
   });
 
-export interface CreateBookingSchema extends BookingPickupSchema {
+export interface CreateBookingBodySchema extends BookingPickupBodySchema {
   uuid?: string;
   resellerReference?: string;
   productId: string;
@@ -53,15 +99,22 @@ export interface CreateBookingSchema extends BookingPickupSchema {
   contact?: BookingContactSchema;
 }
 
-interface BookingPickupSchema {
+interface BookingPickupBodySchema {
   pickupRequested?: boolean;
   pickupPointId?: string;
   pickupHotel?: string;
 }
 
-export const createBookingSchema: yup.SchemaOf<CreateBookingSchema> = yup
+const bookingPickupBodySchema: yup.SchemaOf<BookingPickupBodySchema> = yup
   .object()
   .shape({
+    pickupRequested: yup.bool().notRequired(),
+    pickupPointId: yup.string().notRequired(),
+    pickupHotel: yup.string().notRequired(),
+  });
+
+export const createBookingBodySchema: yup.SchemaOf<CreateBookingBodySchema> =
+  yup.object().shape({
     uuid: yup.string().notRequired(),
     resellerReference: yup.string().notRequired(),
     productId: yup.string().required(),
@@ -72,13 +125,10 @@ export const createBookingSchema: yup.SchemaOf<CreateBookingSchema> = yup
     emailReceipt: yup.bool().notRequired(),
     unitItems: yup.array().of(bookingUnitItemSchema).required(),
     contact: bookingContactSchema.notRequired().default(undefined),
-    // pickups
-    pickupRequested: yup.bool().notRequired(),
-    pickupPointId: yup.string().notRequired(),
-    pickupHotel: yup.string().notRequired(),
+    ...bookingPickupBodySchema.fields,
   });
 
-export interface UpdateBookingSchema extends BookingPickupSchema {
+export interface UpdateBookingBodySchema extends BookingPickupBodySchema {
   resellerReference?: string;
   productId?: string;
   optionId?: string;
@@ -90,9 +140,8 @@ export interface UpdateBookingSchema extends BookingPickupSchema {
   contact?: BookingContactSchema;
 }
 
-export const updateBookingSchema: yup.SchemaOf<UpdateBookingSchema> = yup
-  .object()
-  .shape({
+export const updateBookingBodySchema: yup.SchemaOf<UpdateBookingBodySchema> =
+  yup.object().shape({
     resellerReference: yup.string().notRequired(),
     productId: yup.string().notRequired(),
     optionId: yup.string().notRequired(),
@@ -102,13 +151,19 @@ export const updateBookingSchema: yup.SchemaOf<UpdateBookingSchema> = yup
     emailReceipt: yup.bool().notRequired(),
     unitItems: yup.array().of(bookingUnitItemSchema).notRequired(),
     contact: bookingContactSchema.notRequired().default(undefined),
-    // pickups
-    pickupRequested: yup.bool().notRequired(),
-    pickupPointId: yup.string().notRequired(),
-    pickupHotel: yup.string().notRequired(),
+    ...bookingPickupBodySchema.fields,
   });
 
-export interface ConfirmBookingSchema extends BookingPickupSchema {
+export interface UpdateBookingPathParamsSchema {
+  uuid: string;
+}
+
+export const updateBookingPathParamsSchema: yup.SchemaOf<UpdateBookingPathParamsSchema> =
+  yup.object().shape({
+    uuid: yup.string().required(),
+  });
+
+export interface ConfirmBookingSchema extends BookingPickupBodySchema {
   resellerReference?: string;
   notes?: string;
   emailReceipt?: boolean;
@@ -124,10 +179,16 @@ export const confirmBookingSchema: yup.SchemaOf<ConfirmBookingSchema> = yup
     emailReceipt: yup.bool().notRequired(),
     unitItems: yup.array().of(bookingUnitItemSchema).notRequired(),
     contact: bookingContactSchema.notRequired().default(undefined),
-    // pickups
-    pickupRequested: yup.bool().notRequired(),
-    pickupPointId: yup.string().notRequired(),
-    pickupHotel: yup.string().notRequired(),
+    ...bookingPickupBodySchema.fields,
+  });
+
+export interface ConfirmBookingPathParamsSchema {
+  uuid: string;
+}
+
+export const confirmBookingPathParamsSchema: yup.SchemaOf<ConfirmBookingPathParamsSchema> =
+  yup.object().shape({
+    uuid: yup.string().required(),
   });
 
 export type CancelBookingSchema = {
@@ -142,6 +203,15 @@ export const cancelBookingSchema: yup.SchemaOf<CancelBookingSchema> = yup
     force: yup.boolean().notRequired(),
   });
 
+export interface CancelBookingPathParamsSchema {
+  uuid: string;
+}
+
+export const cancelBookingPathParamsSchema: yup.SchemaOf<CancelBookingPathParamsSchema> =
+  yup.object().shape({
+    uuid: yup.string().required(),
+  });
+
 export type ExtendBookingSchema = {
   expirationMinutes?: number;
 };
@@ -150,4 +220,13 @@ export const extendBookingSchema: yup.SchemaOf<ExtendBookingSchema> = yup
   .object()
   .shape({
     expirationMinutes: yup.number().integer().notRequired(),
+  });
+
+export interface ExtendBookingPathParamsSchema {
+  uuid: string;
+}
+
+export const extendBookingPathParamsSchema: yup.SchemaOf<ExtendBookingPathParamsSchema> =
+  yup.object().shape({
+    uuid: yup.string().required(),
   });
