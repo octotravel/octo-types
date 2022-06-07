@@ -163,7 +163,7 @@ export const updateBookingPathParamsSchema: yup.SchemaOf<UpdateBookingPathParams
     uuid: yup.string().required(),
   });
 
-export interface ConfirmBookingSchema extends BookingPickupBodySchema {
+export interface ConfirmBookingBodySchema extends BookingPickupBodySchema {
   resellerReference?: string;
   notes?: string;
   emailReceipt?: boolean;
@@ -171,7 +171,7 @@ export interface ConfirmBookingSchema extends BookingPickupBodySchema {
   contact?: BookingContactSchema;
 }
 
-export const confirmBookingSchema: yup.SchemaOf<ConfirmBookingSchema> = yup
+export const confirmBookingBodySchema: yup.SchemaOf<ConfirmBookingBodySchema> = yup
   .object()
   .shape({
     resellerReference: yup.string().notRequired(),
@@ -191,12 +191,12 @@ export const confirmBookingPathParamsSchema: yup.SchemaOf<ConfirmBookingPathPara
     uuid: yup.string().required(),
   });
 
-export type CancelBookingSchema = {
+export type CancelBookingBodySchema = {
   reason?: string;
   force?: boolean;
 };
 
-export const cancelBookingSchema: yup.SchemaOf<CancelBookingSchema> = yup
+export const cancelBookingBodySchema: yup.SchemaOf<CancelBookingBodySchema> = yup
   .object()
   .shape({
     reason: yup.string().notRequired(),
@@ -212,11 +212,11 @@ export const cancelBookingPathParamsSchema: yup.SchemaOf<CancelBookingPathParams
     uuid: yup.string().required(),
   });
 
-export type ExtendBookingSchema = {
+export type ExtendBookingBodySchema = {
   expirationMinutes?: number;
 };
 
-export const extendBookingSchema: yup.SchemaOf<ExtendBookingSchema> = yup
+export const extendBookingBodySchema: yup.SchemaOf<ExtendBookingBodySchema> = yup
   .object()
   .shape({
     expirationMinutes: yup.number().integer().notRequired(),
