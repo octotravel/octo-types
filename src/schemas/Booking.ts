@@ -167,8 +167,8 @@ export interface ConfirmBookingBodySchema extends BookingPickupBodySchema {
   resellerReference?: string;
   notes?: string;
   emailReceipt?: boolean;
-  unitItems: BookingUnitItemSchema[];
-  contact?: BookingContactSchema;
+  unitItems?: BookingUnitItemSchema[];
+  contact: BookingContactSchema;
 }
 
 export const confirmBookingBodySchema: yup.SchemaOf<ConfirmBookingBodySchema> =
@@ -177,7 +177,7 @@ export const confirmBookingBodySchema: yup.SchemaOf<ConfirmBookingBodySchema> =
     notes: yup.string().notRequired(),
     emailReceipt: yup.bool().notRequired(),
     unitItems: yup.array().of(bookingUnitItemSchema).notRequired(),
-    contact: bookingContactSchema.notRequired().default(undefined),
+    contact: bookingContactSchema.required().default(undefined),
     ...bookingPickupBodySchema.fields,
   });
 
