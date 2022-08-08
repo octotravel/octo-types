@@ -59,7 +59,7 @@ export const availabilityBodySchema: yup.SchemaOf<AvailabilityBodySchema> = yup
     "either localDate, localDateStart/localDateEnd or availabilityIds is required",
     ({ localDateStart, localDate, localDateEnd, availabilityIds }) =>
       !Boolean(
-        !(localDateStart || localDate || localDateEnd || availabilityIds)
+        !((localDateStart && localDateEnd) || localDate  || availabilityIds)
       ).valueOf()
   )
   .test(
