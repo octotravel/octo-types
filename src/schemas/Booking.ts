@@ -136,7 +136,7 @@ export interface UpdateBookingBodySchema extends BookingPickupBodySchema {
   expirationMinutes?: number;
   notes?: string;
   emailReceipt?: boolean;
-  unitItems: BookingUnitItemSchema[];
+  unitItems?: BookingUnitItemSchema[];
   contact?: BookingContactSchema;
 }
 
