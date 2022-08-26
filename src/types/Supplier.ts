@@ -14,10 +14,10 @@ interface SupplierContact {
 
 interface SupplierContent {
   country: string;
-  destinations: Array<Destination>;
+  destinations: Array<SupplierDestination>;
 }
 
-interface Destination {
+export interface SupplierDestination {
   id: string;
   default: boolean;
   name: string;
@@ -25,10 +25,10 @@ interface Destination {
   contact: SupplierContact;
   latitude: number;
   longitude: number;
-  categories: Array<Category>;
+  categories: Array<SupplierCategory>;
 }
 
-interface Category {
+export interface SupplierCategory {
   id: string;
   default: boolean;
   title: string;
