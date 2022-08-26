@@ -32,9 +32,12 @@ export type FAQ = {
 
 export type Destination = {
   id: string;
+  default: boolean;
   name: string;
   country: string;
   contact: DestinationContact;
+  latitude: number;
+  longitude: number;
 };
 
 type DestinationContact = {
@@ -48,7 +51,7 @@ export type Category = {
   id: string;
   default: boolean;
   title: string;
-  shortDescription: string;
+  shortDescription: Nullable<string>;
   coverImageUrl: Nullable<string>;
   bannerImageUrl: Nullable<string>;
 };
@@ -73,10 +76,10 @@ export interface Product extends ProductContent, ProductPricing, ProductPickup {
 export interface ProductContent {
   title?: string;
   country?: string;
-  location?: string;
-  subtitle?: string;
-  shortDescription?: string;
-  description?: string;
+  location?: Nullable<string>;
+  subtitle?: Nullable<string>;
+  shortDescription?: Nullable<string>;
+  description?: Nullable<string>;
   highlights?: Array<string>;
   inclusions?: Array<string>;
   exclusions?: Array<string>;

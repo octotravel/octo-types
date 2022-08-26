@@ -80,9 +80,9 @@ export interface Option
 
 interface OptionContent {
   title?: string;
-  subtitle?: string;
+  subtitle?: Nullable<string>;
   language?: string;
-  shortDescription?: string;
+  shortDescription?: Nullable<string>;
   duration?: string;
   durationAmount?: string;
   durationUnit?: DurationUnit;

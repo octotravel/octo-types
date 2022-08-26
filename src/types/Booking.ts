@@ -67,6 +67,7 @@ export interface Contact {
   emailAddress: Nullable<string>;
   phoneNumber: Nullable<string>;
   locales: string[];
+  postalCode: Nullable<string>;
   country: Nullable<string>;
   notes: Nullable<string>;
 }

@@ -33,7 +33,7 @@ export interface Unit extends UnitContent, UnitPricing {
 interface UnitContent {
   title?: string;
   titlePlural?: string;
-  subtitle?: string;
+  subtitle?: Nullable<string>;
 }
 
 interface UnitPricing {
