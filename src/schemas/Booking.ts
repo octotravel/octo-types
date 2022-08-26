@@ -55,6 +55,7 @@ export type BookingContactSchema = {
   country?: string;
   notes?: string;
   locales?: Array<string>;
+  postalCode?: string;
 };
 
 export const bookingContactSchema: yup.SchemaOf<BookingContactSchema> = yup
@@ -68,6 +69,7 @@ export const bookingContactSchema: yup.SchemaOf<BookingContactSchema> = yup
     country: yup.string().notRequired(),
     notes: yup.string().notRequired(),
     locales: yup.array().of(yup.string()).notRequired(),
+    postalCode: yup.string().notRequired(),
   });
 
 export interface BookingUnitItemSchema {
