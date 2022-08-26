@@ -13,8 +13,8 @@ interface SupplierContact {
 }
 
 interface SupplierContent {
-  country: string;
-  destinations: Array<SupplierDestination>;
+  country?: string;
+  destinations?: Array<SupplierDestination>;
 }
 
 export interface SupplierDestination {
