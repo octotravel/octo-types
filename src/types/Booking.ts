@@ -104,8 +104,11 @@ interface BookingPricing {
 }
 
 interface BookingPickup {
-  pickupRequired?: boolean;
-  pickupPoints?: PickupPoint[];
+  pickupRequested?: boolean;
+  pickupPointId?: Nullable<string>;
+  pickupHotel: Nullable<string>;
+  pickupHotelRoom: Nullable<string>;
+  pickupPoint?: Nullable<PickupPoint>;
 }
 
 interface BookingContent {
