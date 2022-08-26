@@ -106,8 +106,8 @@ interface BookingPricing {
 interface BookingPickup {
   pickupRequested?: boolean;
   pickupPointId?: Nullable<string>;
-  pickupHotel: Nullable<string>;
-  pickupHotelRoom: Nullable<string>;
+  pickupHotel?: Nullable<string>;
+  pickupHotelRoom?: Nullable<string>;
   pickupPoint?: Nullable<PickupPoint>;
 }
 
