@@ -56,7 +56,7 @@ export type Category = {
   bannerImageUrl: Nullable<string>;
 };
 
-export interface Product extends ProductContent, ProductPricing, ProductPickup {
+export interface Product extends ProductContent, ProductPricing {
   id: string;
   internalName: string;
   reference: Nullable<string>;
@@ -100,10 +100,4 @@ interface ProductPricing {
   defaultCurrency?: string;
   availableCurrencies?: Array<string>;
   pricingPer?: PricingPer;
-}
-
-interface ProductPickup {
-  pickupAvailable?: boolean;
-  pickupRequired?: boolean;
-  pickupPoints?: PickupPoint[];
 }
