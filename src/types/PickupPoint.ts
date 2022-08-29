@@ -1,7 +1,7 @@
 export interface PickupPoint {
   id: string;
   name: string;
-  direction: Nullable<string>;
+  directions: Nullable<string>;
   address: string,
   latitude: Nullable<number>;
   longitude: Nullable<number>;
