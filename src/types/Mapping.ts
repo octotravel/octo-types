@@ -1,4 +1,4 @@
-export interface OctoMapping {
+export interface Mapping {
     resellerReference: string;
     title: string;
     url: string;
