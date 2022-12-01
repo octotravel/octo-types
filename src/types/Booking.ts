@@ -24,7 +24,7 @@ export interface Booking
   extends BookingPricing,
     BookingPickup,
     BookingContent,
-    BookingOrder {
+    BookingCart {
   id: string;
   uuid: string;
   testMode: boolean;
@@ -124,8 +124,8 @@ interface BookingContent {
   durationUnit?: string;
 }
 
-interface BookingOrder {
-  orderId: string;
-  orderReference: string;
-  primary: boolean;
+interface BookingCart {
+  orderId?: string;
+  orderReference?: string;
+  primary?: boolean;
 }

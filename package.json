@@ -1,24 +1,15 @@
 {
   "name": "@octocloud/types",
-  "version": "1.4.3",
+  "version": "1.4.7",
   "description": "",
-  "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
-    }
-  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
     "format": "prettier --write \"**/*.{ts,js,css,json,md}\"",
-    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
-    "watch": "npm run build -- --watch src",
-    "prepublishOnly": "npm run build"
+    "pretest": "npm run build",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -39,9 +30,7 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
-    "tsup": "^6.5.0",
-    "typescript": "^4.6.3",
-    "unbuild": "^1.0.1"
+    "typescript": "^4.6.3"
   },
   "dependencies": {
     "yup": "^0.32.11"
