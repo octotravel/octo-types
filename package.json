@@ -1,18 +1,24 @@
 {
   "name": "@octocloud/types",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "",
   "type": "module",
-  "main": "lib/index.js",
-  "module": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "ts-types": " tsc --emitDeclarationOnly --outDir lib",
-    "build": "rimraf lib && node ./esbuild.js && npm run ts-types",
     "format": "prettier --write \"**/*.{ts,js,css,json,md}\"",
-    "pretest": "npm run build",
-    "prepare": "npm run build"
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "watch": "npm run build -- --watch src",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -28,13 +34,14 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.27.0",
     "@typescript-eslint/parser": "^5.27.0",
-    "esbuild": "^0.15.10",
     "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
-    "typescript": "^4.6.3"
+    "tsup": "^6.5.0",
+    "typescript": "^4.6.3",
+    "unbuild": "^1.0.1"
   },
   "dependencies": {
     "yup": "^0.32.11"

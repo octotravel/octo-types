@@ -20,7 +20,11 @@ export enum BookingStatus {
   REJECTED = "REJECTED",
 }
 
-export interface Booking extends BookingPricing, BookingPickup, BookingContent, BookingOrder {
+export interface Booking
+  extends BookingPricing,
+    BookingPickup,
+    BookingContent,
+    BookingOrder {
   id: string;
   uuid: string;
   testMode: boolean;
