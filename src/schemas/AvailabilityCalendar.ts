@@ -1,4 +1,5 @@
-import * as yup from "yup";
+import { object, string, array } from "yup";
+import type { SchemaOf } from "yup";
 import { AvailabilityUnit, availabilityUnitSchema } from "./Availability";
 
 export interface AvailabilityCalendarBodySchema {
@@ -9,15 +10,14 @@ export interface AvailabilityCalendarBodySchema {
   units?: Array<AvailabilityUnit>;
 }
 
-export const availabilityCalendarBodySchema: yup.SchemaOf<AvailabilityCalendarBodySchema> =
-  yup
-    .object()
+export const availabilityCalendarBodySchema: SchemaOf<AvailabilityCalendarBodySchema> =
+  object()
     .shape({
-      productId: yup.string().required(),
-      optionId: yup.string().required(),
-      localDateStart: yup.string().required(),
-      localDateEnd: yup.string().required(),
-      units: yup.array().of(availabilityUnitSchema).notRequired().nullable(),
+      productId: string().required(),
+      optionId: string().required(),
+      localDateStart: string().required(),
+      localDateEnd: string().required(),
+      units: array().of(availabilityUnitSchema).notRequired().nullable(),
     })
     .test(
       "",

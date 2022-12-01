@@ -2,7 +2,7 @@ export interface PickupPoint {
   id: string;
   name: string;
   directions: Nullable<string>;
-  address: string,
+  address: string;
   latitude: Nullable<number>;
   longitude: Nullable<number>;
   googlePlaceId: Nullable<string>;

@@ -1,12 +1,13 @@
-import * as yup from "yup";
+import { object, string, number, array, bool } from "yup";
+import type { SchemaOf } from "yup";
 
 export type GetBookingPathParamsSchema = {
   uuid: string;
 };
 
-export const getBookingPathParamsSchema: yup.SchemaOf<GetBookingPathParamsSchema> =
-  yup.object().shape({
-    uuid: yup.string().required(),
+export const getBookingPathParamsSchema: SchemaOf<GetBookingPathParamsSchema> =
+  object().shape({
+    uuid: string().required(),
   });
 
 export type GetBookingsQueryParamsSchema = {
@@ -17,15 +18,14 @@ export type GetBookingsQueryParamsSchema = {
   localDateEnd?: string;
 };
 
-export const getBookingsQueryParamsSchema: yup.SchemaOf<GetBookingsQueryParamsSchema> =
-  yup
-    .object()
+export const getBookingsQueryParamsSchema: SchemaOf<GetBookingsQueryParamsSchema> =
+  object()
     .shape({
-      resellerReference: yup.string().notRequired(),
-      supplierReference: yup.string().notRequired(),
-      localDate: yup.string().notRequired(),
-      localDateStart: yup.string().notRequired(),
-      localDateEnd: yup.string().notRequired(),
+      resellerReference: string().notRequired(),
+      supplierReference: string().notRequired(),
+      localDate: string().notRequired(),
+      localDateStart: string().notRequired(),
+      localDateEnd: string().notRequired(),
     })
     .test(
       "",
@@ -58,18 +58,17 @@ export type BookingContactSchema = {
   postalCode?: string;
 };
 
-export const bookingContactSchema: yup.SchemaOf<BookingContactSchema> = yup
-  .object()
-  .shape({
-    fullName: yup.string().notRequired(),
-    firstName: yup.string().notRequired(),
-    lastName: yup.string().notRequired(),
-    emailAddress: yup.string().notRequired(),
-    phoneNumber: yup.string().notRequired(),
-    country: yup.string().notRequired(),
-    notes: yup.string().notRequired(),
-    locales: yup.array().of(yup.string()).notRequired(),
-    postalCode: yup.string().notRequired(),
+export const bookingContactSchema: SchemaOf<BookingContactSchema> =
+  object().shape({
+    fullName: string().notRequired(),
+    firstName: string().notRequired(),
+    lastName: string().notRequired(),
+    emailAddress: string().notRequired(),
+    phoneNumber: string().notRequired(),
+    country: string().notRequired(),
+    notes: string().notRequired(),
+    locales: array().of(string()).notRequired(),
+    postalCode: string().notRequired(),
   });
 
 export interface BookingUnitItemSchema {
@@ -79,12 +78,11 @@ export interface BookingUnitItemSchema {
   contact?: BookingContactSchema;
 }
 
-export const bookingUnitItemSchema: yup.SchemaOf<BookingUnitItemSchema> = yup
-  .object()
-  .shape({
-    uuid: yup.string().notRequired(),
-    unitId: yup.string().required(),
-    resellerReference: yup.string().notRequired(),
+export const bookingUnitItemSchema: SchemaOf<BookingUnitItemSchema> =
+  object().shape({
+    uuid: string().notRequired(),
+    unitId: string().required(),
+    resellerReference: string().notRequired(),
     contact: bookingContactSchema.notRequired(),
   });
 
@@ -107,25 +105,24 @@ interface BookingPickupBodySchema {
   pickupHotel?: string;
 }
 
-const bookingPickupBodySchema: yup.SchemaOf<BookingPickupBodySchema> = yup
-  .object()
-  .shape({
-    pickupRequested: yup.bool().notRequired(),
-    pickupPointId: yup.string().notRequired(),
-    pickupHotel: yup.string().notRequired(),
+const bookingPickupBodySchema: SchemaOf<BookingPickupBodySchema> =
+  object().shape({
+    pickupRequested: bool().notRequired(),
+    pickupPointId: string().notRequired(),
+    pickupHotel: string().notRequired(),
   });
 
-export const createBookingBodySchema: yup.SchemaOf<CreateBookingBodySchema> =
-  yup.object().shape({
-    uuid: yup.string().notRequired(),
-    resellerReference: yup.string().notRequired(),
-    productId: yup.string().required(),
-    optionId: yup.string().required(),
-    availabilityId: yup.string().required(),
-    expirationMinutes: yup.number().integer().notRequired(),
-    notes: yup.string().notRequired(),
-    emailReceipt: yup.bool().notRequired(),
-    unitItems: yup.array().of(bookingUnitItemSchema).required(),
+export const createBookingBodySchema: SchemaOf<CreateBookingBodySchema> =
+  object().shape({
+    uuid: string().notRequired(),
+    resellerReference: string().notRequired(),
+    productId: string().required(),
+    optionId: string().required(),
+    availabilityId: string().required(),
+    expirationMinutes: number().integer().notRequired(),
+    notes: string().notRequired(),
+    emailReceipt: bool().notRequired(),
+    unitItems: array().of(bookingUnitItemSchema).required(),
     contact: bookingContactSchema.notRequired().default(undefined),
     ...bookingPickupBodySchema.fields,
   });
@@ -142,16 +139,16 @@ export interface UpdateBookingBodySchema extends BookingPickupBodySchema {
   contact?: BookingContactSchema;
 }
 
-export const updateBookingBodySchema: yup.SchemaOf<UpdateBookingBodySchema> =
-  yup.object().shape({
-    resellerReference: yup.string().notRequired(),
-    productId: yup.string().notRequired(),
-    optionId: yup.string().notRequired(),
-    availabilityId: yup.string().notRequired(),
-    expirationMinutes: yup.number().integer().notRequired(),
-    notes: yup.string().notRequired(),
-    emailReceipt: yup.bool().notRequired(),
-    unitItems: yup.array().of(bookingUnitItemSchema).notRequired(),
+export const updateBookingBodySchema: SchemaOf<UpdateBookingBodySchema> =
+  object().shape({
+    resellerReference: string().notRequired(),
+    productId: string().notRequired(),
+    optionId: string().notRequired(),
+    availabilityId: string().notRequired(),
+    expirationMinutes: number().integer().notRequired(),
+    notes: string().notRequired(),
+    emailReceipt: bool().notRequired(),
+    unitItems: array().of(bookingUnitItemSchema).notRequired(),
     contact: bookingContactSchema.notRequired().default(undefined),
     ...bookingPickupBodySchema.fields,
   });
@@ -160,9 +157,9 @@ export interface UpdateBookingPathParamsSchema {
   uuid: string;
 }
 
-export const updateBookingPathParamsSchema: yup.SchemaOf<UpdateBookingPathParamsSchema> =
-  yup.object().shape({
-    uuid: yup.string().required(),
+export const updateBookingPathParamsSchema: SchemaOf<UpdateBookingPathParamsSchema> =
+  object().shape({
+    uuid: string().required(),
   });
 
 export interface ConfirmBookingBodySchema extends BookingPickupBodySchema {
@@ -173,12 +170,12 @@ export interface ConfirmBookingBodySchema extends BookingPickupBodySchema {
   contact: BookingContactSchema;
 }
 
-export const confirmBookingBodySchema: yup.SchemaOf<ConfirmBookingBodySchema> =
-  yup.object().shape({
-    resellerReference: yup.string().notRequired(),
-    notes: yup.string().notRequired(),
-    emailReceipt: yup.bool().notRequired(),
-    unitItems: yup.array().of(bookingUnitItemSchema).notRequired(),
+export const confirmBookingBodySchema: SchemaOf<ConfirmBookingBodySchema> =
+  object().shape({
+    resellerReference: string().notRequired(),
+    notes: string().notRequired(),
+    emailReceipt: bool().notRequired(),
+    unitItems: array().of(bookingUnitItemSchema).notRequired(),
     contact: bookingContactSchema.required().default(undefined),
     ...bookingPickupBodySchema.fields,
   });
@@ -187,9 +184,9 @@ export interface ConfirmBookingPathParamsSchema {
   uuid: string;
 }
 
-export const confirmBookingPathParamsSchema: yup.SchemaOf<ConfirmBookingPathParamsSchema> =
-  yup.object().shape({
-    uuid: yup.string().required(),
+export const confirmBookingPathParamsSchema: SchemaOf<ConfirmBookingPathParamsSchema> =
+  object().shape({
+    uuid: string().required(),
   });
 
 export type CancelBookingBodySchema = {
@@ -197,35 +194,35 @@ export type CancelBookingBodySchema = {
   force?: boolean;
 };
 
-export const cancelBookingBodySchema: yup.SchemaOf<CancelBookingBodySchema> =
-  yup.object().shape({
-    reason: yup.string().notRequired(),
-    force: yup.boolean().notRequired(),
+export const cancelBookingBodySchema: SchemaOf<CancelBookingBodySchema> =
+  object().shape({
+    reason: string().notRequired(),
+    force: bool().notRequired(),
   });
 
 export interface CancelBookingPathParamsSchema {
   uuid: string;
 }
 
-export const cancelBookingPathParamsSchema: yup.SchemaOf<CancelBookingPathParamsSchema> =
-  yup.object().shape({
-    uuid: yup.string().required(),
+export const cancelBookingPathParamsSchema: SchemaOf<CancelBookingPathParamsSchema> =
+  object().shape({
+    uuid: string().required(),
   });
 
 export type ExtendBookingBodySchema = {
   expirationMinutes?: number;
 };
 
-export const extendBookingBodySchema: yup.SchemaOf<ExtendBookingBodySchema> =
-  yup.object().shape({
-    expirationMinutes: yup.number().integer().notRequired(),
+export const extendBookingBodySchema: SchemaOf<ExtendBookingBodySchema> =
+  object().shape({
+    expirationMinutes: number().integer().notRequired(),
   });
 
 export interface ExtendBookingPathParamsSchema {
   uuid: string;
 }
 
-export const extendBookingPathParamsSchema: yup.SchemaOf<ExtendBookingPathParamsSchema> =
-  yup.object().shape({
-    uuid: yup.string().required(),
+export const extendBookingPathParamsSchema: SchemaOf<ExtendBookingPathParamsSchema> =
+  object().shape({
+    uuid: string().required(),
   });

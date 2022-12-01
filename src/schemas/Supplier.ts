@@ -1,10 +1,11 @@
-import * as yup from "yup";
+import { object, string } from "yup";
+import type { SchemaOf } from "yup";
 
 export type GetSupplierPathParamsSchema = {
   id: string;
 };
 
-export const getSupplierPathParamsSchema: yup.SchemaOf<GetSupplierPathParamsSchema> =
-  yup.object().shape({
-    id: yup.string().required(),
+export const getSupplierPathParamsSchema: SchemaOf<GetSupplierPathParamsSchema> =
+  object().shape({
+    id: string().required(),
   });

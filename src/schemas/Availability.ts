@@ -1,4 +1,5 @@
-import * as yup from "yup";
+import { object, string, number, array, bool } from "yup";
+import type { SchemaOf } from "yup";
 
 export interface AvailabilityBodySchema extends AvailabilityPickupBodySchema {
   productId: string;
@@ -20,25 +21,23 @@ export type AvailabilityUnit = {
   quantity: number;
 };
 
-export const availabilityUnitSchema: yup.SchemaOf<AvailabilityUnit> = yup
-  .object()
-  .shape({
-    id: yup.string().required(),
-    quantity: yup.number().required(),
+export const availabilityUnitSchema: SchemaOf<AvailabilityUnit> =
+  object().shape({
+    id: string().required(),
+    quantity: number().required(),
   });
 
-export const availabilityBodySchema: yup.SchemaOf<AvailabilityBodySchema> = yup
-  .object()
+export const availabilityBodySchema: SchemaOf<AvailabilityBodySchema> = object()
   .shape({
-    productId: yup.string().required(),
-    optionId: yup.string().required(),
-    localDate: yup.string().notRequired(),
-    localDateStart: yup.string().notRequired(),
-    localDateEnd: yup.string().notRequired(),
-    availabilityIds: yup.array().of(yup.string()).notRequired().min(1),
-    units: yup.array().of(availabilityUnitSchema).notRequired().nullable(),
-    pickupRequested: yup.bool().notRequired().nullable(),
-    pickupPointId: yup.string().notRequired().nullable(),
+    productId: string().required(),
+    optionId: string().required(),
+    localDate: string().notRequired(),
+    localDateStart: string().notRequired(),
+    localDateEnd: string().notRequired(),
+    availabilityIds: array().of(string()).notRequired().min(1),
+    units: array().of(availabilityUnitSchema).notRequired().nullable(),
+    pickupRequested: bool().notRequired().nullable(),
+    pickupPointId: string().notRequired().nullable(),
   })
   .test(
     "",
@@ -59,7 +58,7 @@ export const availabilityBodySchema: yup.SchemaOf<AvailabilityBodySchema> = yup
     "either localDate, localDateStart/localDateEnd or availabilityIds is required",
     ({ localDateStart, localDate, localDateEnd, availabilityIds }) =>
       !Boolean(
-        !((localDateStart && localDateEnd) || localDate  || availabilityIds)
+        !((localDateStart && localDateEnd) || localDate || availabilityIds)
       ).valueOf()
   )
   .test(

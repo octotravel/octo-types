@@ -1,12 +1,13 @@
-import * as yup from "yup";
+import { object, string, number } from "yup";
+import type { SchemaOf } from "yup";
 
 export type CreateOrderBodySchema = {
     currency?: string;
     expirationMinutes?: number;
 }
 
-export const createOrderBodySchema: yup.SchemaOf<CreateOrderBodySchema> = yup.object()
+export const createOrderBodySchema: SchemaOf<CreateOrderBodySchema> = object()
 .shape({
-    currency: yup.string().optional(),
-    expirationMinutes: yup.number().optional()
+    currency: string().optional(),
+    expirationMinutes: number().optional()
 });
