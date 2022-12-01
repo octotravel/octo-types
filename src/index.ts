@@ -33,3 +33,7 @@ export * from "./schemas/Availability";
 export * from "./schemas/AvailabilityCalendar";
 
 export * from "./schemas/Booking";
+
+export * from "./types/Order";
+
+export * from "./schemas/Order";
