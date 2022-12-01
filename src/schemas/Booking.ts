@@ -1,4 +1,4 @@
-import { object, string, number, array, bool } from "yup";
+import { object, string, number, array, bool, isSchema } from "yup";
 import type { SchemaOf } from "yup";
 
 export type GetBookingPathParamsSchema = {
@@ -86,7 +86,7 @@ export const bookingUnitItemSchema: SchemaOf<BookingUnitItemSchema> =
     contact: bookingContactSchema.notRequired(),
   });
 
-export interface CreateBookingBodySchema extends BookingPickupBodySchema {
+export interface CreateBookingBodySchema extends BookingPickupBodySchema, BookingOrderBodySchema {
   uuid?: string;
   resellerReference?: string;
   productId: string;
@@ -112,6 +112,15 @@ const bookingPickupBodySchema: SchemaOf<BookingPickupBodySchema> =
     pickupHotel: string().notRequired(),
   });
 
+interface BookingOrderBodySchema {
+  orderId?: string;
+}
+
+const bookingOrderBodySchema: SchemaOf<BookingOrderBodySchema> = 
+  object().shape({
+    orderId: string().optional(),
+  });
+
 export const createBookingBodySchema: SchemaOf<CreateBookingBodySchema> =
   object().shape({
     uuid: string().notRequired(),
@@ -125,6 +134,7 @@ export const createBookingBodySchema: SchemaOf<CreateBookingBodySchema> =
     unitItems: array().of(bookingUnitItemSchema).required(),
     contact: bookingContactSchema.notRequired().default(undefined),
     ...bookingPickupBodySchema.fields,
+    ...bookingOrderBodySchema.fields,
   });
 
 export interface UpdateBookingBodySchema extends BookingPickupBodySchema {
