@@ -9,6 +9,7 @@ import {
   RedemptionMethod,
 } from "./Product";
 import { Pricing } from "./Pricing";
+import { Offer, OfferComparison } from "./Offer";
 
 export enum BookingStatus {
   ON_HOLD = "ON_HOLD",
@@ -24,7 +25,8 @@ export interface Booking
   extends BookingPricing,
     BookingPickup,
     BookingContent,
-    BookingCart {
+    BookingCart,
+    BookingOffers {
   id: string;
   uuid: string;
   testMode: boolean;
@@ -128,4 +130,13 @@ interface BookingCart {
   orderId?: string;
   orderReference?: string;
   primary?: boolean;
+}
+
+interface BookingOffers {
+  offerCode?: string;
+  offerTitle?: string;
+  offerComparisons?: OfferComparison[]
+  offerIsCombination?: boolean;
+  offers?: Offer[];
+  offer?: Offer;
 }
