@@ -39,3 +39,7 @@ export * from "./types/Order";
 export * from "./schemas/Order";
 
 export * from "./types/Offer";
+
+export * from "./types/Gift";
+
+export * from "./schemas/Gift";
