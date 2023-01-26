@@ -86,7 +86,7 @@ export const bookingUnitItemSchema: SchemaOf<BookingUnitItemSchema> =
     contact: bookingContactSchema.notRequired(),
   });
 
-export interface CreateBookingBodySchema extends BookingPickupBodySchema, BookingOrderBodySchema {
+export interface CreateBookingBodySchema extends BookingPickupBodySchema, BookingOrderBodySchema, BookingGiftBodySchema {
   uuid?: string;
   resellerReference?: string;
   productId: string;
@@ -121,6 +121,19 @@ const bookingOrderBodySchema: SchemaOf<BookingOrderBodySchema> =
     orderId: string().optional(),
   });
 
+interface BookingGiftBodySchema {
+  giftPayment?: {
+    code: string;
+  }
+};
+
+const bookingGiftBodySchema: SchemaOf<BookingGiftBodySchema> =
+  object().shape({
+    giftPayment: object().shape({
+      code: string().required(),
+    }).optional(),
+  });
+
 export const createBookingBodySchema: SchemaOf<CreateBookingBodySchema> =
   object().shape({
     uuid: string().notRequired(),
@@ -135,9 +148,10 @@ export const createBookingBodySchema: SchemaOf<CreateBookingBodySchema> =
     contact: bookingContactSchema.notRequired().default(undefined),
     ...bookingPickupBodySchema.fields,
     ...bookingOrderBodySchema.fields,
+    ...bookingGiftBodySchema.fields,
   });
 
-export interface UpdateBookingBodySchema extends BookingPickupBodySchema {
+export interface UpdateBookingBodySchema extends BookingPickupBodySchema, BookingGiftBodySchema {
   resellerReference?: string;
   productId?: string;
   optionId?: string;
@@ -161,6 +175,7 @@ export const updateBookingBodySchema: SchemaOf<UpdateBookingBodySchema> =
     unitItems: array().of(bookingUnitItemSchema).notRequired(),
     contact: bookingContactSchema.notRequired().default(undefined),
     ...bookingPickupBodySchema.fields,
+    ...bookingGiftBodySchema.fields,
   });
 
 export interface UpdateBookingPathParamsSchema {
