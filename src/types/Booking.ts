@@ -10,6 +10,7 @@ import {
 } from "./Product";
 import { Pricing } from "./Pricing";
 import { Offer, OfferComparison } from "./Offer";
+import { Question } from "./Question";
 
 export enum BookingStatus {
   ON_HOLD = "ON_HOLD",
@@ -26,7 +27,8 @@ export interface Booking
     BookingPickup,
     BookingContent,
     BookingCart,
-    BookingOffers {
+    BookingOffers,
+    BookingQuestions {
   id: string;
   uuid: string;
   testMode: boolean;
@@ -139,4 +141,14 @@ interface BookingOffers {
   offerIsCombination?: boolean;
   offers?: Offer[];
   offer?: Offer;
+}
+
+interface BookingQuestions {
+  questionAswers?: QuestionAnswer[];
+};
+
+interface QuestionAnswer {
+  questionId: string;
+  question: Question[];
+  value: Nullable<string>;
 }
