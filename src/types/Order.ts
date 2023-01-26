@@ -1,7 +1,8 @@
 import { Booking, Contact } from "./Booking";
+import { OfferCombination } from "./Offer";
 import { Pricing } from "./Pricing";
 
-export interface Order {
+export interface Order extends OrderOffers {
   id: string;
   testMode: boolean;
   supplierReference: string;
@@ -24,4 +25,8 @@ export enum OrderStatus {
   CONFIRMED = "CONFIRMED",
   CANCELLED = "CANCELLED",
   EXPIRED = "EXPIRED",
+}
+
+interface OrderOffers {
+  offerCombinations?: OfferCombination[];
 }

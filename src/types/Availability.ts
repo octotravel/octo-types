@@ -1,3 +1,4 @@
+import { Offer } from "./Offer";
 import { PickupPoint } from "./PickupPoint";
 import { Pricing, PricingUnit } from "./Pricing";
 
@@ -28,7 +29,8 @@ interface OpeningHoursContent {
 export interface Availability
   extends AvailabilityContent,
     AvailabilityPricing,
-    AvailabilityPickup {
+    AvailabilityPickup,
+    AvailabilityOffers {
   id: string;
   localDateTimeStart: string;
   localDateTimeEnd: string;
@@ -62,3 +64,11 @@ interface AvailabilityPickup {
   pickupRequired?: boolean;
   pickupPoints?: PickupPoint[];
 }
+
+interface AvailabilityOffers {
+  offerCode?: string;
+  offerTitle?: string;
+  offers?: Offer[];
+  offer?: Offer;
+}
+
