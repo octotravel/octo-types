@@ -39,3 +39,5 @@ export * from "./types/Order";
 export * from "./schemas/Order";
 
 export * from "./types/Offer";
+
+export * from "./types/Question";
