@@ -19,7 +19,7 @@ export interface Order {
   returnUrl?: string;
 }
 
-enum OrderStatus {
+export enum OrderStatus {
   ON_HOLD = "ON_HOLD",
   CONFIRMED = "CONFIRMED",
   CANCELLED = "CANCELLED",
