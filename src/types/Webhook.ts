@@ -25,7 +25,7 @@ export interface BookingUpdate {
 export interface AvailabilityUpdate {
   webhook: Webhook;
   availability: Availability;
-  productId: string;
-  optionId: string;
-  supplier: Supplier;
+  productId?: string;
+  optionId?: string;
+  supplier?: Supplier;
 }
