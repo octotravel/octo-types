@@ -15,7 +15,6 @@ export interface Order extends OrderOffers {
   contact: Contact;
   termsAccepted?: boolean;
   pricing?: Pricing;
-  offerCombinations?: any[];
   cardPayment?: any;
   returnUrl?: string;
 }
