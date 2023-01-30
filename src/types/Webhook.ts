@@ -1,5 +1,6 @@
 import { Availability } from "./Availability";
 import { Booking } from "./Booking";
+import { CapabilityId } from "./Capability";
 import { Supplier } from "./Supplier";
 
 export enum WebhookEvent {
@@ -10,6 +11,10 @@ export interface Webhook {
   id: string;
   event: WebhookEvent;
   url: string;
+  retryOnError: boolean;
+  useContactLanguage: boolean;
+  headers: { [key: string]: string };
+  capabilities: CapabilityId[];
 }
 
 export interface BookingUpdate {
@@ -20,7 +25,7 @@ export interface BookingUpdate {
 export interface AvailabilityUpdate {
   webhook: Webhook;
   availability: Availability;
-  productId: string;
-  optionId: string;
-  supplier: Supplier;
+  productId?: string;
+  optionId?: string;
+  supplier?: Supplier;
 }
