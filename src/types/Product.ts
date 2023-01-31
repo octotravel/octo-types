@@ -104,5 +104,5 @@ interface ProductPricing {
 }
 
 interface ProductQuestions {
-  questions: Question[];
+  questions?: Question[];
 };
