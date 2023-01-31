@@ -40,7 +40,7 @@ export interface ExtendOrderPathParamsSchema {
   id: string;
 }
 
-export const extendOrderBodySchemaPathParamsSchema: SchemaOf<ExtendOrderPathParamsSchema> =
+export const extendOrderPathParamsSchema: SchemaOf<ExtendOrderPathParamsSchema> =
   object().shape({
     id: string().required(),
   });
