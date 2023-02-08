@@ -11,6 +11,7 @@ export enum CapabilityId {
   Mappings = "octo/mappings",
   Redemption = "octo/redemption",
   Google = "octo/google",
+  Questions = "octo/questions",
 }
 
 export interface Capability {

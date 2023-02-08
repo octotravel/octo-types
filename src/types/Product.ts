@@ -2,6 +2,7 @@ import { AvailabilityType } from "./Availability";
 import { PickupPoint } from "./PickupPoint";
 import { PricingPer } from "./Pricing";
 import { Option } from "./Option";
+import { Question } from "./Question";
 
 export enum DeliveryFormat {
   PDF_URL = "PDF_URL",
@@ -56,7 +57,7 @@ export type Category = {
   bannerImageUrl: Nullable<string>;
 };
 
-export interface Product extends ProductContent, ProductPricing {
+export interface Product extends ProductContent, ProductPricing, ProductQuestions {
   id: string;
   internalName: string;
   reference: Nullable<string>;
@@ -101,3 +102,7 @@ interface ProductPricing {
   availableCurrencies?: Array<string>;
   pricingPer?: PricingPer;
 }
+
+interface ProductQuestions {
+  questions?: Question[];
+};

@@ -8,15 +8,14 @@ export interface Order extends OrderOffers {
   supplierReference: string;
   settlementMethod: string;
   status: OrderStatus;
-  utcExpiresAt: string;
+  utcExpiresAt: Nullable<string>;
   utcConfirmedAt: Nullable<string>;
   cancellable: boolean;
   bookings: Array<Booking>;
   contact: Contact;
   termsAccepted?: boolean;
   pricing?: Pricing;
-  offerCombinations?: any[];
-  cardPayment?: any;
+  cardPayment?: unknown;
   returnUrl?: string;
 }
 

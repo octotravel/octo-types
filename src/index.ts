@@ -40,6 +40,8 @@ export * from "./schemas/Order";
 
 export * from "./types/Offer";
 
+export * from "./types/Question";
+
 export * from "./types/Gift";
 
 export * from "./schemas/Gift";
