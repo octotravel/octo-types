@@ -8,7 +8,7 @@ export interface Offer {
     restrictions: OfferRestrictions;
   }
   
-interface OfferRestrictions {
+export interface OfferRestrictions {
     minUnits: Nullable<number>;
     maxUnits: Nullable<number>;
     minTotal: Nullable<number>;
