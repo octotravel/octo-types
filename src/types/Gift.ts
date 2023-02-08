@@ -48,10 +48,10 @@ interface GiftPricing {
 };
 
 interface GiftOffer {
-    offer: Offer;
-    offerCode: Nullable<string>;
-    offerComparisons: OfferComparison[];
-    offerIsCombination: boolean;
-    offers: Offer[];
-    offerTitle: Nullable<string>;
+    offer?: Offer;
+    offerCode?: Nullable<string>;
+    offerComparisons?: OfferComparison[];
+    offerIsCombination?: boolean;
+    offers?: Offer[];
+    offerTitle?: Nullable<string>;
 };
