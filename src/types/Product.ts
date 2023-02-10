@@ -57,7 +57,10 @@ export type Category = {
   bannerImageUrl: Nullable<string>;
 };
 
-export interface Product extends ProductContent, ProductPricing, ProductQuestions {
+export interface Product
+  extends ProductContent,
+    ProductPricing,
+    ProductQuestions {
   id: string;
   internalName: string;
   reference: Nullable<string>;
@@ -97,12 +100,12 @@ export interface ProductContent {
   bannerImages?: Array<Image>;
 }
 
-interface ProductPricing {
+export interface ProductPricing {
   defaultCurrency?: string;
   availableCurrencies?: Array<string>;
   pricingPer?: PricingPer;
 }
 
-interface ProductQuestions {
+export interface ProductQuestions {
   questions?: Question[];
-};
+}

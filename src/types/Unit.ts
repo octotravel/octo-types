@@ -30,13 +30,13 @@ export interface Unit extends UnitContent, UnitPricing {
   requiredContactFields: string[];
 }
 
-interface UnitContent {
+export interface UnitContent {
   title?: string;
   titlePlural?: string;
   subtitle?: Nullable<string>;
 }
 
-interface UnitPricing {
+export interface UnitPricing {
   pricingFrom?: Array<Pricing>;
   pricing?: Array<Pricing>;
 }

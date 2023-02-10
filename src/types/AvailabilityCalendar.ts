@@ -10,7 +10,7 @@ export interface AvailabilityCalendar extends AvailabilityCalendarPricing {
   openingHours: OpeningHours[];
 }
 
-interface AvailabilityCalendarPricing {
+export interface AvailabilityCalendarPricing {
   unitPricingFrom?: PricingUnit[];
   pricingFrom?: Pricing;
 }

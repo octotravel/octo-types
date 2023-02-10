@@ -86,7 +86,10 @@ export const bookingUnitItemSchema: SchemaOf<BookingUnitItemSchema> =
     contact: bookingContactSchema.notRequired(),
   });
 
-export interface CreateBookingBodySchema extends BookingPickupBodySchema, BookingOrderBodySchema, BookingQuestionsBodySchema {
+export interface CreateBookingBodySchema
+  extends BookingPickupBodySchema,
+    BookingOrderBodySchema,
+    BookingQuestionsBodySchema {
   uuid?: string;
   resellerReference?: string;
   productId: string;
@@ -116,28 +119,30 @@ interface BookingOrderBodySchema {
   orderId?: string;
 }
 
-const bookingOrderBodySchema: SchemaOf<BookingOrderBodySchema> = 
-  object().shape({
+const bookingOrderBodySchema: SchemaOf<BookingOrderBodySchema> = object().shape(
+  {
     orderId: string().optional(),
-  });
+  }
+);
 
 interface BookingQuestionsBodySchema {
   questionAnswers?: Array<{
     questionId: string;
     value: string;
   }>;
-};
+}
 
 const bookingQuestionsBodySchema: SchemaOf<BookingQuestionsBodySchema> =
   object().shape({
-    questionAnswers: array().of(
-      object().shape({
-        questionId: string().required(),
-        value: string().required(),
-      })
-    ).optional(),
+    questionAnswers: array()
+      .of(
+        object().shape({
+          questionId: string().required(),
+          value: string().required(),
+        })
+      )
+      .optional(),
   });
-
 
 export const createBookingBodySchema: SchemaOf<CreateBookingBodySchema> =
   object().shape({

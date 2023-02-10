@@ -103,15 +103,15 @@ export interface UnitItem extends UnitItemPricing {
   ticket: Nullable<Ticket>;
 }
 
-interface UnitItemPricing {
+export interface UnitItemPricing {
   pricing?: Pricing;
 }
 
-interface BookingPricing {
+export interface BookingPricing {
   pricing?: Pricing;
 }
 
-interface BookingPickup {
+export interface BookingPickup {
   pickupRequested?: boolean;
   pickupPointId?: Nullable<string>;
   pickupHotel?: Nullable<string>;
@@ -119,7 +119,7 @@ interface BookingPickup {
   pickupPoint?: Nullable<PickupPoint>;
 }
 
-interface BookingContent {
+export interface BookingContent {
   meetingPoint?: Nullable<string>;
   meetingPointCoordinates?: Nullable<[number]>;
   meetingLocalDateTime?: Nullable<string>;
@@ -128,26 +128,26 @@ interface BookingContent {
   durationUnit?: string;
 }
 
-interface BookingCart {
+export interface BookingCart {
   orderId?: string;
   orderReference?: string;
   primary?: boolean;
 }
 
-interface BookingOffers {
+export interface BookingOffers {
   offerCode?: string;
   offerTitle?: string;
-  offerComparisons?: OfferComparison[]
+  offerComparisons?: OfferComparison[];
   offerIsCombination?: boolean;
   offers?: Offer[];
   offer?: Offer;
 }
 
-interface BookingQuestions {
+export interface BookingQuestions {
   questionAswers?: QuestionAnswer[];
-};
+}
 
-interface QuestionAnswer {
+export interface QuestionAnswer {
   questionId: string;
   question: Question[];
   value: Nullable<string>;

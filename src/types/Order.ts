@@ -26,6 +26,6 @@ export enum OrderStatus {
   EXPIRED = "EXPIRED",
 }
 
-interface OrderOffers {
+export interface OrderOffers {
   offerCombinations?: OfferCombination[];
 }

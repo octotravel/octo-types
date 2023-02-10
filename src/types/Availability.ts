@@ -44,7 +44,7 @@ export interface Availability
   openingHours: OpeningHours[];
 }
 
-interface AvailabilityContent {
+export interface AvailabilityContent {
   meetingPoint?: Nullable<string>;
   meetingPointCoordinates?: Nullable<[number]>;
   meetingPointLatitude?: Nullable<number>;
@@ -52,23 +52,22 @@ interface AvailabilityContent {
   meetingLocalDateTime?: Nullable<string>;
 }
 
-interface AvailabilityPricing {
+export interface AvailabilityPricing {
   unitPricing?: PricingUnit[]; // pricingPer = UNIT
   // pricingPer = BOOKING
   // or when units are provided to the availability request
   pricing?: Pricing;
 }
 
-interface AvailabilityPickup {
+export interface AvailabilityPickup {
   pickupAvailable?: boolean;
   pickupRequired?: boolean;
   pickupPoints?: PickupPoint[];
 }
 
-interface AvailabilityOffers {
+export interface AvailabilityOffers {
   offerCode?: string;
   offerTitle?: string;
   offers?: Offer[];
   offer?: Offer;
 }
-
