@@ -41,7 +41,7 @@ export type Itinerary = {
   durationUnit: string;
 };
 
-interface GoogleOptions {
+export interface GoogleOptions {
   landing_page: {
     url: string;
   };
