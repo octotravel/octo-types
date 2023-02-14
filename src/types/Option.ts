@@ -41,7 +41,7 @@ export type Itinerary = {
   durationUnit: string;
 };
 
-interface GoogleOptions {
+export interface GoogleOptions {
   landing_page: {
     url: string;
   };
@@ -78,7 +78,7 @@ export interface Option
   units: Array<Unit>;
 }
 
-interface OptionContent {
+export interface OptionContent {
   title?: string;
   subtitle?: Nullable<string>;
   language?: string;
@@ -89,17 +89,17 @@ interface OptionContent {
   itinerary?: Nullable<Itinerary[]>;
 }
 
-interface OptionPricing {
+export interface OptionPricing {
   pricingFrom?: Array<Pricing>;
   pricing?: Array<Pricing>;
 }
 
-interface OptionPickup {
+export interface OptionPickup {
   pickupRequired?: boolean;
   pickupAvailable?: boolean;
   pickupPoints?: Array<PickupPoint>;
 }
 
-interface OptionGoogle {
+export interface OptionGoogle {
   googleOptions?: GoogleOptions;
 }

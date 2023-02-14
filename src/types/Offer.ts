@@ -1,19 +1,19 @@
 import { Pricing } from "./Pricing";
 
 export interface Offer {
-    title: string;
-    code: string;
-    description: Nullable<string>;
-    netDiscount: Nullable<string>;
-    restrictions: OfferRestrictions;
-  }
-  
+  title: string;
+  code: string;
+  description: Nullable<string>;
+  netDiscount: Nullable<string>;
+  restrictions: OfferRestrictions;
+}
+
 export interface OfferRestrictions {
-    minUnits: Nullable<number>;
-    maxUnits: Nullable<number>;
-    minTotal: Nullable<number>;
-    maxTotal: Nullable<number>;
-    unitIds: string[];
+  minUnits: Nullable<number>;
+  maxUnits: Nullable<number>;
+  minTotal: Nullable<number>;
+  maxTotal: Nullable<number>;
+  unitIds: string[];
 }
 
 export interface OfferComparison {
