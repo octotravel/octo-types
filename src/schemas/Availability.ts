@@ -1,7 +1,7 @@
 import { object, string, number, array, bool } from "yup";
 import type { SchemaOf } from "yup";
 
-export interface AvailabilityBodySchema extends AvailabilityPickupBodySchema {
+export interface AvailabilityBodySchema extends AvailabilityPickupBodySchema, AvailabilityOfferBodySchema {
   productId: string;
   optionId: string;
   localDate?: string;
@@ -9,6 +9,10 @@ export interface AvailabilityBodySchema extends AvailabilityPickupBodySchema {
   localDateEnd?: string;
   availabilityIds?: string[];
   units?: Array<AvailabilityUnit>;
+}
+
+interface AvailabilityOfferBodySchema {
+  offerCode?: string;
 }
 
 interface AvailabilityPickupBodySchema {
@@ -38,6 +42,7 @@ export const availabilityBodySchema: SchemaOf<AvailabilityBodySchema> = object()
     units: array().of(availabilityUnitSchema).notRequired().nullable(),
     pickupRequested: bool().notRequired().nullable(),
     pickupPointId: string().notRequired().nullable(),
+    offerCode: string().notRequired(),
   })
   .test(
     "",
