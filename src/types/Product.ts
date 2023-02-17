@@ -1,5 +1,4 @@
 import { AvailabilityType } from "./Availability";
-import { PickupPoint } from "./PickupPoint";
 import { PricingPer } from "./Pricing";
 import { Option } from "./Option";
 import { Question } from "./Question";
@@ -18,6 +17,7 @@ export enum DeliveryMethod {
 export enum RedemptionMethod {
   DIGITAL = "DIGITAL",
   PRINT = "PRINT",
+  MANIFEST = "MANIFEST",
 }
 
 export type Image = {
