@@ -47,3 +47,5 @@ export * from "./types/Gift";
 export * from "./schemas/Gift";
 
 export * from './types/Webhook';
+
+export * from './schemas/Webhooks';
