@@ -1,10 +1,17 @@
 import { Pricing } from "./Pricing";
 
+export enum NetDiscount {
+  NONE = "NONE",
+  FULL = "FULL",
+  SPLIT = "SPLIT",
+  PRORATED = "PRORATED",
+}
+
 export interface Offer {
   title: string;
   code: string;
   description: Nullable<string>;
-  netDiscount: Nullable<string>;
+  netDiscount: Nullable<NetDiscount>;
   restrictions: OfferRestrictions;
 }
 
