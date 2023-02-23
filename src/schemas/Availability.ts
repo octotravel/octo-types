@@ -1,7 +1,9 @@
 import { object, string, number, array, bool } from "yup";
 import type { SchemaOf } from "yup";
 
-export interface AvailabilityBodySchema extends AvailabilityPickupBodySchema, AvailabilityOfferBodySchema {
+export interface AvailabilityBodySchema
+  extends AvailabilityPickupBodySchema,
+    AvailabilityOfferBodySchema {
   productId: string;
   optionId: string;
   localDate?: string;
