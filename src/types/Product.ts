@@ -113,5 +113,5 @@ export interface ProductQuestions {
 }
 
 export interface ProductGoogle {
-  googleOptions: GoogleOptions;
+  googleOptions?: GoogleOptions;
 }
