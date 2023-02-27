@@ -2,6 +2,7 @@ import { AvailabilityType } from "./Availability";
 import { PricingPer } from "./Pricing";
 import { Option } from "./Option";
 import { Question } from "./Question";
+import { GoogleOptions } from "./Google";
 
 export enum DeliveryFormat {
   PDF_URL = "PDF_URL",
@@ -60,7 +61,8 @@ export type Category = {
 export interface Product
   extends ProductContent,
     ProductPricing,
-    ProductQuestions {
+    ProductQuestions,
+    ProductGoogle {
   id: string;
   internalName: string;
   reference: Nullable<string>;
@@ -108,4 +110,8 @@ export interface ProductPricing {
 
 export interface ProductQuestions {
   questions?: Question[];
+}
+
+export interface ProductGoogle {
+  googleOptions: GoogleOptions;
 }
