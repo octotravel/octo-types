@@ -256,12 +256,14 @@ export const confirmBookingPathParamsSchema: SchemaOf<ConfirmBookingPathParamsSc
 export type CancelBookingBodySchema = {
   reason?: string;
   force?: boolean;
+  emailReceipt?: boolean;
 };
 
 export const cancelBookingBodySchema: SchemaOf<CancelBookingBodySchema> =
   object().shape({
     reason: string().notRequired(),
     force: bool().notRequired(),
+    emailReceipt: bool().notRequired(),
   });
 
 export interface CancelBookingPathParamsSchema {

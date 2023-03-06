@@ -3,7 +3,7 @@ import { CapabilityId } from "../types/Capability";
 import { WebhookEvent } from "../types/Webhook";
 
 export interface CreateWebhookBodyParamsSchema {
-  url: string;
+  url?: string;
   event: WebhookEvent;
   retryOnError?: boolean;
   useContactLanguage?: boolean;
@@ -13,7 +13,7 @@ export interface CreateWebhookBodyParamsSchema {
 
 export const createWebhookBodyParamsSchema: SchemaOf<CreateWebhookBodyParamsSchema> =
   object({
-    url: string().required(),
+    url: string().notRequired(),
     event: mixed().oneOf(Object.values(WebhookEvent)).required(),
     retryOnError: boolean().optional(),
     useContactLanguage: boolean().optional(),
