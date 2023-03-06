@@ -10,7 +10,7 @@ export enum WebhookEvent {
 export interface Webhook {
   id: string;
   event: WebhookEvent;
-  url: string;
+  url?: string;
   retryOnError: boolean;
   useContactLanguage: boolean;
   headers: { [key: string]: string };
