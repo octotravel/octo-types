@@ -11,7 +11,7 @@ export interface Order extends OrderOffers {
   utcExpiresAt: Nullable<string>;
   utcConfirmedAt: Nullable<string>;
   cancellable: boolean;
-  bookings?: Array<Booking>;
+  bookings: Array<Booking>;
   contact: Contact;
   termsAccepted?: boolean;
   pricing?: Pricing;
