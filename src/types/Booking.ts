@@ -41,9 +41,9 @@ export interface Booking
   utcRedeemedAt: Nullable<string>;
   utcConfirmedAt: Nullable<string>;
   productId: string;
-  product: Product;
+  product?: Product;
   optionId: string;
-  option: Option;
+  option?: Option;
   cancellable: boolean;
   cancellation: Nullable<Cancellation>;
   freesale: boolean;
@@ -96,7 +96,7 @@ export interface UnitItem extends UnitItemPricing {
   resellerReference: Nullable<string>;
   supplierReference: Nullable<string>;
   unitId: string;
-  unit: Unit;
+  unit?: Unit;
   status: BookingStatus;
   utcRedeemedAt: Nullable<string>;
   contact: Contact;
