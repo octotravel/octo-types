@@ -1,4 +1,4 @@
-import { object, string, number, array, bool, isSchema } from "yup";
+import { object, string, number, array, bool } from "yup";
 import type { SchemaOf } from "yup";
 
 export type GetBookingPathParamsSchema = {
@@ -7,7 +7,7 @@ export type GetBookingPathParamsSchema = {
 
 export const getBookingPathParamsSchema: SchemaOf<GetBookingPathParamsSchema> =
   object().shape({
-    uuid: string().required(),
+    uuid: string().required()
   });
 
 export type GetBookingsQueryParamsSchema = {
@@ -25,7 +25,7 @@ export const getBookingsQueryParamsSchema: SchemaOf<GetBookingsQueryParamsSchema
       supplierReference: string().notRequired(),
       localDate: string().notRequired(),
       localDateStart: string().notRequired(),
-      localDateEnd: string().notRequired(),
+      localDateEnd: string().notRequired()
     })
     .test(
       "",
@@ -35,7 +35,7 @@ export const getBookingsQueryParamsSchema: SchemaOf<GetBookingsQueryParamsSchema
         supplierReference,
         localDate,
         localDateStart,
-        localDateEnd,
+        localDateEnd
       }) => {
         return Boolean(
           resellerReference ||
@@ -68,7 +68,7 @@ export const bookingContactSchema: SchemaOf<BookingContactSchema> =
     country: string().notRequired(),
     notes: string().notRequired(),
     locales: array().of(string()).notRequired(),
-    postalCode: string().notRequired(),
+    postalCode: string().notRequired()
   });
 
 export interface BookingUnitItemSchema {
@@ -83,7 +83,7 @@ export const bookingUnitItemSchema: SchemaOf<BookingUnitItemSchema> =
     uuid: string().notRequired(),
     unitId: string().required(),
     resellerReference: string().notRequired(),
-    contact: bookingContactSchema.notRequired(),
+    contact: bookingContactSchema.notRequired()
   });
 
 export interface CreateBookingBodySchema
@@ -113,7 +113,7 @@ const bookingPickupBodySchema: SchemaOf<BookingPickupBodySchema> =
   object().shape({
     pickupRequested: bool().notRequired(),
     pickupPointId: string().notRequired(),
-    pickupHotel: string().notRequired(),
+    pickupHotel: string().notRequired()
   });
 
 interface BookingOrderBodySchema {
@@ -122,7 +122,7 @@ interface BookingOrderBodySchema {
 
 const bookingOrderBodySchema: SchemaOf<BookingOrderBodySchema> = object().shape(
   {
-    orderId: string().optional(),
+    orderId: string().optional()
   }
 );
 
@@ -139,24 +139,24 @@ const bookingQuestionsBodySchema: SchemaOf<BookingQuestionsBodySchema> =
       .of(
         object().shape({
           questionId: string().required(),
-          value: string().required(),
+          value: string().required()
         })
       )
-      .optional(),
+      .optional()
   });
 
 interface BookingGiftBodySchema {
   giftPayment?: {
-    code: string;
+    code?: string;
   };
 }
 
 const bookingGiftBodySchema: SchemaOf<BookingGiftBodySchema> = object().shape({
   giftPayment: object()
     .shape({
-      code: string().required(),
+      code: string().required()
     })
-    .optional(),
+    .optional()
 });
 
 export const createBookingBodySchema: SchemaOf<CreateBookingBodySchema> =
@@ -174,7 +174,7 @@ export const createBookingBodySchema: SchemaOf<CreateBookingBodySchema> =
     ...bookingPickupBodySchema.fields,
     ...bookingOrderBodySchema.fields,
     ...bookingGiftBodySchema.fields,
-    ...bookingQuestionsBodySchema.fields,
+    ...bookingQuestionsBodySchema.fields
   });
 
 export interface UpdateBookingBodySchema
@@ -197,7 +197,7 @@ interface BookingOfferBodySchema {
 }
 const bookingOfferBodySchema: SchemaOf<BookingOfferBodySchema> = object().shape(
   {
-    offerCode: string().optional(),
+    offerCode: string().optional()
   }
 );
 
@@ -214,7 +214,7 @@ export const updateBookingBodySchema: SchemaOf<UpdateBookingBodySchema> =
     contact: bookingContactSchema.notRequired().default(undefined),
     ...bookingPickupBodySchema.fields,
     ...bookingGiftBodySchema.fields,
-    ...bookingOfferBodySchema.fields,
+    ...bookingOfferBodySchema.fields
   });
 
 export interface UpdateBookingPathParamsSchema {
@@ -223,7 +223,7 @@ export interface UpdateBookingPathParamsSchema {
 
 export const updateBookingPathParamsSchema: SchemaOf<UpdateBookingPathParamsSchema> =
   object().shape({
-    uuid: string().required(),
+    uuid: string().required()
   });
 
 export interface ConfirmBookingBodySchema extends BookingPickupBodySchema {
@@ -241,7 +241,7 @@ export const confirmBookingBodySchema: SchemaOf<ConfirmBookingBodySchema> =
     emailReceipt: bool().notRequired(),
     unitItems: array().of(bookingUnitItemSchema).notRequired(),
     contact: bookingContactSchema.required().default(undefined),
-    ...bookingPickupBodySchema.fields,
+    ...bookingPickupBodySchema.fields
   });
 
 export interface ConfirmBookingPathParamsSchema {
@@ -250,7 +250,7 @@ export interface ConfirmBookingPathParamsSchema {
 
 export const confirmBookingPathParamsSchema: SchemaOf<ConfirmBookingPathParamsSchema> =
   object().shape({
-    uuid: string().required(),
+    uuid: string().required()
   });
 
 export type CancelBookingBodySchema = {
@@ -263,7 +263,7 @@ export const cancelBookingBodySchema: SchemaOf<CancelBookingBodySchema> =
   object().shape({
     reason: string().notRequired(),
     force: bool().notRequired(),
-    emailReceipt: bool().notRequired(),
+    emailReceipt: bool().notRequired()
   });
 
 export interface CancelBookingPathParamsSchema {
@@ -272,7 +272,7 @@ export interface CancelBookingPathParamsSchema {
 
 export const cancelBookingPathParamsSchema: SchemaOf<CancelBookingPathParamsSchema> =
   object().shape({
-    uuid: string().required(),
+    uuid: string().required()
   });
 
 export type ExtendBookingBodySchema = {
@@ -281,7 +281,7 @@ export type ExtendBookingBodySchema = {
 
 export const extendBookingBodySchema: SchemaOf<ExtendBookingBodySchema> =
   object().shape({
-    expirationMinutes: number().integer().notRequired(),
+    expirationMinutes: number().integer().notRequired()
   });
 
 export interface ExtendBookingPathParamsSchema {
@@ -290,5 +290,5 @@ export interface ExtendBookingPathParamsSchema {
 
 export const extendBookingPathParamsSchema: SchemaOf<ExtendBookingPathParamsSchema> =
   object().shape({
-    uuid: string().required(),
+    uuid: string().required()
   });
