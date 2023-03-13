@@ -10,6 +10,8 @@ export * from "./types/Currency";
 
 export * from "./types/Duration";
 
+export * from "./types/Google";
+
 export * from "./types/Mapping";
 
 export * from "./types/Option";
