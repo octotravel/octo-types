@@ -157,6 +157,7 @@ const bookingGiftBodySchema: SchemaOf<BookingGiftBodySchema> = object().shape({
       code: string().required()
     })
     .optional()
+    .default(undefined)
 });
 
 export const createBookingBodySchema: SchemaOf<CreateBookingBodySchema> =
