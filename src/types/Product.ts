@@ -8,6 +8,7 @@ export enum DeliveryFormat {
   PDF_URL = "PDF_URL",
   QRCODE = "QRCODE",
   CODE128 = "CODE128",
+  PKPASS_URL = "PKPASS_URL"
 }
 
 export enum DeliveryMethod {
