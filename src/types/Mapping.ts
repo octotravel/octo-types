@@ -1,5 +1,12 @@
+export enum ResellerStatus {
+  ACTIVE = 'ACTIVE',
+  DISABLED = 'DISABLED',
+  DRAFT = 'DRAFT',
+}
+
 export interface Mapping {
   resellerReference: string;
+  resellerStatus: ResellerStatus;
   title: string;
   url: string;
   webhookUrl: Nullable<string>;
