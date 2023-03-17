@@ -1,5 +1,6 @@
 export interface Mapping {
   resellerReference: string;
+  resellerStatus: string;
   title: string;
   url: string;
   webhookUrl: Nullable<string>;
