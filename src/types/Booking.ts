@@ -144,7 +144,7 @@ export interface BookingOffers {
 }
 
 export interface BookingQuestions {
-  questionAswers?: QuestionAnswer[];
+  questionAnswers?: QuestionAnswer[];
 }
 
 export interface QuestionAnswer {
