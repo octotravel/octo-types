@@ -1,4 +1,5 @@
 import { Pricing } from "./Pricing";
+import { Tax } from "./Tax";
 
 export enum NetDiscount {
   NONE = "NONE",
@@ -35,4 +36,10 @@ export interface OfferCombination {
   offerCode: string;
   offerTitle: string;
   pricing: Pricing;
+}
+
+export interface OfferDiscount {
+  original: number;
+  retail: number;
+  includedTaxes: Array<Tax>;
 }

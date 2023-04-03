@@ -24,6 +24,8 @@ export * from "./types/Product";
 
 export * from "./types/Supplier";
 
+export * from "./types/Tax";
+
 export * from "./types/Unit";
 
 export * from "./schemas/Product";
