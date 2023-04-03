@@ -12,7 +12,9 @@ interface Url {
 }
 interface Operator {
     name: string;
-    google_business_profile_name: string;
+    google_business_profile_name: {
+        localized_text: Array<LocalizedText>;
+    };
     phone_number: string;
     localtions: Array<Location>;
 }
@@ -35,4 +37,8 @@ interface Location {
 interface Rating {
     average_value: Nullable<number>;
     rating_count: Nullable<number>;
+}
+interface LocalizedText {
+    text: string;
+    language_code: string;
 }
