@@ -16,7 +16,7 @@ interface Operator {
         localized_text: Array<LocalizedText>;
     };
     phone_number: string;
-    localtions: Array<Location>;
+    locations: Array<Location>;
 }
 interface OptionCategories {
     label: string;
