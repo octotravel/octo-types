@@ -1,20 +1,20 @@
 export interface GoogleOptions {
-    operator: Operator;
+    operator: Nullable<Operator>;
+    rating: Nullable<Rating>;
     landing_page: Url;
     inventory_type: string;
     landing_page_list_view: Url;
     option_categories: Array<OptionCategories>;
     related_locations: Array<RelatedLocations>;
 }
-
 interface Url {
     url: Nullable<string>;
 }
-
 interface Operator {
     name: string;
     google_business_profile_name: string;
     phone_number: string;
+    localtions: Array<Location>;
 }
 interface OptionCategories {
     label: string;
@@ -26,4 +26,13 @@ interface RelatedLocations {
         };
     };
     relation_type: string;
+}
+interface Location {
+    location: {
+        place_id: string;
+    };
+}
+interface Rating {
+    average_value: Nullable<number>;
+    rating_count: Nullable<number>;
 }
