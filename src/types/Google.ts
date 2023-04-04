@@ -13,7 +13,7 @@ interface Url {
 interface Operator {
     name: string;
     google_business_profile_name: {
-        localized_text: Array<LocalizedText>;
+        localized_texts: Array<LocalizedText>;
     };
     phone_number: string;
     locations: Array<Location>;
