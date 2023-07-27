@@ -95,7 +95,7 @@ export interface CreateBookingBodySchema
   resellerReference?: string;
   productId: string;
   optionId: string;
-  availabilityId: string;
+  availabilityId?: string|null;
   expirationMinutes?: number;
   notes?: string;
   emailReceipt?: boolean;
