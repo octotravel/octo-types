@@ -9,7 +9,7 @@ export interface AvailabilityResourcesBodySchema {
   units?: Array<AvailabilityUnit>;
 }
 
-export const availabilityBodySchema: SchemaOf<AvailabilityResourcesBodySchema> =
+export const availabilityResourcesBodySchema: SchemaOf<AvailabilityResourcesBodySchema> =
   object().shape({
     productId: string().required(),
     optionId: string().required(),
