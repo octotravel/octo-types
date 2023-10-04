@@ -41,10 +41,7 @@ export type Itinerary = {
   durationUnit: string;
 };
 
-export interface Option
-  extends OptionContent,
-    OptionPickup,
-    OptionPricing {
+export interface Option extends OptionContent, OptionPickup, OptionPricing {
   id: string;
   default: boolean;
   internalName: string;

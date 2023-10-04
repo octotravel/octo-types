@@ -11,6 +11,7 @@ import {
 import { Pricing } from "./Pricing";
 import { Offer, OfferComparison } from "./Offer";
 import { Question } from "./Question";
+import { ResourceAlloctation } from "./Resources";
 
 export enum BookingStatus {
   ON_HOLD = "ON_HOLD",
@@ -28,7 +29,8 @@ export interface Booking
     BookingContent,
     BookingCart,
     BookingOffers,
-    BookingQuestions {
+    BookingQuestions,
+    BookingResources {
   id: string;
   uuid: string;
   testMode: boolean;
@@ -151,4 +153,8 @@ export interface QuestionAnswer {
   questionId: string;
   question: Question[];
   value: Nullable<string>;
+}
+
+export interface BookingResources {
+  resourceAllocations?: Array<ResourceAlloctation>;
 }

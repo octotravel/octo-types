@@ -1,5 +1,5 @@
-import { OfferDiscount } from './Offer';
-import { Tax } from './Tax';
+import { OfferDiscount } from "./Offer";
+import { Tax } from "./Tax";
 
 export enum PricingPer {
   UNIT = "UNIT",
@@ -19,5 +19,5 @@ export interface PricingUnit extends Pricing {
 }
 
 export interface PricingOffer {
-  offerDiscount?: OfferDiscount
+  offerDiscount?: OfferDiscount;
 }

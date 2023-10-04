@@ -1,44 +1,44 @@
 export interface GoogleOptions {
-    operator: Nullable<Operator>;
-    rating: Nullable<Rating>;
-    landing_page: Url;
-    inventory_type: string;
-    landing_page_list_view: Url;
-    option_categories: Array<OptionCategories>;
-    related_locations: Array<RelatedLocations>;
+  operator: Nullable<Operator>;
+  rating: Nullable<Rating>;
+  landing_page: Url;
+  inventory_type: string;
+  landing_page_list_view: Url;
+  option_categories: Array<OptionCategories>;
+  related_locations: Array<RelatedLocations>;
 }
 interface Url {
-    url: Nullable<string>;
+  url: Nullable<string>;
 }
 interface Operator {
-    name: string;
-    google_business_profile_name: {
-        localized_texts: Array<LocalizedText>;
-    };
-    phone_number: string;
-    locations: Array<Location>;
+  name: string;
+  google_business_profile_name: {
+    localized_texts: Array<LocalizedText>;
+  };
+  phone_number: string;
+  locations: Array<Location>;
 }
 interface OptionCategories {
-    label: string;
+  label: string;
 }
 interface RelatedLocations {
+  location: {
     location: {
-        location: {
-            place_id: string;
-        };
+      place_id: string;
     };
-    relation_type: string;
+  };
+  relation_type: string;
 }
 interface Location {
-    location: {
-        place_id: string;
-    };
+  location: {
+    place_id: string;
+  };
 }
 interface Rating {
-    average_value: Nullable<number>;
-    rating_count: Nullable<number>;
+  average_value: Nullable<number>;
+  rating_count: Nullable<number>;
 }
 interface LocalizedText {
-    text: string;
-    language_code: string;
+  text: string;
+  language_code: string;
 }
