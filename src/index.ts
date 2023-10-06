@@ -2,7 +2,7 @@ export * from "./types/Availability";
 
 export * from "./types/AvailabilityCalendar";
 
-export * from './schemas/AvailabilityResources';
+export * from "./schemas/AvailabilityResources";
 
 export * from "./types/Booking";
 
@@ -56,4 +56,4 @@ export * from "./types/Webhook";
 
 export * from "./schemas/Webhooks";
 
-export * from './types/Resources';
+export * from "./types/Resources";

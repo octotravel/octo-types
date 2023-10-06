@@ -17,9 +17,17 @@ export interface Webhook {
   capabilities: CapabilityId[];
 }
 
+export interface Diff {
+  op: string;
+  path: string;
+  was: string;
+  value: string;
+}
+
 export interface BookingUpdate {
   webhook: Webhook;
   booking: Booking;
+  diff: Diff[];
 }
 
 export interface AvailabilityUpdate {
