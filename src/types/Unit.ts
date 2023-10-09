@@ -18,7 +18,7 @@ export interface Restrictions {
   minQuantity: Nullable<number>;
   maxQuantity: Nullable<number>;
   paxCount: number;
-  accompaniedBy: number[];
+  accompaniedBy: string[];
 }
 
 export interface Unit extends UnitContent, UnitPricing {
