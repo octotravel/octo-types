@@ -97,5 +97,5 @@ export interface OptionQuestions {
 }
 
 export interface OptionExtras {
-  extrass?: Array<Extra>;
+  extras?: Array<Extra>;
 }

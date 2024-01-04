@@ -1,6 +1,6 @@
 import { PickupPoint } from "./PickupPoint";
 import { Unit } from "./Unit";
-import { OpeningHours } from "./Availability";
+import { Availability, AvailabilityStatus, OpeningHours } from "./Availability";
 import { Option } from "./Option";
 import {
   DeliveryFormat,
@@ -13,6 +13,7 @@ import { Offer, OfferComparison } from "./Offer";
 import { Question } from "./Question";
 import { ResourceAlloctation } from "./Resources";
 import { GiftPayment } from "./Gift";
+import { ExtraItem } from "./Extras";
 
 export enum BookingStatus {
   ON_HOLD = "ON_HOLD",
@@ -32,7 +33,8 @@ export interface Booking
     BookingOffers,
     BookingQuestions,
     BookingResources,
-    BookingGift {
+    BookingGift,
+    BookingExtras {
   id: string;
   uuid: string;
   testMode: boolean;
@@ -52,7 +54,7 @@ export interface Booking
   cancellation: Nullable<Cancellation>;
   freesale: boolean;
   availabilityId: string;
-  availability: BookingAvailability;
+  availability: Nullable<Availability>;
   contact: Contact;
   notes: Nullable<string>;
   deliveryMethods: DeliveryMethod[];
@@ -63,13 +65,6 @@ export interface Cancellation {
   refund: string;
   reason: Nullable<string>;
   utcCancelledAt: string;
-}
-export interface BookingAvailability {
-  id: string;
-  localDateTimeStart: string;
-  localDateTimeEnd: string;
-  allDay: boolean;
-  openingHours: OpeningHours[];
 }
 
 export interface Contact {
@@ -96,12 +91,16 @@ export interface DeliveryOption {
   deliveryValue: string;
 }
 
-export interface UnitItem extends UnitItemPricing {
+export interface UnitItem
+  extends UnitItemPricing,
+    BookingQuestions,
+    BookingExtras {
   uuid: string;
+  is: string;
   resellerReference: Nullable<string>;
   supplierReference: Nullable<string>;
   unitId: string;
-  unit?: Unit;
+  unit: Unit;
   status: BookingStatus;
   utcRedeemedAt: Nullable<string>;
   contact: Contact;
@@ -149,7 +148,7 @@ export interface BookingOffers {
 }
 
 export interface BookingQuestions {
-  questionAnswers?: QuestionAnswer[];
+  questionAnswers?: Array<QuestionAnswer>;
 }
 
 export interface QuestionAnswer {
@@ -164,4 +163,8 @@ export interface BookingResources {
 
 export interface BookingGift {
   giftPayment?: Nullable<GiftPayment>;
+}
+
+export interface BookingExtras {
+  extraItems?: Array<ExtraItem>;
 }

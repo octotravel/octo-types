@@ -17,3 +17,10 @@ interface Restrictions {
   minQuantity: number;
   maxQuantity: number | null;
 }
+
+export interface ExtraItem {
+  id: string;
+  extraId: string;
+  extra: Extra;
+  pricing: Pricing;
+}

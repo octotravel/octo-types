@@ -1,8 +1,9 @@
 import { Booking, Contact } from "./Booking";
+import { GiftPayment } from "./Gift";
 import { OfferCombination } from "./Offer";
 import { Pricing } from "./Pricing";
 
-export interface Order extends OrderOffers {
+export interface Order extends OrderOffers, OrderGift {
   id: string;
   testMode: boolean;
   supplierReference: string;
@@ -17,6 +18,7 @@ export interface Order extends OrderOffers {
   pricing?: Pricing;
   cardPayment?: unknown;
   returnUrl?: string;
+  confirmable?: boolean;
 }
 
 export enum OrderStatus {
@@ -28,4 +30,8 @@ export enum OrderStatus {
 
 export interface OrderOffers {
   offerCombinations?: OfferCombination[];
+}
+
+export interface OrderGift {
+  giftPayment?: GiftPayment;
 }

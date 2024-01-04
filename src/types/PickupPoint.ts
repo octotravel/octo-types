@@ -12,4 +12,6 @@ export interface PickupPoint {
   region: Nullable<string>;
   state: Nullable<string>;
   country: Nullable<string>;
+  localDateTime: string;
+  localDateTimeTo: Nullable<string>;
 }
