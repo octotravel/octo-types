@@ -12,6 +12,7 @@ import { Pricing } from "./Pricing";
 import { Offer, OfferComparison } from "./Offer";
 import { Question } from "./Question";
 import { ResourceAlloctation } from "./Resources";
+import { GiftPayment } from "./Gift";
 
 export enum BookingStatus {
   ON_HOLD = "ON_HOLD",
@@ -30,7 +31,8 @@ export interface Booking
     BookingCart,
     BookingOffers,
     BookingQuestions,
-    BookingResources {
+    BookingResources,
+    BookingGift {
   id: string;
   uuid: string;
   testMode: boolean;
@@ -55,7 +57,7 @@ export interface Booking
   notes: Nullable<string>;
   deliveryMethods: DeliveryMethod[];
   voucher: Nullable<Ticket>;
-  unitItems: UnitItem[];
+  unitItems: Array<UnitItem>;
 }
 export interface Cancellation {
   refund: string;
@@ -80,6 +82,7 @@ export interface Contact {
   postalCode: Nullable<string>;
   country: Nullable<string>;
   notes: Nullable<string>;
+  allowMarketing: boolean;
 }
 
 export interface Ticket {
@@ -157,4 +160,8 @@ export interface QuestionAnswer {
 
 export interface BookingResources {
   resourceAllocations?: Array<ResourceAlloctation>;
+}
+
+export interface BookingGift {
+  giftPayment?: Nullable<GiftPayment>;
 }
