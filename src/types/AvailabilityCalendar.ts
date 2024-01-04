@@ -7,6 +7,9 @@ export interface AvailabilityCalendar extends AvailabilityCalendarPricing {
   status: AvailabilityStatus;
   vacancies: Nullable<number>;
   capacity: Nullable<number>;
+  paxCount: Nullable<number>;
+  utcCutoffAt: string;
+  availabilityLocalStartTimes: Array<string>;
   openingHours: OpeningHours[];
 }
 

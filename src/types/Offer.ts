@@ -1,4 +1,5 @@
 import { Pricing } from "./Pricing";
+import { Product } from "./Product";
 import { Tax } from "./Tax";
 
 export enum NetDiscount {
@@ -28,6 +29,9 @@ export interface OfferComparison {
   productId: string;
   optionId: string;
   pricing: Pricing;
+  product: Product;
+  shortDescription: string | null;
+  units: Array<{ unitId: string; quantity: number }>;
 }
 
 export interface OfferCombination {

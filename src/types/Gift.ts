@@ -38,7 +38,7 @@ export enum GiftStatus {
 }
 
 export interface GiftPayment {
-  code: string;
+  giftCode: string;
   amount: number;
   currency: string;
 }

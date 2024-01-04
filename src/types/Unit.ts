@@ -1,4 +1,7 @@
+import { Extra } from "./Extras";
+import { ContactField } from "./Option";
 import { Pricing } from "./Pricing";
+import { Question } from "./Question";
 
 export enum UnitType {
   ADULT = "ADULT",
@@ -18,16 +21,18 @@ export interface Restrictions {
   minQuantity: Nullable<number>;
   maxQuantity: Nullable<number>;
   paxCount: number;
-  accompaniedBy: string[];
+  accompaniedBy: Array<string>;
 }
 
-export interface Unit extends UnitContent, UnitPricing {
+export interface Unit extends UnitContent, UnitPricing, UnitQuestions {
   id: string;
   internalName: string;
   reference: string;
   type: UnitType;
   restrictions: Restrictions;
-  requiredContactFields: string[];
+  requiredContactFields: Array<ContactField>;
+  visibleContactFields: Array<ContactField>;
+  extras: Array<Extra>;
 }
 
 export interface UnitContent {
@@ -39,4 +44,8 @@ export interface UnitContent {
 export interface UnitPricing {
   pricingFrom?: Array<Pricing>;
   pricing?: Array<Pricing>;
+}
+
+export interface UnitQuestions {
+  questions: Array<Question>;
 }
