@@ -4,7 +4,8 @@ import { Pricing } from "./Pricing";
 import { DurationUnit } from "./Duration";
 import { Question } from "./Question";
 import { Extra } from "./Extras";
-import { Point } from "./content";
+import { Point } from "./Content";
+import { Package } from "./Package";
 
 export enum ContactField {
   firstName = "firstName",
@@ -52,7 +53,9 @@ export interface Option
   extends OptionContent,
     OptionPickup,
     OptionPricing,
-    OptionQuestions {
+    OptionQuestions,
+    OptionExtras,
+    OptionPackage {
   id: string;
   default: boolean;
   internalName: string;
@@ -98,4 +101,8 @@ export interface OptionQuestions {
 
 export interface OptionExtras {
   extras?: Array<Extra>;
+}
+
+export interface OptionPackage {
+  packageIncludes?: Array<Package>;
 }

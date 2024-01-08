@@ -160,6 +160,25 @@ const bookingGiftBodySchema: SchemaOf<BookingGiftBodySchema> = object().shape({
     .default(undefined),
 });
 
+interface BookingPackageBodySchema {
+  packageBookings?: Array<{
+    packageIncludeId: string;
+    availabilityId: string;
+  }>;
+}
+
+const bookingPackageBodySchema: SchemaOf<BookingPackageBodySchema> =
+  object().shape({
+    packageBookings: array()
+      .of(
+        object().shape({
+          packageIncludeId: string().required(),
+          availabilityId: string().required(),
+        })
+      )
+      .optional(),
+  });
+
 export const createBookingBodySchema: SchemaOf<CreateBookingBodySchema> =
   object().shape({
     uuid: string().notRequired(),
@@ -176,6 +195,7 @@ export const createBookingBodySchema: SchemaOf<CreateBookingBodySchema> =
     ...bookingOrderBodySchema.fields,
     ...bookingGiftBodySchema.fields,
     ...bookingQuestionsBodySchema.fields,
+    ...bookingPackageBodySchema.fields,
   });
 
 export interface UpdateBookingBodySchema
@@ -216,6 +236,7 @@ export const updateBookingBodySchema: SchemaOf<UpdateBookingBodySchema> =
     ...bookingPickupBodySchema.fields,
     ...bookingGiftBodySchema.fields,
     ...bookingOfferBodySchema.fields,
+    ...bookingPackageBodySchema.fields,
   });
 
 export interface UpdateBookingPathParamsSchema {

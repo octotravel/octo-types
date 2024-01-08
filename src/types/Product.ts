@@ -63,7 +63,8 @@ export interface Product
   extends ProductContent,
     ProductPricing,
     ProductQuestions,
-    ProductGoogle {
+    ProductGoogle,
+    ProductPackage {
   id: string;
   internalName: string;
   reference: Nullable<string>;
@@ -121,4 +122,8 @@ export interface ProductQuestions {
 
 export interface ProductGoogle {
   googleOptions?: GoogleOptions;
+}
+
+export interface ProductPackage {
+  isPackage?: boolean;
 }

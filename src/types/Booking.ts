@@ -14,6 +14,7 @@ import { Question } from "./Question";
 import { ResourceAlloctation } from "./Resources";
 import { GiftPayment } from "./Gift";
 import { ExtraItem } from "./Extras";
+import { PackageBooking } from "./Package";
 
 export enum BookingStatus {
   ON_HOLD = "ON_HOLD",
@@ -34,7 +35,8 @@ export interface Booking
     BookingQuestions,
     BookingResources,
     BookingGift,
-    BookingExtras {
+    BookingExtras,
+    BookingPackage {
   id: string;
   uuid: string;
   testMode: boolean;
@@ -167,4 +169,9 @@ export interface BookingGift {
 
 export interface BookingExtras {
   extraItems?: Array<ExtraItem>;
+}
+
+export interface BookingPackage {
+  isPackage?: boolean;
+  packageBookings?: Array<PackageBooking>;
 }
