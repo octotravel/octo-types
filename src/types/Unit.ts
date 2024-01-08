@@ -24,7 +24,11 @@ export interface Restrictions {
   accompaniedBy: Array<string>;
 }
 
-export interface Unit extends UnitContent, UnitPricing, UnitQuestions {
+export interface Unit
+  extends UnitContent,
+    UnitPricing,
+    UnitQuestions,
+    UnitExtras {
   id: string;
   internalName: string;
   reference: string;
@@ -32,7 +36,6 @@ export interface Unit extends UnitContent, UnitPricing, UnitQuestions {
   restrictions: Restrictions;
   requiredContactFields: Array<ContactField>;
   visibleContactFields: Array<ContactField>;
-  extras: Array<Extra>;
 }
 
 export interface UnitContent {
@@ -47,5 +50,9 @@ export interface UnitPricing {
 }
 
 export interface UnitQuestions {
-  questions: Array<Question>;
+  questions?: Array<Question>;
+}
+
+export interface UnitExtras {
+  extras?: Array<Extra>;
 }

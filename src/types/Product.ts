@@ -112,7 +112,7 @@ export interface ProductPricing {
   defaultCurrency?: string;
   availableCurrencies?: Array<string>;
   pricingPer?: PricingPer;
-  includeTax: boolean;
+  includeTax?: boolean;
 }
 
 export interface ProductQuestions {

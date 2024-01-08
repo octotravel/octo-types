@@ -96,11 +96,11 @@ export interface UnitItem
     BookingQuestions,
     BookingExtras {
   uuid: string;
-  is: string;
+  id: string;
   resellerReference: Nullable<string>;
   supplierReference: Nullable<string>;
   unitId: string;
-  unit: Unit;
+  unit?: Unit;
   status: BookingStatus;
   utcRedeemedAt: Nullable<string>;
   contact: Contact;
