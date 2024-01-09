@@ -17,7 +17,4 @@ export interface Mapping {
   optionId: Nullable<string>;
   unitId: Nullable<string>;
   connected: boolean;
-  expediaTourTime: Nullable<string>;
-  gygPriceOverApi: boolean;
-  viatorRecurringPriceSync: boolean;
 }
