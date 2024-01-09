@@ -5,6 +5,7 @@ export enum ResellerStatus {
 }
 
 export interface Mapping {
+  id: string;
   resellerReference: string;
   resellerStatus: ResellerStatus;
   title: string;
@@ -16,6 +17,4 @@ export interface Mapping {
   optionId: Nullable<string>;
   unitId: Nullable<string>;
   connected: boolean;
-  expediaTourTime: Nullable<string>;
-  gygPriceOverApi: boolean;
 }
