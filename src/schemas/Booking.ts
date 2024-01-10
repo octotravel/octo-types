@@ -1,5 +1,6 @@
 import { object, string, number, array, bool } from "yup";
 import type { SchemaOf } from "yup";
+import { CardPaymentGateway } from "../types/CardPayment";
 
 export type GetBookingPathParamsSchema = {
   uuid: string;
@@ -248,7 +249,68 @@ export const updateBookingPathParamsSchema: SchemaOf<UpdateBookingPathParamsSche
     uuid: string().required(),
   });
 
-export interface ConfirmBookingBodySchema extends BookingPickupBodySchema {
+export interface BookingCardPaymentBodySchema {
+  cardPayment?: {
+    gateway: CardPaymentGateway;
+    amount?: number;
+    currency?: string;
+    notes?: string;
+    adyen?: {
+      sessionId: string;
+    };
+    vivawallet?: {
+      offerCode: string;
+      transactionId: string;
+    };
+    bridgepay?: {
+      token: string;
+    };
+    stripe?: {
+      paymentIntent?: string;
+      paymentMethod?: string;
+      setupIntent?: string;
+    };
+  };
+}
+
+export const bookingCardPaymentBodySchema: SchemaOf<BookingCardPaymentBodySchema> =
+  object().shape({
+    cardPayment: object()
+      .shape({
+        gateway: string().required(),
+        amount: number().integer().optional(),
+        currency: string().optional(),
+        notes: string().optional(),
+        adyen: object()
+          .shape({
+            sessionId: string().required(),
+          })
+          .optional(),
+        vivawallet: object()
+          .shape({
+            offerCode: string().required(),
+            transactionId: string().required(),
+          })
+          .optional(),
+        bridgepay: object()
+          .shape({
+            token: string().required(),
+          })
+          .optional(),
+        stripe: object()
+          .shape({
+            paymentIntent: string().optional(),
+            paymentMethod: string().optional(),
+            setupIntent: string().optional(),
+          })
+          .optional(),
+      })
+      .optional(),
+  });
+
+export interface ConfirmBookingBodySchema
+  extends BookingPickupBodySchema,
+    BookingCardPaymentBodySchema {
   resellerReference?: string;
   notes?: string;
   emailReceipt?: boolean;
@@ -264,6 +326,7 @@ export const confirmBookingBodySchema: SchemaOf<ConfirmBookingBodySchema> =
     unitItems: array().of(bookingUnitItemSchema).notRequired(),
     contact: bookingContactSchema.required().default(undefined),
     ...bookingPickupBodySchema.fields,
+    ...bookingCardPaymentBodySchema.fields,
   });
 
 export interface ConfirmBookingPathParamsSchema {

@@ -15,6 +15,13 @@ import { ResourceAlloctation } from "./Resources";
 import { GiftPayment } from "./Gift";
 import { ExtraItem } from "./Extras";
 import { PackageBooking } from "./Package";
+import {
+  Adyen,
+  Bridgepay,
+  CardPaymentGateway,
+  Stripe,
+  Vivawallet,
+} from "./CardPayment";
 
 export enum BookingStatus {
   ON_HOLD = "ON_HOLD",
@@ -36,7 +43,8 @@ export interface Booking
     BookingResources,
     BookingGift,
     BookingExtras,
-    BookingPackage {
+    BookingPackage,
+    BookingCardPayment {
   id: string;
   uuid: string;
   testMode: boolean;
@@ -174,4 +182,12 @@ export interface BookingExtras {
 export interface BookingPackage {
   isPackage?: boolean;
   packageBookings?: Array<PackageBooking>;
+}
+
+export interface BookingCardPayment {
+  gateway: CardPaymentGateway;
+  adyen?: Adyen;
+  vivawallet?: Vivawallet;
+  bridgepay?: Bridgepay;
+  stripe?: Stripe;
 }
