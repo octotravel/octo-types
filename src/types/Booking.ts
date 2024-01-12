@@ -1,6 +1,6 @@
 import { PickupPoint } from "./PickupPoint";
 import { Unit } from "./Unit";
-import { Availability, AvailabilityStatus, OpeningHours } from "./Availability";
+import { Availability } from "./Availability";
 import { Option } from "./Option";
 import {
   DeliveryFormat,
@@ -10,7 +10,7 @@ import {
 } from "./Product";
 import { Pricing } from "./Pricing";
 import { Offer, OfferComparison } from "./Offer";
-import { Question } from "./Question";
+import { QuestionAnswer } from "./Question";
 import { ResourceAlloctation } from "./Resources";
 import { GiftPayment } from "./Gift";
 import { ExtraItem } from "./Extras";
@@ -18,10 +18,12 @@ import { PackageBooking } from "./Package";
 import {
   Adyen,
   Bridgepay,
+  CardPayment,
   CardPaymentGateway,
   Stripe,
   Vivawallet,
 } from "./CardPayment";
+import { Notice } from "./Content";
 
 export enum BookingStatus {
   ON_HOLD = "ON_HOLD",
@@ -63,7 +65,7 @@ export interface Booking
   cancellable: boolean;
   cancellation: Nullable<Cancellation>;
   freesale: boolean;
-  availabilityId: string;
+  availabilityId: Nullable<string>;
   availability: Nullable<Availability>;
   contact: Contact;
   notes: Nullable<string>;
@@ -87,7 +89,7 @@ export interface Contact {
   postalCode: Nullable<string>;
   country: Nullable<string>;
   notes: Nullable<string>;
-  allowMarketing: boolean;
+  allowMarketing?: boolean;
 }
 
 export interface Ticket {
@@ -140,6 +142,8 @@ export interface BookingContent {
   duration?: string;
   durationAmount?: string;
   durationUnit?: string;
+  termsAccepted?: boolean;
+  notices: Array<Notice>;
 }
 
 export interface BookingCart {
@@ -161,12 +165,6 @@ export interface BookingQuestions {
   questionAnswers?: Array<QuestionAnswer>;
 }
 
-export interface QuestionAnswer {
-  questionId: string;
-  question: Question[];
-  value: Nullable<string>;
-}
-
 export interface BookingResources {
   resourceAllocations?: Array<ResourceAlloctation>;
 }
@@ -185,9 +183,5 @@ export interface BookingPackage {
 }
 
 export interface BookingCardPayment {
-  gateway: CardPaymentGateway;
-  adyen?: Adyen;
-  vivawallet?: Vivawallet;
-  bridgepay?: Bridgepay;
-  stripe?: Stripe;
+  cardPayment?: CardPayment<CardPaymentGateway>;
 }

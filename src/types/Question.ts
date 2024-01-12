@@ -25,3 +25,9 @@ interface SelectOption {
   label: string;
   value: string;
 }
+
+export interface QuestionAnswer {
+  questionId: string;
+  question: Question;
+  value: Nullable<string>;
+}

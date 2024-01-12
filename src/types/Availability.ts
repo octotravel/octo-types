@@ -1,3 +1,4 @@
+import { Notice, TourGroup } from "./Content";
 import { Offer } from "./Offer";
 import { PickupPoint } from "./PickupPoint";
 import { Pricing, PricingUnit } from "./Pricing";
@@ -30,7 +31,8 @@ export interface Availability
   extends AvailabilityContent,
     AvailabilityPricing,
     AvailabilityPickup,
-    AvailabilityOffers {
+    AvailabilityOffers,
+    AvailabilityResources {
   id: string;
   localDateTimeStart: string;
   localDateTimeEnd: string;
@@ -50,6 +52,8 @@ export interface AvailabilityContent {
   meetingPointLatitude?: Nullable<number>;
   meetingPointLongitude?: Nullable<number>;
   meetingLocalDateTime?: Nullable<string>;
+  tourGroup?: Nullable<TourGroup>;
+  notices?: Notice[];
 }
 
 export interface AvailabilityPricing {
@@ -70,4 +74,8 @@ export interface AvailabilityOffers {
   offerTitle?: string;
   offers?: Offer[];
   offer?: Offer;
+}
+
+export interface AvailabilityResources {
+  hasResources: boolean;
 }

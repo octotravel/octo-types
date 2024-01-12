@@ -19,7 +19,7 @@ export enum ContactField {
   postalCode = "postalCode",
 }
 
-export type UnitRestrictions = {
+export type OptionRestrictions = {
   minUnits: number;
   maxUnits: Nullable<number>;
   minPaxCount: number;
@@ -66,7 +66,7 @@ export interface Option
   cancellationCutoffUnit: string;
   requiredContactFields: Array<ContactField>;
   visibleContactFields: Array<ContactField>;
-  restrictions: UnitRestrictions;
+  restrictions: OptionRestrictions;
   units: Array<Unit>;
 }
 

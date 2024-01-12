@@ -33,6 +33,7 @@
     "typescript": "^4.6.3"
   },
   "dependencies": {
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "@adyen/adyen-web": "^5.55.1"
   }
 }

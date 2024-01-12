@@ -1,11 +1,5 @@
 import { Booking, Contact } from "./Booking";
-import {
-  Adyen,
-  Bridgepay,
-  CardPaymentGateway,
-  Stripe,
-  Vivawallet,
-} from "./CardPayment";
+import { CardPayment, CardPaymentGateway } from "./CardPayment";
 import { GiftPayment } from "./Gift";
 import { OfferCombination } from "./Offer";
 import { Pricing } from "./Pricing";
@@ -23,7 +17,6 @@ export interface Order extends OrderOffers, OrderGift, OrderCardPayment {
   contact: Contact;
   termsAccepted?: boolean;
   pricing?: Pricing;
-  cardPayment?: unknown;
   returnUrl?: string;
   confirmable?: boolean;
 }
@@ -40,13 +33,9 @@ export interface OrderOffers {
 }
 
 export interface OrderGift {
-  giftPayment?: GiftPayment;
+  giftPayment?: Nullable<GiftPayment>;
 }
 
 export interface OrderCardPayment {
-  gateway: CardPaymentGateway;
-  adyen?: Adyen;
-  vivawallet?: Vivawallet;
-  bridgepay?: Bridgepay;
-  stripe?: Stripe;
+  cardPayment?: CardPayment<CardPaymentGateway>;
 }

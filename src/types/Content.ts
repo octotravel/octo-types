@@ -12,3 +12,16 @@ interface PointGroup {
   shortDescription: string;
   internalName: string;
 }
+
+export interface TourGroup {
+  id: string;
+  internalName: string;
+  title: string;
+}
+
+export interface Notice {
+  id: string;
+  title: Nullable<string>;
+  shortDescription: string;
+  coverImageUrl: Nullable<string>;
+}

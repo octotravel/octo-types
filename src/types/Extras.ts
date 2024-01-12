@@ -2,20 +2,20 @@ import { Pricing } from "./Pricing";
 
 export interface Extra {
   id: string;
-  internalName: string | null;
-  title: string | null;
-  description: string | null;
-  reference: string | null;
+  internalName: Nullable<string>;
+  title: Nullable<string>;
+  description: Nullable<string>;
+  reference: Nullable<string>;
   restrictions: Restrictions;
   pricingFrom?: Pricing[];
   pricing?: Pricing[];
-  shortDescription: string | null;
+  shortDescription: Nullable<string>;
 }
 
 interface Restrictions {
   required: boolean;
   minQuantity: number;
-  maxQuantity: number | null;
+  maxQuantity: Nullable<number>;
 }
 
 export interface ExtraItem {
@@ -23,4 +23,9 @@ export interface ExtraItem {
   extraId: string;
   extra: Extra;
   pricing: Pricing;
+}
+
+export interface AvailabilityExtraUnit {
+  id: string;
+  quantity: number;
 }

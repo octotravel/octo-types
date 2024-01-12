@@ -1,8 +1,30 @@
-import { object, string, array } from "yup";
+import { object, string, array, number } from "yup";
 import type { SchemaOf } from "yup";
 import { AvailabilityUnit, availabilityUnitSchema } from "./Availability";
+import { AvailabilityExtraUnit } from "../types/Extras";
 
-export interface AvailabilityCalendarBodySchema {
+interface AvailabilityCalendarCapabilitiesBodySchema {
+  currency?: string;
+  extras?: Array<AvailabilityExtraUnit>;
+  offerCode?: string;
+}
+
+const availabilityCalendarCapabilitiesBodySchema: SchemaOf<AvailabilityCalendarCapabilitiesBodySchema> =
+  object().shape({
+    currency: string().notRequired(),
+    extras: array()
+      .of(
+        object().shape({
+          id: string().required(),
+          quantity: number().required(),
+        })
+      )
+      .notRequired(),
+    offerCode: string().notRequired(),
+  });
+
+export interface AvailabilityCalendarBodySchema
+  extends AvailabilityCalendarCapabilitiesBodySchema {
   productId: string;
   optionId: string;
   localDateStart: string;
@@ -18,6 +40,7 @@ export const availabilityCalendarBodySchema: SchemaOf<AvailabilityCalendarBodySc
       localDateStart: string().required(),
       localDateEnd: string().required(),
       units: array().of(availabilityUnitSchema).notRequired().nullable(),
+      ...availabilityCalendarCapabilitiesBodySchema.fields,
     })
     .test(
       "",
