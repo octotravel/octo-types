@@ -13,6 +13,8 @@ export enum CapabilityId {
   Google = "octo/google",
   Questions = "octo/questions",
   Resources = "octo/resources",
+  Extras = "octo/extras",
+  Packages = "octo/packages",
 }
 
 export interface Capability {

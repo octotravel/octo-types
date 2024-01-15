@@ -1,9 +1,12 @@
 import { object, string, number, array, bool } from "yup";
 import type { SchemaOf } from "yup";
+import { AvailabilityExtraUnit } from "../types/Extras";
 
 export interface AvailabilityBodySchema
   extends AvailabilityPickupBodySchema,
-    AvailabilityOfferBodySchema {
+    AvailabilityOfferBodySchema,
+    AvailabilityExtrasBodySchema,
+    AvailabilityCardPaymentBodySchema {
   productId: string;
   optionId: string;
   localDate?: string;
@@ -22,15 +25,35 @@ interface AvailabilityPickupBodySchema {
   pickupPointId?: Nullable<string>;
 }
 
-export type AvailabilityUnit = {
+interface AvailabilityExtrasBodySchema {
+  extras?: Array<AvailabilityExtraUnit>;
+}
+
+interface AvailabilityCardPaymentBodySchema {
+  currency?: string;
+}
+
+export interface AvailabilityUnit extends AvailabilityUnitExtras {
   id: string;
   quantity: number;
-};
+}
+
+interface AvailabilityUnitExtras {
+  extras?: Array<AvailabilityExtraUnit>;
+}
 
 export const availabilityUnitSchema: SchemaOf<AvailabilityUnit> =
   object().shape({
     id: string().required(),
     quantity: number().required(),
+    extras: array()
+      .of(
+        object().shape({
+          id: string().required(),
+          quantity: number().required(),
+        })
+      )
+      .notRequired(),
   });
 
 export const availabilityBodySchema: SchemaOf<AvailabilityBodySchema> = object()
@@ -45,6 +68,15 @@ export const availabilityBodySchema: SchemaOf<AvailabilityBodySchema> = object()
     pickupRequested: bool().notRequired().nullable(),
     pickupPointId: string().notRequired().nullable(),
     offerCode: string().notRequired(),
+    extras: array()
+      .of(
+        object().shape({
+          id: string().required(),
+          quantity: number().required(),
+        })
+      )
+      .notRequired(),
+    currency: string().notRequired(),
   })
   .test(
     "",

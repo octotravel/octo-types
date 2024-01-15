@@ -1,6 +1,6 @@
 import { PickupPoint } from "./PickupPoint";
 import { Unit } from "./Unit";
-import { OpeningHours } from "./Availability";
+import { Availability } from "./Availability";
 import { Option } from "./Option";
 import {
   DeliveryFormat,
@@ -10,8 +10,20 @@ import {
 } from "./Product";
 import { Pricing } from "./Pricing";
 import { Offer, OfferComparison } from "./Offer";
-import { Question } from "./Question";
+import { QuestionAnswer } from "./Question";
 import { ResourceAlloctation } from "./Resources";
+import { GiftPayment } from "./Gift";
+import { ExtraItem } from "./Extras";
+import { PackageBooking } from "./Package";
+import {
+  Adyen,
+  Bridgepay,
+  CardPayment,
+  CardPaymentGateway,
+  Stripe,
+  Vivawallet,
+} from "./CardPayment";
+import { Notice } from "./Content";
 
 export enum BookingStatus {
   ON_HOLD = "ON_HOLD",
@@ -30,7 +42,11 @@ export interface Booking
     BookingCart,
     BookingOffers,
     BookingQuestions,
-    BookingResources {
+    BookingResources,
+    BookingGift,
+    BookingExtras,
+    BookingPackage,
+    BookingCardPayment {
   id: string;
   uuid: string;
   testMode: boolean;
@@ -49,25 +65,18 @@ export interface Booking
   cancellable: boolean;
   cancellation: Nullable<Cancellation>;
   freesale: boolean;
-  availabilityId: string;
-  availability: BookingAvailability;
+  availabilityId: Nullable<string>;
+  availability: Nullable<Availability>;
   contact: Contact;
   notes: Nullable<string>;
   deliveryMethods: DeliveryMethod[];
   voucher: Nullable<Ticket>;
-  unitItems: UnitItem[];
+  unitItems: Array<UnitItem>;
 }
 export interface Cancellation {
   refund: string;
   reason: Nullable<string>;
   utcCancelledAt: string;
-}
-export interface BookingAvailability {
-  id: string;
-  localDateTimeStart: string;
-  localDateTimeEnd: string;
-  allDay: boolean;
-  openingHours: OpeningHours[];
 }
 
 export interface Contact {
@@ -80,6 +89,7 @@ export interface Contact {
   postalCode: Nullable<string>;
   country: Nullable<string>;
   notes: Nullable<string>;
+  allowMarketing?: boolean;
 }
 
 export interface Ticket {
@@ -93,8 +103,12 @@ export interface DeliveryOption {
   deliveryValue: string;
 }
 
-export interface UnitItem extends UnitItemPricing {
+export interface UnitItem
+  extends UnitItemPricing,
+    BookingQuestions,
+    BookingExtras {
   uuid: string;
+  id: string;
   resellerReference: Nullable<string>;
   supplierReference: Nullable<string>;
   unitId: string;
@@ -128,6 +142,8 @@ export interface BookingContent {
   duration?: string;
   durationAmount?: string;
   durationUnit?: string;
+  termsAccepted?: boolean;
+  notices: Array<Notice>;
 }
 
 export interface BookingCart {
@@ -146,15 +162,26 @@ export interface BookingOffers {
 }
 
 export interface BookingQuestions {
-  questionAnswers?: QuestionAnswer[];
-}
-
-export interface QuestionAnswer {
-  questionId: string;
-  question: Question[];
-  value: Nullable<string>;
+  questionAnswers?: Array<QuestionAnswer>;
 }
 
 export interface BookingResources {
   resourceAllocations?: Array<ResourceAlloctation>;
+}
+
+export interface BookingGift {
+  giftPayment?: Nullable<GiftPayment>;
+}
+
+export interface BookingExtras {
+  extraItems?: Array<ExtraItem>;
+}
+
+export interface BookingPackage {
+  isPackage?: boolean;
+  packageBookings?: Array<PackageBooking>;
+}
+
+export interface BookingCardPayment {
+  cardPayment?: CardPayment<CardPaymentGateway>;
 }

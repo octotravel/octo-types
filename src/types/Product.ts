@@ -63,7 +63,8 @@ export interface Product
   extends ProductContent,
     ProductPricing,
     ProductQuestions,
-    ProductGoogle {
+    ProductGoogle,
+    ProductPackage {
   id: string;
   internalName: string;
   reference: Nullable<string>;
@@ -77,6 +78,8 @@ export interface Product
   deliveryFormats: Array<DeliveryFormat>;
   deliveryMethods: Array<DeliveryMethod>;
   redemptionMethod: RedemptionMethod;
+  freesaleDurationAmount: number;
+  freesaleDurationUnit: string;
   options: Array<Option>;
 }
 
@@ -101,12 +104,16 @@ export interface ProductContent {
   videoUrl?: Nullable<string>;
   galleryImages?: Array<Image>;
   bannerImages?: Array<Image>;
+  pointToPoint?: boolean;
+  privacyTerms?: Nullable<string>;
+  alert?: Nullable<string>;
 }
 
 export interface ProductPricing {
   defaultCurrency?: string;
   availableCurrencies?: Array<string>;
   pricingPer?: PricingPer;
+  includeTax?: boolean;
 }
 
 export interface ProductQuestions {
@@ -115,4 +122,8 @@ export interface ProductQuestions {
 
 export interface ProductGoogle {
   googleOptions?: GoogleOptions;
+}
+
+export interface ProductPackage {
+  isPackage?: boolean;
 }

@@ -1,8 +1,10 @@
 import { Booking, Contact } from "./Booking";
+import { CardPayment, CardPaymentGateway } from "./CardPayment";
+import { GiftPayment } from "./Gift";
 import { OfferCombination } from "./Offer";
 import { Pricing } from "./Pricing";
 
-export interface Order extends OrderOffers {
+export interface Order extends OrderOffers, OrderGift, OrderCardPayment {
   id: string;
   testMode: boolean;
   supplierReference: string;
@@ -15,8 +17,8 @@ export interface Order extends OrderOffers {
   contact: Contact;
   termsAccepted?: boolean;
   pricing?: Pricing;
-  cardPayment?: unknown;
   returnUrl?: string;
+  confirmable?: boolean;
 }
 
 export enum OrderStatus {
@@ -28,4 +30,12 @@ export enum OrderStatus {
 
 export interface OrderOffers {
   offerCombinations?: OfferCombination[];
+}
+
+export interface OrderGift {
+  giftPayment?: Nullable<GiftPayment>;
+}
+
+export interface OrderCardPayment {
+  cardPayment?: CardPayment<CardPaymentGateway>;
 }

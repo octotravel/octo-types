@@ -5,7 +5,7 @@ export enum PricingPer {
   UNIT = "UNIT",
   BOOKING = "BOOKING",
 }
-export interface Pricing extends PricingOffer {
+export interface Pricing extends PricingOffer, PricingExtras {
   original: number;
   retail: number;
   net: Nullable<number>;
@@ -14,10 +14,18 @@ export interface Pricing extends PricingOffer {
   includedTaxes: Array<Tax>;
 }
 
-export interface PricingUnit extends Pricing {
+export interface PricingUnit extends Pricing, PricingUnitExtras {
   unitId: string;
 }
 
 export interface PricingOffer {
   offerDiscount?: OfferDiscount;
+}
+
+export interface PricingExtras {
+  extraId?: string;
+}
+
+export interface PricingUnitExtras {
+  extraPricing?: PricingExtras;
 }
