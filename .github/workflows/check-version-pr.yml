@@ -19,20 +19,20 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16'
-      
+
       - name: Get PR version
         id: pr_version
         run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
-      
+
       - name: Checkout main branch
         uses: actions/checkout@v2
         with:
           ref: main
-      
+
       - name: Get main version
         id: main_version
         run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
-      
+
       - name: Compare versions
         run: |
           if [ "${{ steps.pr_version.outputs.VERSION }}" != "${{ steps.main_version.outputs.VERSION }}" ]; then

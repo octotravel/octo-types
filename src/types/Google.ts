@@ -4,8 +4,8 @@ export interface GoogleOptions {
   landing_page: Url;
   inventory_type: string;
   landing_page_list_view: Url;
-  option_categories: Array<OptionCategories>;
-  related_locations: Array<RelatedLocations>;
+  option_categories: OptionCategories[];
+  related_locations: RelatedLocations[];
 }
 interface Url {
   url: Nullable<string>;
@@ -13,10 +13,10 @@ interface Url {
 interface Operator {
   name: string;
   google_business_profile_name: {
-    localized_texts: Array<LocalizedText>;
+    localized_texts: LocalizedText[];
   };
   phone_number: string;
-  locations: Array<Location>;
+  locations: Location[];
 }
 interface OptionCategories {
   label: string;

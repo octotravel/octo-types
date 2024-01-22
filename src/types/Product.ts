@@ -1,39 +1,39 @@
-import { AvailabilityType } from "./Availability";
-import { PricingPer } from "./Pricing";
-import { Option } from "./Option";
-import { Question } from "./Question";
-import { GoogleOptions } from "./Google";
+import { AvailabilityType } from './Availability';
+import { PricingPer } from './Pricing';
+import { Option } from './Option';
+import { Question } from './Question';
+import { GoogleOptions } from './Google';
 
 export enum DeliveryFormat {
-  PDF_URL = "PDF_URL",
-  QRCODE = "QRCODE",
-  CODE128 = "CODE128",
-  PKPASS_URL = "PKPASS_URL",
+  PDF_URL = 'PDF_URL',
+  QRCODE = 'QRCODE',
+  CODE128 = 'CODE128',
+  PKPASS_URL = 'PKPASS_URL',
 }
 
 export enum DeliveryMethod {
-  VOUCHER = "VOUCHER",
-  TICKET = "TICKET",
+  VOUCHER = 'VOUCHER',
+  TICKET = 'TICKET',
 }
 
 export enum RedemptionMethod {
-  DIGITAL = "DIGITAL",
-  PRINT = "PRINT",
-  MANIFEST = "MANIFEST",
+  DIGITAL = 'DIGITAL',
+  PRINT = 'PRINT',
+  MANIFEST = 'MANIFEST',
 }
 
-export type Image = {
+export interface Image {
   url: string;
   title: Nullable<string>;
   caption: Nullable<string>;
-};
+}
 
-export type FAQ = {
+export interface FAQ {
   question: string;
   answer: string;
-};
+}
 
-export type Destination = {
+export interface Destination {
   id: string;
   default: boolean;
   name: string;
@@ -41,30 +41,25 @@ export type Destination = {
   contact: DestinationContact;
   latitude: number;
   longitude: number;
-};
+}
 
-type DestinationContact = {
+interface DestinationContact {
   website: Nullable<string>;
   email: Nullable<string>;
   telephone: Nullable<string>;
   address: Nullable<string>;
-};
+}
 
-export type Category = {
+export interface Category {
   id: string;
   default: boolean;
   title: string;
   shortDescription: Nullable<string>;
   coverImageUrl: Nullable<string>;
   bannerImageUrl: Nullable<string>;
-};
+}
 
-export interface Product
-  extends ProductContent,
-    ProductPricing,
-    ProductQuestions,
-    ProductGoogle,
-    ProductPackage {
+export interface Product extends ProductContent, ProductPricing, ProductQuestions, ProductGoogle, ProductPackage {
   id: string;
   internalName: string;
   reference: Nullable<string>;
@@ -75,12 +70,12 @@ export interface Product
   instantDelivery: boolean;
   availabilityRequired: boolean;
   availabilityType: AvailabilityType;
-  deliveryFormats: Array<DeliveryFormat>;
-  deliveryMethods: Array<DeliveryMethod>;
+  deliveryFormats: DeliveryFormat[];
+  deliveryMethods: DeliveryMethod[];
   redemptionMethod: RedemptionMethod;
   freesaleDurationAmount: number;
   freesaleDurationUnit: string;
-  options: Array<Option>;
+  options: Option[];
 }
 
 export interface ProductContent {
@@ -90,20 +85,20 @@ export interface ProductContent {
   subtitle?: Nullable<string>;
   shortDescription?: Nullable<string>;
   description?: Nullable<string>;
-  highlights?: Array<string>;
-  inclusions?: Array<string>;
-  exclusions?: Array<string>;
+  highlights?: string[];
+  inclusions?: string[];
+  exclusions?: string[];
   bookingTerms?: Nullable<string>;
   redemptionInstructions?: Nullable<string>;
   cancellationPolicy?: Nullable<string>;
   destination?: Destination;
-  categories?: Array<Category>;
-  faqs?: Array<FAQ>;
+  categories?: Category[];
+  faqs?: FAQ[];
   coverImageUrl?: Nullable<string>;
   bannerImageUrl?: Nullable<string>;
   videoUrl?: Nullable<string>;
-  galleryImages?: Array<Image>;
-  bannerImages?: Array<Image>;
+  galleryImages?: Image[];
+  bannerImages?: Image[];
   pointToPoint?: boolean;
   privacyTerms?: Nullable<string>;
   alert?: Nullable<string>;
@@ -111,7 +106,7 @@ export interface ProductContent {
 
 export interface ProductPricing {
   defaultCurrency?: string;
-  availableCurrencies?: Array<string>;
+  availableCurrencies?: string[];
   pricingPer?: PricingPer;
   includeTax?: boolean;
 }

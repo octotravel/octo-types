@@ -1,39 +1,52 @@
 {
   "name": "@octocloud/types",
-  "version": "1.5.14",
+  "version": "1.5.15",
   "description": "",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "format": "prettier --write \"**/*.{ts,js,css,json,md}\"",
-    "pretest": "npm run build",
-    "prepare": "npm run build"
-  },
+  "license": "ISC",
+  "author": "",
+  "homepage": "https://github.com/octotravel/octo-types#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/octotravel/octo-types.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/octotravel/octo-types/issues"
   },
-  "homepage": "https://github.com/octotravel/octo-types#readme",
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.27.0",
-    "@typescript-eslint/parser": "^5.27.0",
-    "eslint": "^8.17.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-unused-imports": "^2.0.0",
-    "prettier": "^2.8.8",
-    "rimraf": "^3.0.2",
-    "typescript": "^4.6.3"
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "build:dry": "tsc --noEmit",
+    "check": "npm run build:dry && npm run format:check && npm run lint",
+    "fix": "npm run format:package && npm run format && npm run lint:fix",
+    "fix:staged": "npx lint-staged",
+    "format": "prettier . '!./ops' --write",
+    "format:check": "prettier . '!./ops' --check",
+    "format:package": "prettier-package-json --write",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "prepare": "npm run build",
+    "pretest": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "types": "dist/index.d.ts",
   "dependencies": {
-    "yup": "^0.32.11",
-    "@adyen/adyen-web": "^5.55.1"
-  }
+    "@adyen/adyen-web": "5.55.1",
+    "yup": "0.32.11"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "6.18.1",
+    "@typescript-eslint/parser": "6.18.1",
+    "eslint": "8.56.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-airbnb-typescript": "17.1.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-config-standard-with-typescript": "43.0.0",
+    "eslint-plugin-import": "2.29.1",
+    "eslint-plugin-unused-imports": "3.0.0",
+    "prettier": "3.1.1",
+    "prettier-package-json": "2.8.0",
+    "rimraf": "3.0.2",
+    "typescript": "5.3.3"
+  },
+  "keywords": []
 }

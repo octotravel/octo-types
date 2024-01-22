@@ -5,8 +5,8 @@ export interface ResourceAlloctation {
   resourceId: string;
   resource: Resource;
   paxCount: number;
-  seatIds: Array<string>;
-  seats: Array<Seat>;
+  seatIds: string[];
+  seats: Seat[];
 }
 
 export interface ResourceGroup {
@@ -19,7 +19,7 @@ export interface Resource {
   id: string;
   title: string;
   seating: boolean;
-  seats: Array<Seat>;
+  seats: Seat[];
 }
 
 export interface Seat {

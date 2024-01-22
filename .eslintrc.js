@@ -39,6 +39,7 @@ module.exports = {
         '@typescript-eslint/space-before-function-paren': 'off',
         '@typescript-eslint/indent': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/prefer-nullish-coalescing': 'off',
         '@typescript-eslint/explicit-member-accessibility': [
           'error',
           {

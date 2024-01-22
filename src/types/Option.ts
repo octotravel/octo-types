@@ -1,39 +1,39 @@
-import { Unit } from "./Unit";
-import { PickupPoint } from "./PickupPoint";
-import { Pricing } from "./Pricing";
-import { DurationUnit } from "./Duration";
-import { Question } from "./Question";
-import { Extra } from "./Extras";
-import { Point } from "./Content";
-import { Package } from "./Package";
+import { Unit } from './Unit';
+import { PickupPoint } from './PickupPoint';
+import { Pricing } from './Pricing';
+import { DurationUnit } from './Duration';
+import { Question } from './Question';
+import { Extra } from './Extras';
+import { Point } from './Content';
+import { Package } from './Package';
 
 export enum ContactField {
-  firstName = "firstName",
-  lastName = "lastName",
-  emailAddress = "emailAddress",
-  phoneNumber = "phoneNumber",
-  country = "country",
-  notes = "notes",
-  locales = "locales",
-  allowMarketing = "allowMarketing",
-  postalCode = "postalCode",
+  firstName = 'firstName',
+  lastName = 'lastName',
+  emailAddress = 'emailAddress',
+  phoneNumber = 'phoneNumber',
+  country = 'country',
+  notes = 'notes',
+  locales = 'locales',
+  allowMarketing = 'allowMarketing',
+  postalCode = 'postalCode',
 }
 
-export type OptionRestrictions = {
+export interface OptionRestrictions {
   minUnits: number;
   maxUnits: Nullable<number>;
   minPaxCount: number;
   maxPaxCount: Nullable<number>;
-};
-
-enum ItineraryType {
-  START = "START",
-  POINT = "POINT",
-  EVENT = "EVENT",
-  END = "END",
 }
 
-export type Itinerary = {
+enum ItineraryType {
+  START = 'START',
+  POINT = 'POINT',
+  EVENT = 'EVENT',
+  END = 'END',
+}
+
+export interface Itinerary {
   name: string;
   type: ItineraryType;
   description: string;
@@ -47,7 +47,7 @@ export type Itinerary = {
   duration: string;
   durationAmount: number;
   durationUnit: string;
-};
+}
 
 export interface Option
   extends OptionContent,
@@ -60,14 +60,14 @@ export interface Option
   default: boolean;
   internalName: string;
   reference: Nullable<string>;
-  availabilityLocalStartTimes: Array<string>;
+  availabilityLocalStartTimes: string[];
   cancellationCutoff: string;
   cancellationCutoffAmount: number;
   cancellationCutoffUnit: string;
-  requiredContactFields: Array<ContactField>;
-  visibleContactFields: Array<ContactField>;
+  requiredContactFields: ContactField[];
+  visibleContactFields: ContactField[];
   restrictions: OptionRestrictions;
-  units: Array<Unit>;
+  units: Unit[];
 }
 
 export interface OptionContent {
@@ -85,24 +85,24 @@ export interface OptionContent {
 }
 
 export interface OptionPricing {
-  pricingFrom?: Array<Pricing>;
-  pricing?: Array<Pricing>;
+  pricingFrom?: Pricing[];
+  pricing?: Pricing[];
 }
 
 export interface OptionPickup {
   pickupRequired?: boolean;
   pickupAvailable?: boolean;
-  pickupPoints?: Array<PickupPoint>;
+  pickupPoints?: PickupPoint[];
 }
 
 export interface OptionQuestions {
-  questions?: Array<Question>;
+  questions?: Question[];
 }
 
 export interface OptionExtras {
-  extras?: Array<Extra>;
+  extras?: Extra[];
 }
 
 export interface OptionPackage {
-  packageIncludes?: Array<Package>;
+  packageIncludes?: Package[];
 }

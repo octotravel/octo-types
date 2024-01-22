@@ -1,7 +1,7 @@
-import { Cancellation, Contact, Ticket } from "./Booking";
-import { Offer, OfferComparison } from "./Offer";
-import { Pricing } from "./Pricing";
-import { DeliveryMethod } from "./Product";
+import { Cancellation, Contact, Ticket } from './Booking';
+import { Offer, OfferComparison } from './Offer';
+import { Pricing } from './Pricing';
+import { DeliveryMethod } from './Product';
 
 export interface Gift extends GiftPricing, GiftOffer {
   id: string;
@@ -30,11 +30,11 @@ export interface Gift extends GiftPricing, GiftOffer {
 }
 
 export enum GiftStatus {
-  ON_HOLD = "ON_HOLD",
-  EXPIRED = "EXPIRED",
-  CONFIRMED = "CONFIRMED",
-  CANCELLED = "CANCELLED",
-  REDEEMED = "REDEEMED",
+  ON_HOLD = 'ON_HOLD',
+  EXPIRED = 'EXPIRED',
+  CONFIRMED = 'CONFIRMED',
+  CANCELLED = 'CANCELLED',
+  REDEEMED = 'REDEEMED',
 }
 
 export interface GiftPayment {

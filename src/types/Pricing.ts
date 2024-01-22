@@ -1,9 +1,9 @@
-import { OfferDiscount } from "./Offer";
-import { Tax } from "./Tax";
+import { OfferDiscount } from './Offer';
+import { Tax } from './Tax';
 
 export enum PricingPer {
-  UNIT = "UNIT",
-  BOOKING = "BOOKING",
+  UNIT = 'UNIT',
+  BOOKING = 'BOOKING',
 }
 export interface Pricing extends PricingOffer, PricingExtras {
   original: number;
@@ -11,7 +11,7 @@ export interface Pricing extends PricingOffer, PricingExtras {
   net: Nullable<number>;
   currency: string;
   currencyPrecision: number;
-  includedTaxes: Array<Tax>;
+  includedTaxes: Tax[];
 }
 
 export interface PricingUnit extends Pricing, PricingUnitExtras {

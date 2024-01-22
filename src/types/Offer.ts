@@ -1,13 +1,13 @@
-import { Booking } from "./Booking";
-import { Pricing } from "./Pricing";
-import { Product } from "./Product";
-import { Tax } from "./Tax";
+import { Booking } from './Booking';
+import { Pricing } from './Pricing';
+import { Product } from './Product';
+import { Tax } from './Tax';
 
 export enum NetDiscount {
-  NONE = "NONE",
-  FULL = "FULL",
-  SPLIT = "SPLIT",
-  PRORATED = "PRORATED",
+  NONE = 'NONE',
+  FULL = 'FULL',
+  SPLIT = 'SPLIT',
+  PRORATED = 'PRORATED',
 }
 
 export interface Offer {
@@ -32,7 +32,7 @@ export interface OfferComparison {
   pricing: Pricing;
   product: Product;
   shortDescription: Nullable<string>;
-  units: Array<Unit>;
+  units: Unit[];
 }
 
 export interface OfferCombination {
@@ -42,14 +42,14 @@ export interface OfferCombination {
   offerTitle: string;
   pricing: Pricing;
   shortDescription: Nullable<string>;
-  units: Array<Unit>;
+  units: Unit[];
   booking: Nullable<Booking>;
 }
 
 export interface OfferDiscount {
   original: number;
   retail: number;
-  includedTaxes: Array<Tax>;
+  includedTaxes: Tax[];
 }
 
 interface Unit {

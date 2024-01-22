@@ -1,5 +1,5 @@
-import { AvailabilityStatus, OpeningHours } from "./Availability";
-import { Pricing, PricingUnit } from "./Pricing";
+import { AvailabilityStatus, OpeningHours } from './Availability';
+import { Pricing, PricingUnit } from './Pricing';
 
 export interface AvailabilityCalendar extends AvailabilityCalendarPricing {
   localDate: string;
@@ -9,7 +9,7 @@ export interface AvailabilityCalendar extends AvailabilityCalendarPricing {
   capacity: Nullable<number>;
   paxCount: Nullable<number>;
   utcCutoffAt: string;
-  availabilityLocalStartTimes: Array<string>;
+  availabilityLocalStartTimes: string[];
   openingHours: OpeningHours[];
 }
 

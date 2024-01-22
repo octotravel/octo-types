@@ -1,17 +1,17 @@
-import { ResultCode } from "@adyen/adyen-web/dist/types/components/types";
-import { PaymentMethodsConfiguration } from "@adyen/adyen-web/dist/types/core/types";
+import { ResultCode } from '@adyen/adyen-web/dist/types/components/types';
+import { PaymentMethodsConfiguration } from '@adyen/adyen-web/dist/types/core/types';
 
 export enum CardPaymentGateway {
-  Adyen = "adyen",
-  Vivawallet = "vivawallet",
-  Bridgepay = "bridgepay",
-  Stripe = "stripe",
-  External = "external",
-  Paypal = "paypal",
-  Paytr = "paytr",
+  Adyen = 'adyen',
+  Vivawallet = 'vivawallet',
+  Bridgepay = 'bridgepay',
+  Stripe = 'stripe',
+  External = 'external',
+  Paypal = 'paypal',
+  Paytr = 'paytr',
 }
 
-export type CardPayment<T extends CardPaymentGateway> = {
+export interface CardPayment<T extends CardPaymentGateway> {
   gateway: T;
   balance?: number;
   surcharge?: number;
@@ -24,7 +24,7 @@ export type CardPayment<T extends CardPaymentGateway> = {
   stripe: T extends CardPaymentGateway.Stripe ? Stripe : never;
   paytr: T extends CardPaymentGateway.Paytr ? Paytr : never;
   paypal: T extends CardPaymentGateway.Paypal ? Paypal : never;
-};
+}
 
 export interface Adyen {
   environment: string;

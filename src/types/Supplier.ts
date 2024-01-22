@@ -14,7 +14,7 @@ interface SupplierContact {
 
 interface SupplierContent {
   country?: string;
-  destinations?: Array<SupplierDestination>;
+  destinations?: SupplierDestination[];
 }
 
 export interface SupplierDestination {
@@ -25,7 +25,7 @@ export interface SupplierDestination {
   contact: SupplierContact;
   latitude: number;
   longitude: number;
-  categories: Array<SupplierCategory>;
+  categories: SupplierCategory[];
 }
 
 export interface SupplierCategory {
@@ -35,5 +35,5 @@ export interface SupplierCategory {
   shortDescription: Nullable<string>;
   coverImageUrl: Nullable<string>;
   bannerImageUrl: Nullable<string>;
-  productIds: Array<string>;
+  productIds: string[];
 }

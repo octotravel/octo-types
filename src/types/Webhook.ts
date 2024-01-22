@@ -1,11 +1,11 @@
-import { Availability } from "./Availability";
-import { Booking } from "./Booking";
-import { CapabilityId } from "./Capability";
-import { Supplier } from "./Supplier";
+import { Availability } from './Availability';
+import { Booking } from './Booking';
+import { CapabilityId } from './Capability';
+import { Supplier } from './Supplier';
 
 export enum WebhookEvent {
-  BookingUpdate = "booking_update",
-  AvailabilityUpdate = "availability_update",
+  BookingUpdate = 'booking_update',
+  AvailabilityUpdate = 'availability_update',
 }
 export interface Webhook {
   id: string;
@@ -13,7 +13,7 @@ export interface Webhook {
   url: Nullable<string>;
   retryOnError: boolean;
   useContactLanguage: boolean;
-  headers: { [key: string]: string };
+  headers: Record<string, string>;
   capabilities: CapabilityId[];
 }
 

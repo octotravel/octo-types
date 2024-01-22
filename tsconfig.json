@@ -1,10 +1,22 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "module": "commonjs",
+    "outDir": "dist",
+    "baseUrl": ".",
+    "rootDir": ".",
+    "target": "ES2021",
+    "module": "CommonJS",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "checkJs": true,
+    "allowJs": true,
     "declaration": true,
-    "outDir": "./dist",
-    "strict": true
+    "declarationMap": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "resolveJsonModule": true
   },
   "include": ["src/**/**.ts"],
   "exclude": ["node_modules"]

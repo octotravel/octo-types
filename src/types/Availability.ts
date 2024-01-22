@@ -1,19 +1,19 @@
-import { Notice, TourGroup } from "./Content";
-import { Offer } from "./Offer";
-import { PickupPoint } from "./PickupPoint";
-import { Pricing, PricingUnit } from "./Pricing";
+import { Notice, TourGroup } from './Content';
+import { Offer } from './Offer';
+import { PickupPoint } from './PickupPoint';
+import { Pricing, PricingUnit } from './Pricing';
 
 export enum AvailabilityType {
-  START_TIME = "START_TIME",
-  OPENING_HOURS = "OPENING_HOURS",
+  START_TIME = 'START_TIME',
+  OPENING_HOURS = 'OPENING_HOURS',
 }
 
 export enum AvailabilityStatus {
-  AVAILABLE = "AVAILABLE",
-  FREESALE = "FREESALE",
-  SOLD_OUT = "SOLD_OUT",
-  LIMITED = "LIMITED",
-  CLOSED = "CLOSED",
+  AVAILABLE = 'AVAILABLE',
+  FREESALE = 'FREESALE',
+  SOLD_OUT = 'SOLD_OUT',
+  LIMITED = 'LIMITED',
+  CLOSED = 'CLOSED',
 }
 
 export interface OpeningHours extends OpeningHoursContent {

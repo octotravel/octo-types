@@ -1,7 +1,7 @@
 export enum ResellerStatus {
-  ACTIVE = "ACTIVE",
-  DISABLED = "DISABLED",
-  DRAFT = "DRAFT",
+  ACTIVE = 'ACTIVE',
+  DISABLED = 'DISABLED',
+  DRAFT = 'DRAFT',
 }
 
 export interface Mapping {
