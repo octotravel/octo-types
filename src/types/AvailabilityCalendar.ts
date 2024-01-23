@@ -1,7 +1,8 @@
 import { AvailabilityStatus, OpeningHours } from './Availability';
+import { Offer } from './Offer';
 import { Pricing, PricingUnit } from './Pricing';
 
-export interface AvailabilityCalendar extends AvailabilityCalendarPricing {
+export interface AvailabilityCalendar extends AvailabilityCalendarPricing, AvailabilityCalendarOffers {
   localDate: string;
   available: boolean;
   status: AvailabilityStatus;
@@ -16,4 +17,11 @@ export interface AvailabilityCalendar extends AvailabilityCalendarPricing {
 export interface AvailabilityCalendarPricing {
   unitPricingFrom?: PricingUnit[];
   pricingFrom?: Pricing;
+}
+
+export interface AvailabilityCalendarOffers {
+  offers?: Array<Offer>;
+  offerCode?: string;
+  offerTitle?: string;
+  offer?: Offer;
 }
