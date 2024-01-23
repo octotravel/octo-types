@@ -27,5 +27,5 @@ export interface PricingExtras {
 }
 
 export interface PricingUnitExtras {
-  extraPricing?: Array<PricingExtras>;
+  extraPricing?: Array<Pricing>;
 }
