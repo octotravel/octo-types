@@ -1,6 +1,6 @@
-import { defineBuildConfig } from "unbuild";
+import { defineBuildConfig } from 'unbuild';
 
 export default defineBuildConfig({
-  entries: ["./src/index"],
+  entries: ['./src/index'],
   declaration: true, // generate .d.ts files
 });

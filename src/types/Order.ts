@@ -1,8 +1,8 @@
-import { Booking, Contact } from "./Booking";
-import { CardPayment, CardPaymentGateway } from "./CardPayment";
-import { GiftPayment } from "./Gift";
-import { OfferCombination } from "./Offer";
-import { Pricing } from "./Pricing";
+import { Booking, Contact } from './Booking';
+import { CardPayment, CardPaymentGateway } from './CardPayment';
+import { GiftPayment } from './Gift';
+import { OfferCombination } from './Offer';
+import { Pricing } from './Pricing';
 
 export interface Order extends OrderOffers, OrderGift, OrderCardPayment {
   id: string;
@@ -13,7 +13,7 @@ export interface Order extends OrderOffers, OrderGift, OrderCardPayment {
   utcExpiresAt: Nullable<string>;
   utcConfirmedAt: Nullable<string>;
   cancellable: boolean;
-  bookings: Array<Booking>;
+  bookings: Booking[];
   contact: Contact;
   termsAccepted?: boolean;
   pricing?: Pricing;
@@ -22,10 +22,10 @@ export interface Order extends OrderOffers, OrderGift, OrderCardPayment {
 }
 
 export enum OrderStatus {
-  ON_HOLD = "ON_HOLD",
-  CONFIRMED = "CONFIRMED",
-  CANCELLED = "CANCELLED",
-  EXPIRED = "EXPIRED",
+  ON_HOLD = 'ON_HOLD',
+  CONFIRMED = 'CONFIRMED',
+  CANCELLED = 'CANCELLED',
+  EXPIRED = 'EXPIRED',
 }
 
 export interface OrderOffers {

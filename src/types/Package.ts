@@ -1,11 +1,11 @@
-import { Booking } from "./Booking";
-import { Option } from "./Option";
-import { Product } from "./Product";
+import { Booking } from './Booking';
+import { Option } from './Option';
+import { Product } from './Product';
 
 export interface Package {
   title: string;
   count: number;
-  includes: Array<Include>;
+  includes: Include[];
 }
 
 export interface Include {

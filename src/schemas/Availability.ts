@@ -1,6 +1,6 @@
-import { object, string, number, array, bool } from "yup";
-import type { SchemaOf } from "yup";
-import { AvailabilityExtraUnit } from "../types/Extras";
+import { object, string, number, array, bool } from 'yup';
+import type { SchemaOf } from 'yup';
+import { AvailabilityExtraUnit } from '../types/Extras';
 
 export interface AvailabilityBodySchema
   extends AvailabilityPickupBodySchema,
@@ -13,7 +13,7 @@ export interface AvailabilityBodySchema
   localDateStart?: string;
   localDateEnd?: string;
   availabilityIds?: string[];
-  units?: Array<AvailabilityUnit>;
+  units?: AvailabilityUnit[];
 }
 
 interface AvailabilityOfferBodySchema {
@@ -26,7 +26,7 @@ interface AvailabilityPickupBodySchema {
 }
 
 interface AvailabilityExtrasBodySchema {
-  extras?: Array<AvailabilityExtraUnit>;
+  extras?: AvailabilityExtraUnit[];
 }
 
 interface AvailabilityCardPaymentBodySchema {
@@ -39,22 +39,21 @@ export interface AvailabilityUnit extends AvailabilityUnitExtras {
 }
 
 interface AvailabilityUnitExtras {
-  extras?: Array<AvailabilityExtraUnit>;
+  extras?: AvailabilityExtraUnit[];
 }
 
-export const availabilityUnitSchema: SchemaOf<AvailabilityUnit> =
-  object().shape({
-    id: string().required(),
-    quantity: number().required(),
-    extras: array()
-      .of(
-        object().shape({
-          id: string().required(),
-          quantity: number().required(),
-        })
-      )
-      .notRequired(),
-  });
+export const availabilityUnitSchema: SchemaOf<AvailabilityUnit> = object().shape({
+  id: string().required(),
+  quantity: number().required(),
+  extras: array()
+    .of(
+      object().shape({
+        id: string().required(),
+        quantity: number().required(),
+      }),
+    )
+    .notRequired(),
+});
 
 export const availabilityBodySchema: SchemaOf<AvailabilityBodySchema> = object()
   .shape({
@@ -73,54 +72,40 @@ export const availabilityBodySchema: SchemaOf<AvailabilityBodySchema> = object()
         object().shape({
           id: string().required(),
           quantity: number().required(),
-        })
+        }),
       )
       .notRequired(),
     currency: string().notRequired(),
   })
   .test(
-    "",
-    "cannot use localDate/localDateStart/localDateEnd and availabilityIds in the same request",
+    '',
+    'cannot use localDate/localDateStart/localDateEnd and availabilityIds in the same request',
     ({ availabilityIds, localDateStart, localDate, localDateEnd }) =>
-      !Boolean(
-        availabilityIds && (localDateStart || localDate || localDateEnd)
-      ).valueOf()
+      !Boolean(availabilityIds && (localDateStart || localDate || localDateEnd)).valueOf(),
   )
   .test(
-    "",
-    "cannot use localDate and localDateStart/localDateEnd in the same request",
-    ({ localDateStart, localDate, localDateEnd }) =>
-      !Boolean((localDateStart || localDateEnd) && localDate).valueOf()
+    '',
+    'cannot use localDate and localDateStart/localDateEnd in the same request',
+    ({ localDateStart, localDate, localDateEnd }) => !Boolean((localDateStart || localDateEnd) && localDate).valueOf(),
   )
   .test(
-    "",
-    "either localDate, localDateStart/localDateEnd or availabilityIds is required",
+    '',
+    'either localDate, localDateStart/localDateEnd or availabilityIds is required',
     ({ localDateStart, localDate, localDateEnd, availabilityIds }) =>
-      !Boolean(
-        !((localDateStart && localDateEnd) || localDate || availabilityIds)
-      ).valueOf()
+      !Boolean(!((localDateStart && localDateEnd) || localDate || availabilityIds)).valueOf(),
   )
-  .test(
-    "",
-    "cannot request more than 100 availability objects at a time",
-    ({ availabilityIds }) => {
-      if (availabilityIds) {
-        return !Boolean(availabilityIds.length > 100).valueOf();
-      }
-      return true;
+  .test('', 'cannot request more than 100 availability objects at a time', ({ availabilityIds }) => {
+    if (availabilityIds) {
+      return !Boolean(availabilityIds.length > 100).valueOf();
     }
-  )
-  .test(
-    "",
-    "cannot request more than 1 year of availability",
-    ({ localDateStart, localDateEnd }) => {
-      if (localDateStart && localDateEnd) {
-        const start = new Date(localDateStart);
-        return !Boolean(
-          new Date(start.getFullYear() + 1, start.getMonth(), start.getDate()) <
-            new Date(localDateEnd)
-        ).valueOf();
-      }
-      return true;
+    return true;
+  })
+  .test('', 'cannot request more than 1 year of availability', ({ localDateStart, localDateEnd }) => {
+    if (localDateStart && localDateEnd) {
+      const start = new Date(localDateStart);
+      return !Boolean(
+        new Date(start.getFullYear() + 1, start.getMonth(), start.getDate()) < new Date(localDateEnd),
+      ).valueOf();
     }
-  );
+    return true;
+  });

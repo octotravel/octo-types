@@ -1,11 +1,10 @@
-import { object, string } from "yup";
-import type { SchemaOf } from "yup";
+import { object, string } from 'yup';
+import type { SchemaOf } from 'yup';
 
-export type GetSupplierPathParamsSchema = {
+export interface GetSupplierPathParamsSchema {
   id: string;
-};
+}
 
-export const getSupplierPathParamsSchema: SchemaOf<GetSupplierPathParamsSchema> =
-  object().shape({
-    id: string().required(),
-  });
+export const getSupplierPathParamsSchema: SchemaOf<GetSupplierPathParamsSchema> = object().shape({
+  id: string().required(),
+});

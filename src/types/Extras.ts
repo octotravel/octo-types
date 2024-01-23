@@ -1,4 +1,4 @@
-import { Pricing } from "./Pricing";
+import { Pricing } from './Pricing';
 
 export interface Extra {
   id: string;
