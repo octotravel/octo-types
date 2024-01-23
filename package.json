@@ -51,6 +51,7 @@
     "typescript": "5.3.3"
   },
   "keywords": [],
+  "prepare": "husky install",
   "lint-staged": {
     "./package.json": "npm run format:package",
     "*": "npm run format",

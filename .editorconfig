@@ -10,7 +10,7 @@ trim_trailing_whitespace = true
 quote_type = single
 
 [*.md]
-trim_trailing_whitespace = true
+trim_trailing_whitespace = false
 
 [{*.yml,*.json}]
 indent_size = 2
