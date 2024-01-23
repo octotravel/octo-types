@@ -24,7 +24,7 @@
     "format:package": "prettier-package-json --write",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
-    "prepare": "npm run build",
+    "prepare": "npm run build && husky install",
     "pretest": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -51,7 +51,6 @@
     "typescript": "5.3.3"
   },
   "keywords": [],
-  "prepare": "husky install",
   "lint-staged": {
     "./package.json": "npm run format:package",
     "*": "npm run format",

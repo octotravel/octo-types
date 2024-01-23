@@ -10,4 +10,4 @@ else
     npm run fix:staged
 fi
 
-exit 1;
+exit 0;
