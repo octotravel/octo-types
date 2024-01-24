@@ -6,7 +6,7 @@ export interface Point {
   pointGroup: PointGroup;
 }
 
-interface PointGroup {
+export interface PointGroup {
   id: string;
   title: string;
   shortDescription: string;
