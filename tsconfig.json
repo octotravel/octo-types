@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "baseUrl": ".",
-    "rootDir": ".",
     "target": "ES2021",
     "module": "CommonJS",
     "strict": true,
