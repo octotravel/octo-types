@@ -8,6 +8,8 @@ export * from './types/Booking';
 
 export * from './types/Capability';
 
+export * from './types/Content';
+
 export * from './types/Currency';
 
 export * from './types/Duration';
