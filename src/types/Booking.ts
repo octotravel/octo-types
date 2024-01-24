@@ -128,7 +128,7 @@ export interface BookingContent {
   durationAmount?: string;
   durationUnit?: string;
   termsAccepted?: boolean;
-  notices: Notice[];
+  notices?: Notice[];
 }
 
 export interface BookingCart {
