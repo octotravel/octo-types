@@ -77,5 +77,5 @@ export interface AvailabilityOffers {
 }
 
 export interface AvailabilityResources {
-  hasResources: boolean;
+  hasResources?: boolean;
 }
