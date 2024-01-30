@@ -314,27 +314,32 @@ export const bookingCardPaymentBodySchema: SchemaOf<BookingCardPaymentBodySchema
         .shape({
           sessionId: string().required(),
         })
-        .optional(),
+        .optional()
+        .default(undefined),
       vivawallet: object()
         .shape({
           offerCode: string().required(),
           transactionId: string().required(),
         })
-        .optional(),
+        .optional()
+        .default(undefined),
       bridgepay: object()
         .shape({
           token: string().required(),
         })
-        .optional(),
+        .optional()
+        .default(undefined),
       stripe: object()
         .shape({
           paymentIntent: string().optional(),
           paymentMethod: string().optional(),
           setupIntent: string().optional(),
         })
-        .optional(),
+        .optional()
+        .default(undefined),
     })
-    .optional(),
+    .optional()
+    .default(undefined),
 });
 
 export interface ConfirmBookingBodySchema extends BookingPickupBodySchema, BookingCardPaymentBodySchema {

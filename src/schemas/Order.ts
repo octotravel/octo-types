@@ -44,7 +44,7 @@ export const extendOrderPathParamsSchema: SchemaOf<ExtendOrderPathParamsSchema> 
 
 export interface OrderCardPaymentBodySchema {
   cardPayment?: {
-    gateway: CardPaymentGateway;
+    gateway?: CardPaymentGateway;
     amount?: number;
     currency?: string;
     notes?: string;
@@ -69,7 +69,7 @@ export interface OrderCardPaymentBodySchema {
 export const orderCardPaymentBodySchema: SchemaOf<OrderCardPaymentBodySchema> = object().shape({
   cardPayment: object()
     .shape({
-      gateway: string().required(),
+      gateway: string().optional(),
       amount: number().integer().optional(),
       currency: string().optional(),
       notes: string().optional(),
@@ -77,27 +77,32 @@ export const orderCardPaymentBodySchema: SchemaOf<OrderCardPaymentBodySchema> = 
         .shape({
           sessionId: string().required(),
         })
-        .optional(),
+        .optional()
+        .default(undefined),
       vivawallet: object()
         .shape({
           offerCode: string().required(),
           transactionId: string().required(),
         })
-        .optional(),
+        .optional()
+        .default(undefined),
       bridgepay: object()
         .shape({
           token: string().required(),
         })
-        .optional(),
+        .optional()
+        .default(undefined),
       stripe: object()
         .shape({
           paymentIntent: string().optional(),
           paymentMethod: string().optional(),
           setupIntent: string().optional(),
         })
-        .optional(),
+        .optional()
+        .default(undefined),
     })
-    .optional(),
+    .optional()
+    .default(undefined),
 });
 
 export interface OrderConfirmationBodySchema extends OrderCardPaymentBodySchema {
