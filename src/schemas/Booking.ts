@@ -281,7 +281,7 @@ export const updateBookingPathParamsSchema: SchemaOf<UpdateBookingPathParamsSche
 
 export interface BookingCardPaymentBodySchema {
   cardPayment?: {
-    gateway: CardPaymentGateway;
+    gateway?: CardPaymentGateway;
     amount?: number;
     currency?: string;
     notes?: string;
@@ -306,7 +306,7 @@ export interface BookingCardPaymentBodySchema {
 export const bookingCardPaymentBodySchema: SchemaOf<BookingCardPaymentBodySchema> = object().shape({
   cardPayment: object()
     .shape({
-      gateway: string().required(),
+      gateway: string().optional(),
       amount: number().integer().optional(),
       currency: string().optional(),
       notes: string().optional(),
