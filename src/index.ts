@@ -59,3 +59,7 @@ export * from './types/Webhook';
 export * from './schemas/Webhooks';
 
 export * from './types/Resources';
+
+export * from './types/Package';
+
+export * from './types/Extras';

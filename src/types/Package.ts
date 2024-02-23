@@ -16,6 +16,7 @@ export interface Include {
   product: Product;
   optionId: string;
   option: Option;
+  validityDays: number;
 }
 
 export interface PackageBooking extends Booking {
