@@ -1,5 +1,6 @@
 import { OfferDiscount } from './Offer';
 import { Tax } from './Tax';
+import { UnitType } from './Unit';
 
 export enum PricingPer {
   UNIT = 'UNIT',
@@ -16,6 +17,7 @@ export interface Pricing extends PricingOffer, PricingExtras {
 
 export interface PricingUnit extends Pricing, PricingUnitExtras {
   unitId: string;
+  unitType: UnitType;
 }
 
 export interface PricingOffer {
