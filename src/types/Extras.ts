@@ -13,6 +13,7 @@ export interface Extra {
 }
 
 interface Restrictions {
+  default: boolean;
   required: boolean;
   minQuantity: number;
   maxQuantity: Nullable<number>;
