@@ -16,6 +16,7 @@ export interface Offer {
   description: Nullable<string>;
   netDiscount: Nullable<NetDiscount>;
   restrictions: OfferRestrictions;
+  usable: boolean;
 }
 
 export interface OfferRestrictions {
