@@ -4,14 +4,14 @@ import { AvailabilityUnit, availabilityUnitSchema } from './Availability';
 import { AvailabilityExtraUnit } from '../types/Extras';
 
 interface AvailabilityCalendarCapabilitiesBodySchema {
-  currency?: string;
+  currency?: string | null;
   extras?: AvailabilityExtraUnit[];
   offerCode?: string;
 }
 
 const availabilityCalendarCapabilitiesBodySchema: SchemaOf<AvailabilityCalendarCapabilitiesBodySchema> = object().shape(
   {
-    currency: string().notRequired(),
+    currency: string().notRequired().nullable(),
     extras: array()
       .of(
         object().shape({

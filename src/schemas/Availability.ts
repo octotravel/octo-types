@@ -30,7 +30,7 @@ interface AvailabilityExtrasBodySchema {
 }
 
 interface AvailabilityCardPaymentBodySchema {
-  currency?: string;
+  currency?: string | null;
 }
 
 export interface AvailabilityUnit extends AvailabilityUnitExtras {
@@ -75,7 +75,7 @@ export const availabilityBodySchema: SchemaOf<AvailabilityBodySchema> = object()
         }),
       )
       .notRequired(),
-    currency: string().notRequired(),
+    currency: string().notRequired().nullable(),
   })
   .test(
     '',
