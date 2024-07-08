@@ -35,29 +35,29 @@ export const getBookingsQueryParamsSchema: SchemaOf<GetBookingsQueryParamsSchema
   );
 
 export interface BookingContactSchema {
-  fullName?: string;
-  firstName?: string;
-  lastName?: string;
-  emailAddress?: string;
-  phoneNumber?: string;
-  country?: string;
-  notes?: string;
+  fullName?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
+  emailAddress?: string | null;
+  phoneNumber?: string | null;
+  country?: string | null;
+  notes?: string | null;
   locales?: string[];
-  postalCode?: string;
-  allowMarketing?: boolean;
+  postalCode?: string | null;
+  allowMarketing?: boolean | null;
 }
 
 export const bookingContactSchema: SchemaOf<BookingContactSchema> = object().shape({
-  fullName: string().notRequired(),
-  firstName: string().notRequired(),
-  lastName: string().notRequired(),
-  emailAddress: string().notRequired(),
-  phoneNumber: string().notRequired(),
-  country: string().notRequired(),
-  notes: string().notRequired(),
+  fullName: string().notRequired().nullable(),
+  firstName: string().notRequired().nullable(),
+  lastName: string().notRequired().nullable(),
+  emailAddress: string().notRequired().nullable(),
+  phoneNumber: string().notRequired().nullable(),
+  country: string().notRequired().nullable(),
+  notes: string().notRequired().nullable(),
   locales: array().of(string()).notRequired(),
-  postalCode: string().notRequired(),
-  allowMarketing: bool().notRequired(),
+  postalCode: string().notRequired().nullable(),
+  allowMarketing: bool().notRequired().nullable(),
 });
 
 export interface BookingUnitItemSchema {
@@ -71,7 +71,7 @@ export const bookingUnitItemSchema: SchemaOf<BookingUnitItemSchema> = object().s
   uuid: string().notRequired(),
   unitId: string().required(),
   resellerReference: string().notRequired(),
-  contact: bookingContactSchema.notRequired(),
+  contact: bookingContactSchema.notRequired().default(undefined),
 });
 
 export interface CreateBookingBodySchema
@@ -86,11 +86,11 @@ export interface CreateBookingBodySchema
   optionId: string;
   availabilityId?: string | null;
   expirationMinutes?: number;
-  notes?: string;
+  notes?: string | null;
   emailReceipt?: boolean;
   unitItems: BookingUnitItemSchema[];
   contact?: BookingContactSchema;
-  currency?: string;
+  currency?: string | null;
 }
 
 interface BookingExtrasBodySchema {
@@ -187,11 +187,11 @@ export const createBookingBodySchema: SchemaOf<CreateBookingBodySchema> = object
   optionId: string().required(),
   availabilityId: string().required(),
   expirationMinutes: number().integer().notRequired(),
-  notes: string().notRequired(),
+  notes: string().notRequired().nullable(),
   emailReceipt: bool().notRequired(),
   unitItems: array().of(bookingUnitItemSchema).required(),
   contact: bookingContactSchema.notRequired().default(undefined),
-  currency: string().notRequired(),
+  currency: string().notRequired().nullable(),
   ...bookingPickupBodySchema.fields,
   ...bookingOrderBodySchema.fields,
   ...bookingGiftBodySchema.fields,
@@ -247,9 +247,9 @@ export interface UpdateBookingBodySchema
   optionId?: string;
   availabilityId?: string;
   expirationMinutes?: number;
-  notes?: string;
+  notes?: string | null;
   emailReceipt?: boolean;
-  unitItems?: BookingUnitItemSchema[];
+  unitItems: BookingUnitItemSchema[];
   contact?: BookingContactSchema;
 }
 
@@ -259,7 +259,7 @@ export const updateBookingBodySchema: SchemaOf<UpdateBookingBodySchema> = object
   optionId: string().notRequired(),
   availabilityId: string().notRequired(),
   expirationMinutes: number().integer().notRequired(),
-  notes: string().notRequired(),
+  notes: string().notRequired().nullable(),
   emailReceipt: bool().notRequired(),
   unitItems: array().of(bookingUnitItemSchema).notRequired(),
   contact: bookingContactSchema.notRequired().default(undefined),
@@ -344,7 +344,11 @@ export const bookingCardPaymentBodySchema: SchemaOf<BookingCardPaymentBodySchema
 
 export interface ConfirmBookingBodySchema extends BookingPickupBodySchema, BookingCardPaymentBodySchema {
   resellerReference?: string;
-  notes?: string;
+  productId?: string;
+  optionId?: string;
+  availabilityId?: string;
+  expirationMinutes?: number;
+  notes?: string | null;
   emailReceipt?: boolean;
   unitItems?: BookingUnitItemSchema[];
   contact: BookingContactSchema;
@@ -352,7 +356,11 @@ export interface ConfirmBookingBodySchema extends BookingPickupBodySchema, Booki
 
 export const confirmBookingBodySchema: SchemaOf<ConfirmBookingBodySchema> = object().shape({
   resellerReference: string().notRequired(),
-  notes: string().notRequired(),
+  productId: string().notRequired(),
+  optionId: string().notRequired(),
+  availabilityId: string().notRequired(),
+  expirationMinutes: number().integer().notRequired(),
+  notes: string().notRequired().nullable(),
   emailReceipt: bool().notRequired(),
   unitItems: array().of(bookingUnitItemSchema).notRequired(),
   contact: bookingContactSchema.required().default(undefined),

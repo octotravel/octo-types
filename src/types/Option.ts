@@ -63,7 +63,7 @@ export interface Option
   availabilityLocalStartTimes: string[];
   cancellationCutoff: string;
   cancellationCutoffAmount: number;
-  cancellationCutoffUnit: string;
+  cancellationCutoffUnit: DurationUnit;
   requiredContactFields: ContactField[];
   visibleContactFields: ContactField[];
   restrictions: OptionRestrictions;
