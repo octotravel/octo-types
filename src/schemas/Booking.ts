@@ -249,7 +249,7 @@ export interface UpdateBookingBodySchema
   expirationMinutes?: number;
   notes?: string | null;
   emailReceipt?: boolean;
-  unitItems: BookingUnitItemSchema[];
+  unitItems?: BookingUnitItemSchema[];
   contact?: BookingContactSchema;
 }
 
