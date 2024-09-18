@@ -1,7 +1,5 @@
-import { object, string, number, boolean } from 'yup';
-import type { SchemaOf } from 'yup';
-import { Contact } from '../types/Booking';
-import { bookingContactSchema } from './Booking';
+import { object, string, number, ObjectSchema } from 'yup';
+import { BookingContactSchema, bookingContactSchema } from './Booking';
 
 export interface GiftReservationBodySchema {
   uuid?: string;
@@ -9,23 +7,23 @@ export interface GiftReservationBodySchema {
   amount: number;
   currency: string;
   message?: string;
-  recipient?: Recipient;
+  recipient?: RecipientSchema;
   resellerReference?: string;
   notes?: string;
-  contact?: Contact;
+  contact?: BookingContactSchema;
 }
 
-interface Recipient {
+interface RecipientSchema {
   fullName?: string;
   emailAddress?: string;
 }
 
-const recipentSchema: SchemaOf<Recipient> = object().shape({
+const recipentSchema: ObjectSchema<RecipientSchema> = object().shape({
   fullName: string().optional(),
   emailAddress: string().optional(),
 });
 
-export const giftReservationBodySchema: SchemaOf<GiftReservationBodySchema> = object().shape({
+export const giftReservationBodySchema: ObjectSchema<GiftReservationBodySchema> = object().shape({
   uuid: string().optional(),
   expirationMinutes: number().optional(),
   amount: number().required(),
@@ -43,13 +41,13 @@ export interface GiftUpdateBodySchema {
   amount?: number;
   currency?: string;
   message?: string;
-  recipient?: Recipient;
+  recipient?: RecipientSchema;
   resellerReference?: string;
   notes?: string;
-  contact?: Contact;
+  contact?: BookingContactSchema;
 }
 
-export const giftUpdateBodySchema: SchemaOf<GiftUpdateBodySchema> = object().shape({
+export const giftUpdateBodySchema: ObjectSchema<GiftUpdateBodySchema> = object().shape({
   uuid: string().optional(),
   expirationMinutes: number().optional(),
   amount: number().optional(),
@@ -65,7 +63,7 @@ export interface GiftUpdatePathParamsSchema {
   uuid: string;
 }
 
-export const giftUpdatePathParamsSchema: SchemaOf<GiftUpdatePathParamsSchema> = object().shape({
+export const giftUpdatePathParamsSchema: ObjectSchema<GiftUpdatePathParamsSchema> = object().shape({
   uuid: string().required(),
 });
 
@@ -75,13 +73,13 @@ export interface GiftConfirmationBodySchema {
   amount?: number;
   currency?: string;
   message?: string;
-  recipient?: Recipient;
+  recipient?: RecipientSchema;
   resellerReference?: string;
   notes?: string;
-  contact?: Contact;
+  contact?: BookingContactSchema;
 }
 
-export const giftConfirmationBodySchema: SchemaOf<GiftConfirmationBodySchema> = object().shape({
+export const giftConfirmationBodySchema: ObjectSchema<GiftConfirmationBodySchema> = object().shape({
   uuid: string().optional(),
   expirationMinutes: number().optional(),
   amount: number().optional(),
@@ -97,7 +95,7 @@ export interface GiftConfirmationPathParamsSchema {
   uuid: string;
 }
 
-export const giftConfirmationPathParamsSchema: SchemaOf<GiftConfirmationPathParamsSchema> = object().shape({
+export const giftConfirmationPathParamsSchema: ObjectSchema<GiftConfirmationPathParamsSchema> = object().shape({
   uuid: string().required(),
 });
 
@@ -105,7 +103,7 @@ export interface GiftCancellationPathParamsSchema {
   uuid: string;
 }
 
-export const giftCancellationPathParamsSchema: SchemaOf<GiftCancellationPathParamsSchema> = object().shape({
+export const giftCancellationPathParamsSchema: ObjectSchema<GiftCancellationPathParamsSchema> = object().shape({
   uuid: string().required(),
 });
 
@@ -113,7 +111,7 @@ export interface GiftExtendBodySchema {
   expirationMinutes?: number;
 }
 
-export const giftExtendBodySchema: SchemaOf<GiftExtendBodySchema> = object().shape({
+export const giftExtendBodySchema: ObjectSchema<GiftExtendBodySchema> = object().shape({
   expirationMinutes: number().optional(),
 });
 
@@ -121,7 +119,7 @@ export interface GiftExtendPathParamsSchema {
   uuid: string;
 }
 
-export const giftExtendPathParamsSchema: SchemaOf<GiftExtendPathParamsSchema> = object().shape({
+export const giftExtendPathParamsSchema: ObjectSchema<GiftExtendPathParamsSchema> = object().shape({
   uuid: string().required(),
 });
 
@@ -129,7 +127,7 @@ export interface GetGiftPathParamsSchema {
   uuid: string;
 }
 
-export const getGiftPathParamsSchema: SchemaOf<GetGiftPathParamsSchema> = object().shape({
+export const getGiftPathParamsSchema: ObjectSchema<GetGiftPathParamsSchema> = object().shape({
   uuid: string().required(),
 });
 
@@ -138,7 +136,7 @@ export interface ListGiftsBodySchema {
   supplierReference?: string;
 }
 
-export const listGiftsBodySchema: SchemaOf<ListGiftsBodySchema> = object().shape({
+export const listGiftsBodySchema: ObjectSchema<ListGiftsBodySchema> = object().shape({
   resellerReference: string().optional(),
   supplierReference: string().optional(),
 });

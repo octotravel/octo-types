@@ -1,6 +1,6 @@
 {
   "name": "@octocloud/types",
-  "version": "1.5.29",
+  "version": "1.5.30",
   "description": "",
   "license": "ISC",
   "author": "",
@@ -31,7 +31,7 @@
   "types": "dist/index.d.ts",
   "dependencies": {
     "@adyen/adyen-web": "5.55.1",
-    "yup": "0.32.11"
+    "yup": "1.4.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "6.18.1",

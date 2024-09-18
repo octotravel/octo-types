@@ -1,12 +1,11 @@
-import { object, string, number, array, bool } from 'yup';
-import type { SchemaOf } from 'yup';
+import { object, string, number, array, bool, ObjectSchema } from 'yup';
 import { CardPaymentGateway } from '../types/CardPayment';
 
 export interface GetBookingPathParamsSchema {
   uuid: string;
 }
 
-export const getBookingPathParamsSchema: SchemaOf<GetBookingPathParamsSchema> = object().shape({
+export const getBookingPathParamsSchema: ObjectSchema<GetBookingPathParamsSchema> = object().shape({
   uuid: string().required(),
 });
 
@@ -18,13 +17,13 @@ export interface GetBookingsQueryParamsSchema {
   localDateEnd?: string;
 }
 
-export const getBookingsQueryParamsSchema: SchemaOf<GetBookingsQueryParamsSchema> = object()
+export const getBookingsQueryParamsSchema: ObjectSchema<GetBookingsQueryParamsSchema> = object()
   .shape({
-    resellerReference: string().notRequired(),
-    supplierReference: string().notRequired(),
-    localDate: string().notRequired(),
-    localDateStart: string().notRequired(),
-    localDateEnd: string().notRequired(),
+    resellerReference: string().optional(),
+    supplierReference: string().optional(),
+    localDate: string().optional(),
+    localDateStart: string().optional(),
+    localDateEnd: string().optional(),
   })
   .test(
     '',
@@ -47,17 +46,17 @@ export interface BookingContactSchema {
   allowMarketing?: boolean | null;
 }
 
-export const bookingContactSchema: SchemaOf<BookingContactSchema> = object().shape({
-  fullName: string().notRequired().nullable(),
-  firstName: string().notRequired().nullable(),
-  lastName: string().notRequired().nullable(),
-  emailAddress: string().notRequired().nullable(),
-  phoneNumber: string().notRequired().nullable(),
-  country: string().notRequired().nullable(),
-  notes: string().notRequired().nullable(),
-  locales: array().of(string()).notRequired(),
-  postalCode: string().notRequired().nullable(),
-  allowMarketing: bool().notRequired().nullable(),
+export const bookingContactSchema: ObjectSchema<BookingContactSchema> = object().shape({
+  fullName: string().optional().nullable(),
+  firstName: string().optional().nullable(),
+  lastName: string().optional().nullable(),
+  emailAddress: string().optional().nullable(),
+  phoneNumber: string().optional().nullable(),
+  country: string().optional().nullable(),
+  notes: string().optional().nullable(),
+  locales: array().of(string().required()).optional(),
+  postalCode: string().optional().nullable(),
+  allowMarketing: bool().optional().nullable(),
 });
 
 export interface BookingUnitItemSchema {
@@ -67,11 +66,11 @@ export interface BookingUnitItemSchema {
   contact?: BookingContactSchema;
 }
 
-export const bookingUnitItemSchema: SchemaOf<BookingUnitItemSchema> = object().shape({
-  uuid: string().notRequired(),
+export const bookingUnitItemSchema: ObjectSchema<BookingUnitItemSchema> = object().shape({
+  uuid: string().optional(),
   unitId: string().required(),
-  resellerReference: string().notRequired(),
-  contact: bookingContactSchema.notRequired().default(undefined),
+  resellerReference: string().optional(),
+  contact: bookingContactSchema.optional().default(undefined),
 });
 
 export interface CreateBookingBodySchema
@@ -99,7 +98,7 @@ interface BookingExtrasBodySchema {
   }>;
 }
 
-const bookingExtrasBodySchema: SchemaOf<BookingExtrasBodySchema> = object().shape({
+const bookingExtrasBodySchema: ObjectSchema<BookingExtrasBodySchema> = object().shape({
   extraItems: array()
     .of(
       object().shape({
@@ -115,17 +114,17 @@ interface BookingPickupBodySchema {
   pickupHotel?: string;
 }
 
-const bookingPickupBodySchema: SchemaOf<BookingPickupBodySchema> = object().shape({
-  pickupRequested: bool().notRequired(),
-  pickupPointId: string().notRequired(),
-  pickupHotel: string().notRequired(),
+const bookingPickupBodySchema: ObjectSchema<BookingPickupBodySchema> = object().shape({
+  pickupRequested: bool().optional(),
+  pickupPointId: string().optional(),
+  pickupHotel: string().optional(),
 });
 
 interface BookingOrderBodySchema {
   orderId?: string;
 }
 
-const bookingOrderBodySchema: SchemaOf<BookingOrderBodySchema> = object().shape({
+const bookingOrderBodySchema: ObjectSchema<BookingOrderBodySchema> = object().shape({
   orderId: string().optional(),
 });
 
@@ -136,7 +135,7 @@ interface BookingQuestionsBodySchema {
   }>;
 }
 
-const bookingQuestionsBodySchema: SchemaOf<BookingQuestionsBodySchema> = object().shape({
+const bookingQuestionsBodySchema: ObjectSchema<BookingQuestionsBodySchema> = object().shape({
   questionAnswers: array()
     .of(
       object().shape({
@@ -153,7 +152,7 @@ interface BookingGiftBodySchema {
   };
 }
 
-const bookingGiftBodySchema: SchemaOf<BookingGiftBodySchema> = object().shape({
+const bookingGiftBodySchema: ObjectSchema<BookingGiftBodySchema> = object().shape({
   giftPayment: object()
     .shape({
       code: string().required(),
@@ -169,7 +168,7 @@ interface BookingPackageBodySchema {
   }>;
 }
 
-const bookingPackageBodySchema: SchemaOf<BookingPackageBodySchema> = object().shape({
+const bookingPackageBodySchema: ObjectSchema<BookingPackageBodySchema> = object().shape({
   packageBookings: array()
     .of(
       object().shape({
@@ -180,25 +179,26 @@ const bookingPackageBodySchema: SchemaOf<BookingPackageBodySchema> = object().sh
     .optional(),
 });
 
-export const createBookingBodySchema: SchemaOf<CreateBookingBodySchema> = object().shape({
-  uuid: string().notRequired(),
-  resellerReference: string().notRequired(),
-  productId: string().required(),
-  optionId: string().required(),
-  availabilityId: string().required(),
-  expirationMinutes: number().integer().notRequired(),
-  notes: string().nullable().notRequired(),
-  emailReceipt: bool().notRequired(),
-  unitItems: array().of(bookingUnitItemSchema).required(),
-  contact: bookingContactSchema.notRequired().default(undefined),
-  currency: string().notRequired().nullable(),
-  ...bookingPickupBodySchema.fields,
-  ...bookingOrderBodySchema.fields,
-  ...bookingGiftBodySchema.fields,
-  ...bookingQuestionsBodySchema.fields,
-  ...bookingPackageBodySchema.fields,
-  ...bookingExtrasBodySchema.fields,
-});
+export const createBookingBodySchema: ObjectSchema<CreateBookingBodySchema> = object()
+  .shape({
+    uuid: string().optional(),
+    resellerReference: string().optional(),
+    productId: string().required(),
+    optionId: string().required(),
+    availabilityId: string().required(),
+    expirationMinutes: number().integer().optional(),
+    notes: string().nullable().optional(),
+    emailReceipt: bool().optional(),
+    unitItems: array().of(bookingUnitItemSchema).required(),
+    contact: bookingContactSchema.optional().default(undefined),
+    currency: string().optional().nullable(),
+  })
+  .concat(bookingPickupBodySchema)
+  .concat(bookingOrderBodySchema)
+  .concat(bookingGiftBodySchema)
+  .concat(bookingQuestionsBodySchema)
+  .concat(bookingPackageBodySchema)
+  .concat(bookingExtrasBodySchema);
 
 interface UpdateBookingCardPaymentBodySchema {
   currency?: string;
@@ -206,10 +206,10 @@ interface UpdateBookingCardPaymentBodySchema {
   originUrl?: string;
 }
 
-const updateBookingCardPaymentBodySchema: SchemaOf<UpdateBookingCardPaymentBodySchema> = object().shape({
-  currency: string().notRequired(),
-  returnUrl: string().notRequired(),
-  originUrl: string().notRequired(),
+const updateBookingCardPaymentBodySchema: ObjectSchema<UpdateBookingCardPaymentBodySchema> = object().shape({
+  currency: string().optional(),
+  returnUrl: string().optional(),
+  originUrl: string().optional(),
 });
 
 interface UpdateBookingExtrasBodySchema {
@@ -218,7 +218,7 @@ interface UpdateBookingExtrasBodySchema {
   }>;
 }
 
-const updateBookingExtrasBodySchema: SchemaOf<UpdateBookingExtrasBodySchema> = object().shape({
+const updateBookingExtrasBodySchema: ObjectSchema<UpdateBookingExtrasBodySchema> = object().shape({
   extraItems: array()
     .of(
       object().shape({
@@ -232,7 +232,7 @@ interface BookingOfferBodySchema {
   offerCode?: string;
 }
 
-const bookingOfferBodySchema: SchemaOf<BookingOfferBodySchema> = object().shape({
+const bookingOfferBodySchema: ObjectSchema<BookingOfferBodySchema> = object().shape({
   offerCode: string().optional(),
 });
 
@@ -253,29 +253,31 @@ export interface UpdateBookingBodySchema
   contact?: BookingContactSchema;
 }
 
-export const updateBookingBodySchema: SchemaOf<UpdateBookingBodySchema> = object().shape({
-  resellerReference: string().notRequired(),
-  productId: string().notRequired(),
-  optionId: string().notRequired(),
-  availabilityId: string().notRequired(),
-  expirationMinutes: number().integer().notRequired(),
-  notes: string().notRequired().nullable(),
-  emailReceipt: bool().notRequired(),
-  unitItems: array().of(bookingUnitItemSchema).notRequired(),
-  contact: bookingContactSchema.notRequired().default(undefined),
-  ...bookingPickupBodySchema.fields,
-  ...bookingGiftBodySchema.fields,
-  ...bookingOfferBodySchema.fields,
-  ...bookingPackageBodySchema.fields,
-  ...updateBookingCardPaymentBodySchema.fields,
-  ...updateBookingExtrasBodySchema.fields,
-});
+export const updateBookingBodySchema: ObjectSchema<UpdateBookingBodySchema> = object()
+  .shape({
+    resellerReference: string().optional(),
+    productId: string().optional(),
+    optionId: string().optional(),
+    availabilityId: string().optional(),
+    expirationMinutes: number().integer().optional(),
+    notes: string().optional().nullable(),
+    emailReceipt: bool().optional(),
+    unitItems: array().of(bookingUnitItemSchema).optional(),
+    contact: bookingContactSchema.optional().default(undefined),
+  })
+  .concat(bookingPickupBodySchema)
+  .concat(bookingGiftBodySchema)
+  .concat(bookingOfferBodySchema)
+  .concat(bookingOfferBodySchema)
+  .concat(bookingPackageBodySchema)
+  .concat(updateBookingCardPaymentBodySchema)
+  .concat(updateBookingExtrasBodySchema);
 
 export interface UpdateBookingPathParamsSchema {
   uuid: string;
 }
 
-export const updateBookingPathParamsSchema: SchemaOf<UpdateBookingPathParamsSchema> = object().shape({
+export const updateBookingPathParamsSchema: ObjectSchema<UpdateBookingPathParamsSchema> = object().shape({
   uuid: string().required(),
 });
 
@@ -303,10 +305,10 @@ export interface BookingCardPaymentBodySchema {
   };
 }
 
-export const bookingCardPaymentBodySchema: SchemaOf<BookingCardPaymentBodySchema> = object().shape({
+export const bookingCardPaymentBodySchema: ObjectSchema<BookingCardPaymentBodySchema> = object().shape({
   cardPayment: object()
     .shape({
-      gateway: string().optional(),
+      gateway: string().oneOf(Object.values(CardPaymentGateway)).optional(),
       amount: number().integer().optional(),
       currency: string().optional(),
       notes: string().optional(),
@@ -318,7 +320,7 @@ export const bookingCardPaymentBodySchema: SchemaOf<BookingCardPaymentBodySchema
         .default(undefined),
       vivawallet: object()
         .shape({
-          offerCode: string().required(),
+          orderCode: string().required(),
           transactionId: string().required(),
         })
         .optional()
@@ -354,25 +356,26 @@ export interface ConfirmBookingBodySchema extends BookingPickupBodySchema, Booki
   contact: BookingContactSchema;
 }
 
-export const confirmBookingBodySchema: SchemaOf<ConfirmBookingBodySchema> = object().shape({
-  resellerReference: string().notRequired(),
-  productId: string().notRequired(),
-  optionId: string().notRequired(),
-  availabilityId: string().notRequired(),
-  expirationMinutes: number().integer().notRequired(),
-  notes: string().notRequired().nullable(),
-  emailReceipt: bool().notRequired(),
-  unitItems: array().of(bookingUnitItemSchema).notRequired(),
-  contact: bookingContactSchema.required().default(undefined),
-  ...bookingPickupBodySchema.fields,
-  ...bookingCardPaymentBodySchema.fields,
-});
+export const confirmBookingBodySchema: ObjectSchema<ConfirmBookingBodySchema> = object()
+  .shape({
+    resellerReference: string().optional(),
+    productId: string().optional(),
+    optionId: string().optional(),
+    availabilityId: string().optional(),
+    expirationMinutes: number().integer().optional(),
+    notes: string().optional().nullable(),
+    emailReceipt: bool().optional(),
+    unitItems: array().of(bookingUnitItemSchema).optional(),
+    contact: bookingContactSchema.required().default(undefined),
+  })
+  .concat(bookingPickupBodySchema)
+  .concat(bookingCardPaymentBodySchema);
 
 export interface ConfirmBookingPathParamsSchema {
   uuid: string;
 }
 
-export const confirmBookingPathParamsSchema: SchemaOf<ConfirmBookingPathParamsSchema> = object().shape({
+export const confirmBookingPathParamsSchema: ObjectSchema<ConfirmBookingPathParamsSchema> = object().shape({
   uuid: string().required(),
 });
 
@@ -382,17 +385,17 @@ export interface CancelBookingBodySchema {
   emailReceipt?: boolean;
 }
 
-export const cancelBookingBodySchema: SchemaOf<CancelBookingBodySchema> = object().shape({
-  reason: string().notRequired(),
-  force: bool().notRequired(),
-  emailReceipt: bool().notRequired(),
+export const cancelBookingBodySchema: ObjectSchema<CancelBookingBodySchema> = object().shape({
+  reason: string().optional(),
+  force: bool().optional(),
+  emailReceipt: bool().optional(),
 });
 
 export interface CancelBookingPathParamsSchema {
   uuid: string;
 }
 
-export const cancelBookingPathParamsSchema: SchemaOf<CancelBookingPathParamsSchema> = object().shape({
+export const cancelBookingPathParamsSchema: ObjectSchema<CancelBookingPathParamsSchema> = object().shape({
   uuid: string().required(),
 });
 
@@ -400,14 +403,14 @@ export interface ExtendBookingBodySchema {
   expirationMinutes?: number;
 }
 
-export const extendBookingBodySchema: SchemaOf<ExtendBookingBodySchema> = object().shape({
-  expirationMinutes: number().integer().notRequired(),
+export const extendBookingBodySchema: ObjectSchema<ExtendBookingBodySchema> = object().shape({
+  expirationMinutes: number().integer().optional(),
 });
 
 export interface ExtendBookingPathParamsSchema {
   uuid: string;
 }
 
-export const extendBookingPathParamsSchema: SchemaOf<ExtendBookingPathParamsSchema> = object().shape({
+export const extendBookingPathParamsSchema: ObjectSchema<ExtendBookingPathParamsSchema> = object().shape({
   uuid: string().required(),
 });

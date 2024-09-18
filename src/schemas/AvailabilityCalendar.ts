@@ -1,5 +1,4 @@
-import { object, string, array, number } from 'yup';
-import type { SchemaOf } from 'yup';
+import { object, string, array, number, ObjectSchema } from 'yup';
 import { AvailabilityUnit, availabilityUnitSchema } from './Availability';
 import { AvailabilityExtraUnit } from '../types/Extras';
 
@@ -9,9 +8,9 @@ interface AvailabilityCalendarCapabilitiesBodySchema {
   offerCode?: string;
 }
 
-const availabilityCalendarCapabilitiesBodySchema: SchemaOf<AvailabilityCalendarCapabilitiesBodySchema> = object().shape(
-  {
-    currency: string().notRequired().nullable(),
+const availabilityCalendarCapabilitiesBodySchema: ObjectSchema<AvailabilityCalendarCapabilitiesBodySchema> =
+  object().shape({
+    currency: string().optional().nullable(),
     extras: array()
       .of(
         object().shape({
@@ -19,10 +18,9 @@ const availabilityCalendarCapabilitiesBodySchema: SchemaOf<AvailabilityCalendarC
           quantity: number().required(),
         }),
       )
-      .notRequired(),
-    offerCode: string().notRequired(),
-  },
-);
+      .optional(),
+    offerCode: string().optional(),
+  });
 
 export interface AvailabilityCalendarBodySchema extends AvailabilityCalendarCapabilitiesBodySchema {
   productId: string;
@@ -32,15 +30,15 @@ export interface AvailabilityCalendarBodySchema extends AvailabilityCalendarCapa
   units?: AvailabilityUnit[];
 }
 
-export const availabilityCalendarBodySchema: SchemaOf<AvailabilityCalendarBodySchema> = object()
+export const availabilityCalendarBodySchema: ObjectSchema<AvailabilityCalendarBodySchema> = object()
   .shape({
     productId: string().required(),
     optionId: string().required(),
     localDateStart: string().required(),
     localDateEnd: string().required(),
-    units: array().of(availabilityUnitSchema).notRequired().nullable(),
-    ...availabilityCalendarCapabilitiesBodySchema.fields,
+    units: array().of(availabilityUnitSchema).optional(),
   })
+  .concat(availabilityCalendarCapabilitiesBodySchema)
   .test('', 'cannot request more than 1 year of availability', ({ localDateStart, localDateEnd }) => {
     if (localDateStart && localDateEnd) {
       const start = new Date(localDateStart);
