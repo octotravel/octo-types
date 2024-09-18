@@ -1,5 +1,4 @@
-import { object, string, number, array, bool } from 'yup';
-import type { SchemaOf } from 'yup';
+import { object, string, number, array, bool, ObjectSchema } from 'yup';
 import { AvailabilityExtraUnit } from '../types/Extras';
 
 export interface AvailabilityBodySchema
@@ -42,7 +41,7 @@ interface AvailabilityUnitExtras {
   extras?: AvailabilityExtraUnit[];
 }
 
-export const availabilityUnitSchema: SchemaOf<AvailabilityUnit> = object().shape({
+export const availabilityUnitSchema: ObjectSchema<AvailabilityUnit> = object().shape({
   id: string().required(),
   quantity: number().required(),
   extras: array()
@@ -52,21 +51,21 @@ export const availabilityUnitSchema: SchemaOf<AvailabilityUnit> = object().shape
         quantity: number().required(),
       }),
     )
-    .notRequired(),
+    .optional(),
 });
 
-export const availabilityBodySchema: SchemaOf<AvailabilityBodySchema> = object()
+export const availabilityBodySchema: ObjectSchema<AvailabilityBodySchema> = object()
   .shape({
     productId: string().required(),
     optionId: string().required(),
-    localDate: string().notRequired(),
-    localDateStart: string().notRequired(),
-    localDateEnd: string().notRequired(),
-    availabilityIds: array().of(string()).notRequired().min(1),
-    units: array().of(availabilityUnitSchema).notRequired().nullable(),
-    pickupRequested: bool().notRequired().nullable(),
-    pickupPointId: string().notRequired().nullable(),
-    offerCode: string().notRequired(),
+    localDate: string().optional(),
+    localDateStart: string().optional(),
+    localDateEnd: string().optional(),
+    availabilityIds: array().of(string().required()).optional().min(1),
+    units: array().of(availabilityUnitSchema).optional(),
+    pickupRequested: bool().optional().nullable(),
+    pickupPointId: string().optional().nullable(),
+    offerCode: string().optional(),
     extras: array()
       .of(
         object().shape({
@@ -74,8 +73,8 @@ export const availabilityBodySchema: SchemaOf<AvailabilityBodySchema> = object()
           quantity: number().required(),
         }),
       )
-      .notRequired(),
-    currency: string().notRequired().nullable(),
+      .optional(),
+    currency: string().optional().nullable(),
   })
   .test(
     '',

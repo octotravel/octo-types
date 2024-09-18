@@ -1,5 +1,4 @@
-import { object, string, array } from 'yup';
-import type { SchemaOf } from 'yup';
+import { object, string, array, ObjectSchema } from 'yup';
 import { AvailabilityUnit, availabilityUnitSchema } from './Availability';
 
 export interface AvailabilityResourcesBodySchema {
@@ -9,9 +8,9 @@ export interface AvailabilityResourcesBodySchema {
   units?: AvailabilityUnit[];
 }
 
-export const availabilityResourcesBodySchema: SchemaOf<AvailabilityResourcesBodySchema> = object().shape({
+export const availabilityResourcesBodySchema: ObjectSchema<AvailabilityResourcesBodySchema> = object().shape({
   productId: string().required(),
   optionId: string().required(),
   availabilityId: string().required(),
-  units: array().of(availabilityUnitSchema).notRequired().nullable(),
+  units: array().of(availabilityUnitSchema).optional(),
 });

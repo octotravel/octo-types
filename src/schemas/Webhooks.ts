@@ -1,4 +1,4 @@
-import { array, boolean, mixed, object, SchemaOf, string } from 'yup';
+import { array, boolean, mixed, object, ObjectSchema, string } from 'yup';
 import { CapabilityId } from '../types/Capability';
 import { WebhookEvent } from '../types/Webhook';
 
@@ -11,14 +11,14 @@ export interface CreateWebhookBodyParamsSchema {
   capabilities?: CapabilityId[];
 }
 
-export const createWebhookBodyParamsSchema: SchemaOf<CreateWebhookBodyParamsSchema> = object({
-  url: string().notRequired(),
-  event: mixed().oneOf(Object.values(WebhookEvent)).required(),
+export const createWebhookBodyParamsSchema: ObjectSchema<CreateWebhookBodyParamsSchema> = object({
+  url: string().optional(),
+  event: string().oneOf(Object.values(WebhookEvent)).required(),
   retryOnError: boolean().optional(),
   useContactLanguage: boolean().optional(),
   headers: object().optional(),
   capabilities: array()
-    .of(mixed().oneOf(Object.values(CapabilityId)))
+    .of(string().oneOf(Object.values(CapabilityId)).required())
     .optional(),
 });
 
@@ -26,6 +26,6 @@ export interface DeleteWebhookPathParamsSchema {
   id: string;
 }
 
-export const deleteWebhookPathParamsSchema: SchemaOf<DeleteWebhookPathParamsSchema> = object({
+export const deleteWebhookPathParamsSchema: ObjectSchema<DeleteWebhookPathParamsSchema> = object({
   id: string().required(),
 });

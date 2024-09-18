@@ -1,17 +1,15 @@
-import { object, string, number, boolean } from 'yup';
-import type { SchemaOf } from 'yup';
-import { Contact } from '../types/Booking';
-import { bookingContactSchema } from './Booking';
+import { object, string, number, boolean, ObjectSchema } from 'yup';
+import { BookingContactSchema, bookingContactSchema } from './Booking';
 import { CardPaymentGateway } from '../types/CardPayment';
 
 export interface CreateOrderBodySchema {
   currency?: string;
   expirationMinutes?: number;
   emailReceipt?: boolean;
-  contact?: Contact;
+  contact?: BookingContactSchema;
 }
 
-export const createOrderBodySchema: SchemaOf<CreateOrderBodySchema> = object().shape({
+export const createOrderBodySchema: ObjectSchema<CreateOrderBodySchema> = object().shape({
   currency: string().optional(),
   expirationMinutes: number().optional(),
   emailReceipt: boolean().optional(),
@@ -22,7 +20,7 @@ export interface RetrieveOrderPathParamsSchema {
   id: string;
 }
 
-export const retrieveOrderPathParamsSchema: SchemaOf<RetrieveOrderPathParamsSchema> = object().shape({
+export const retrieveOrderPathParamsSchema: ObjectSchema<RetrieveOrderPathParamsSchema> = object().shape({
   id: string().required(),
 });
 
@@ -30,7 +28,7 @@ export interface ExtendOrderBodySchema {
   expirationMinutes: number;
 }
 
-export const extendOrderBodySchema: SchemaOf<ExtendOrderBodySchema> = object().shape({
+export const extendOrderBodySchema: ObjectSchema<ExtendOrderBodySchema> = object().shape({
   expirationMinutes: number().required(),
 });
 
@@ -38,7 +36,7 @@ export interface ExtendOrderPathParamsSchema {
   id: string;
 }
 
-export const extendOrderPathParamsSchema: SchemaOf<ExtendOrderPathParamsSchema> = object().shape({
+export const extendOrderPathParamsSchema: ObjectSchema<ExtendOrderPathParamsSchema> = object().shape({
   id: string().required(),
 });
 
@@ -66,10 +64,10 @@ export interface OrderCardPaymentBodySchema {
   };
 }
 
-export const orderCardPaymentBodySchema: SchemaOf<OrderCardPaymentBodySchema> = object().shape({
+export const orderCardPaymentBodySchema: ObjectSchema<OrderCardPaymentBodySchema> = object().shape({
   cardPayment: object()
     .shape({
-      gateway: string().optional(),
+      gateway: string().oneOf(Object.values(CardPaymentGateway)).optional(),
       amount: number().integer().optional(),
       currency: string().optional(),
       notes: string().optional(),
@@ -109,7 +107,7 @@ export interface OrderConfirmationBodySchema extends OrderCardPaymentBodySchema 
   currency?: string;
   expirationMinutes?: number;
   emailReceipt?: boolean;
-  contact?: Contact;
+  contact?: BookingContactSchema;
 }
 
 export const orderConfirmationBodySchema = object().shape({
@@ -124,7 +122,7 @@ export interface OrderConfirmationPathParamsSchema {
   id: string;
 }
 
-export const orderConfirmationPathParamsSchema: SchemaOf<OrderConfirmationPathParamsSchema> = object().shape({
+export const orderConfirmationPathParamsSchema: ObjectSchema<OrderConfirmationPathParamsSchema> = object().shape({
   id: string().required(),
 });
 
@@ -132,7 +130,7 @@ export interface OrderCancellationBodySchema {
   reason?: string;
 }
 
-export const orderCancellationBodySchema: SchemaOf<OrderCancellationBodySchema> = object().shape({
+export const orderCancellationBodySchema: ObjectSchema<OrderCancellationBodySchema> = object().shape({
   reason: string().optional(),
 });
 
@@ -140,6 +138,6 @@ export interface OrderCancellationPathParamsSchema {
   id: string;
 }
 
-export const orderCancellationPathParamsSchema: SchemaOf<OrderCancellationPathParamsSchema> = object().shape({
+export const orderCancellationPathParamsSchema: ObjectSchema<OrderCancellationPathParamsSchema> = object().shape({
   id: string().required(),
 });
