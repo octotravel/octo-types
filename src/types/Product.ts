@@ -9,6 +9,7 @@ export enum DeliveryFormat {
   QRCODE = 'QRCODE',
   CODE128 = 'CODE128',
   PKPASS_URL = 'PKPASS_URL',
+  AZTECCODE = 'AZTECCODE',
 }
 
 export enum DeliveryMethod {
