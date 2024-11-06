@@ -189,7 +189,7 @@ export const createBookingBodySchema: SchemaOf<CreateBookingBodySchema> = object
   expirationMinutes: number().integer().notRequired(),
   notes: string().nullable().notRequired(),
   emailReceipt: bool().notRequired(),
-  unitItems: array().of(bookingUnitItemSchema).required(),
+  unitItems: array().min(1).of(bookingUnitItemSchema).required(),
   contact: bookingContactSchema.notRequired().default(undefined),
   currency: string().notRequired().nullable(),
   ...bookingPickupBodySchema.fields,
