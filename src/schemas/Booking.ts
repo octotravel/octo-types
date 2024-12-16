@@ -377,13 +377,13 @@ export const confirmBookingPathParamsSchema: SchemaOf<ConfirmBookingPathParamsSc
 });
 
 export interface CancelBookingBodySchema {
-  reason?: string;
+  reason?: string | null;
   force?: boolean;
   emailReceipt?: boolean;
 }
 
 export const cancelBookingBodySchema: SchemaOf<CancelBookingBodySchema> = object().shape({
-  reason: string().notRequired(),
+  reason: string().nullable().notRequired(),
   force: bool().notRequired(),
   emailReceipt: bool().notRequired(),
 });
