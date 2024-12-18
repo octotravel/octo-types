@@ -12,31 +12,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout PR branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
+          fetch-depth: 0
 
-      - name: Install Node.js
-        uses: actions/setup-node@v2
+      - name: Setup node
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22.9.0
 
-      - name: Get PR version
+      - name: Get version in pull request
         id: pr_version
         run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
 
-      - name: Checkout main branch
-        uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          ref: main
+          fetch-depth: 0
 
-      - name: Get main version
-        id: main_version
+      - name: Get version in default branch
+        id: default_branch_version
         run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
 
       - name: Compare versions
         run: |
-          if [ "${{ steps.pr_version.outputs.VERSION }}" != "${{ steps.main_version.outputs.VERSION }}" ]; then
+          if [ "${{ steps.pr_version.outputs.VERSION }}" != "${{ steps.default_branch_version.outputs.VERSION }}" ]; then
             echo "Version changed: ${{ steps.pr_version.outputs.VERSION }}"
           else
             echo "Version did not change"
