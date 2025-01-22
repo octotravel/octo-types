@@ -1,10 +1,11 @@
 export interface Question {
   id: string;
-  label: string;
-  description: Nullable<string>;
+  title: string;
+  shortDescription: Nullable<string>;
   required: boolean;
   inputType: InputType;
   selectOptions: SelectOption[];
+  coverImageUrl: string | null;
 }
 
 export enum InputType {
