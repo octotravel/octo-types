@@ -1,6 +1,6 @@
-import { object, string, number, boolean } from 'yup';
+import { boolean, number, object, string } from 'yup';
 import type { SchemaOf } from 'yup';
-import { Contact } from '../types/Booking';
+import type { Contact } from '../types/Booking';
 import { bookingContactSchema } from './Booking';
 
 export interface GiftReservationBodySchema {

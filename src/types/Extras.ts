@@ -1,4 +1,4 @@
-import { Pricing } from './Pricing';
+import type { Pricing } from './Pricing';
 
 export interface Extra {
   id: string;

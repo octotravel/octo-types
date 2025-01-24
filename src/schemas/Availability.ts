@@ -1,6 +1,6 @@
-import { object, string, number, array, bool } from 'yup';
+import { array, bool, number, object, string } from 'yup';
 import type { SchemaOf } from 'yup';
-import { AvailabilityExtraUnit } from '../types/Extras';
+import type { AvailabilityExtraUnit } from '../types/Extras';
 
 export interface AvailabilityBodySchema
   extends AvailabilityPickupBodySchema,

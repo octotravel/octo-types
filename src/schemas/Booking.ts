@@ -1,6 +1,6 @@
-import { object, string, number, array, bool } from 'yup';
+import { array, bool, number, object, string } from 'yup';
 import type { SchemaOf } from 'yup';
-import { CardPaymentGateway } from '../types/CardPayment';
+import type { CardPaymentGateway } from '../types/CardPayment';
 
 export interface GetBookingPathParamsSchema {
   uuid: string;
