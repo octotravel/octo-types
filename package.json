@@ -26,7 +26,9 @@
     "lint:fix": "biome lint --write .",
     "test": "",
     "lefthook": "lefthook install",
-    "audit": "audit-ci --config ./audit-ci.json"
+    "audit": "audit-ci --config ./audit-ci.json",
+    "prepare": "npm run build",
+    "pretest": "npm run build"
   },
   "types": "dist/index.d.ts",
   "dependencies": {
