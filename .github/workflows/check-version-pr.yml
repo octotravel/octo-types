@@ -6,29 +6,34 @@ on:
       - master
       - main
 
+env:
+  NODE_VERSION: 22.9.0
+
 jobs:
   check-version:
-    name: Check Version
+    name: Check version
     runs-on: ubuntu-latest
     steps:
       - name: Checkout PR branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
+          fetch-depth: 0
 
-      - name: Install Node.js
-        uses: actions/setup-node@v2
+      - name: Setup node
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: Get PR version
         id: pr_version
         run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
 
       - name: Checkout main branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           ref: main
+          fetch-depth: 0
 
       - name: Get main version
         id: main_version

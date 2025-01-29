@@ -1,6 +1,6 @@
-import { Booking } from './Booking';
-import { Option } from './Option';
-import { Product } from './Product';
+import type { Booking } from './Booking';
+import type { Option } from './Option';
+import type { Product } from './Product';
 
 export interface Package {
   title: string;

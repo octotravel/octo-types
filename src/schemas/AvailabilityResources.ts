@@ -1,6 +1,6 @@
-import { object, string, array } from 'yup';
+import { array, object, string } from 'yup';
 import type { SchemaOf } from 'yup';
-import { AvailabilityUnit, availabilityUnitSchema } from './Availability';
+import { type AvailabilityUnit, availabilityUnitSchema } from './Availability';
 
 export interface AvailabilityResourcesBodySchema {
   productId: string;

@@ -1,4 +1,4 @@
-import { array, boolean, mixed, object, SchemaOf, string } from 'yup';
+import { type SchemaOf, array, boolean, mixed, object, string } from 'yup';
 import { CapabilityId } from '../types/Capability';
 import { WebhookEvent } from '../types/Webhook';
 

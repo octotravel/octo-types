@@ -1,7 +1,7 @@
-import { object, string, array, number } from 'yup';
+import { array, number, object, string } from 'yup';
 import type { SchemaOf } from 'yup';
-import { AvailabilityUnit, availabilityUnitSchema } from './Availability';
-import { AvailabilityExtraUnit } from '../types/Extras';
+import type { AvailabilityExtraUnit } from '../types/Extras';
+import { type AvailabilityUnit, availabilityUnitSchema } from './Availability';
 
 interface AvailabilityCalendarCapabilitiesBodySchema {
   currency?: string | null;

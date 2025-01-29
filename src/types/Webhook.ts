@@ -1,7 +1,7 @@
-import { Availability } from './Availability';
-import { Booking } from './Booking';
-import { CapabilityId } from './Capability';
-import { Supplier } from './Supplier';
+import type { Availability } from './Availability';
+import type { Booking } from './Booking';
+import type { CapabilityId } from './Capability';
+import type { Supplier } from './Supplier';
 
 export enum WebhookEvent {
   BookingUpdate = 'booking_update',

@@ -1,11 +1,11 @@
-import { Unit } from './Unit';
-import { PickupPoint } from './PickupPoint';
-import { Pricing } from './Pricing';
-import { DurationUnit } from './Duration';
-import { Question } from './Question';
-import { Extra } from './Extras';
-import { Point } from './Content';
-import { Package } from './Package';
+import type { Point } from './Content';
+import type { DurationUnit } from './Duration';
+import type { Extra } from './Extras';
+import type { Package } from './Package';
+import type { PickupPoint } from './PickupPoint';
+import type { Pricing } from './Pricing';
+import type { Question } from './Question';
+import type { Unit } from './Unit';
 
 export enum ContactField {
   firstName = 'firstName',

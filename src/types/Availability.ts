@@ -1,7 +1,7 @@
-import { Notice, TourGroup } from './Content';
-import { Offer } from './Offer';
-import { PickupPoint } from './PickupPoint';
-import { Pricing, PricingUnit } from './Pricing';
+import type { Notice, TourGroup } from './Content';
+import type { Offer } from './Offer';
+import type { PickupPoint } from './PickupPoint';
+import type { Pricing, PricingUnit } from './Pricing';
 
 export enum AvailabilityType {
   START_TIME = 'START_TIME',

@@ -1,7 +1,7 @@
-import { Booking } from './Booking';
-import { Pricing } from './Pricing';
-import { Product } from './Product';
-import { Tax } from './Tax';
+import type { Booking } from './Booking';
+import type { Pricing } from './Pricing';
+import type { Product } from './Product';
+import type { Tax } from './Tax';
 
 export enum NetDiscount {
   NONE = 'NONE',

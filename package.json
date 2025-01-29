@@ -1,6 +1,6 @@
 {
   "name": "@octocloud/types",
-  "version": "1.5.33",
+  "version": "1.5.34",
   "description": "",
   "license": "ISC",
   "author": "",
@@ -16,17 +16,17 @@
   "scripts": {
     "build": "npx tsc",
     "build:dry": "tsc --noEmit",
-    "check": "npm run build:dry && npm run format:check && npm run lint",
-    "fix": "npm run format:package && npm run format && npm run lint:fix",
-    "fix:staged": "npx lint-staged",
-    "format": "prettier . '!./ops' --write",
-    "format:check": "prettier . '!./ops' --check",
-    "format:package": "prettier-package-json --write",
-    "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint . --ext .ts --fix",
-    "prepare": "npm run build && husky install",
-    "pretest": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:dry:ci": "tsc --noEmit",
+    "check": "npm run build:dry && npm run format && npm run lint",
+    "fix": "biome check --write .",
+    "format": "biome format",
+    "format:fix": "biome format --write .",
+    "lint": "biome lint",
+    "lint:fix": "biome lint --write .",
+    "test": "",
+    "lefthook": "lefthook install",
+    "audit": "audit-ci --config ./audit-ci.json",
+    "prepare": "npm run build"
   },
   "types": "dist/index.d.ts",
   "dependencies": {
@@ -34,28 +34,10 @@
     "yup": "0.32.11"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "6.18.1",
-    "@typescript-eslint/parser": "6.18.1",
-    "eslint": "8.56.0",
-    "eslint-config-airbnb-base": "15.0.0",
-    "eslint-config-airbnb-typescript": "17.1.0",
-    "eslint-config-prettier": "9.1.0",
-    "eslint-config-standard-with-typescript": "43.0.0",
-    "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-unused-imports": "3.0.0",
-    "husky": "8.0.3",
-    "lint-staged": "15.2.0",
-    "prettier": "3.1.1",
-    "prettier-package-json": "2.8.0",
-    "rimraf": "3.0.2",
-    "typescript": "5.3.3"
-  },
-  "keywords": [],
-  "lint-staged": {
-    "./package.json": "npm run format:package",
-    "*": "npm run format",
-    "*.(ts|js)": [
-      "npm run lint:fix"
-    ]
+    "@biomejs/biome": "1.9.4",
+    "@types/node": "^22.9.0",
+    "typescript": "^5.7.2",
+    "audit-ci": "7.1.0",
+    "lefthook": "1.10.10"
   }
 }

@@ -1,8 +1,8 @@
-import { AvailabilityType } from './Availability';
-import { PricingPer } from './Pricing';
-import { Option } from './Option';
-import { Question } from './Question';
-import { GoogleOptions } from './Google';
+import type { AvailabilityType } from './Availability';
+import type { GoogleOptions } from './Google';
+import type { Option } from './Option';
+import type { PricingPer } from './Pricing';
+import type { Question } from './Question';
 
 export enum DeliveryFormat {
   PDF_URL = 'PDF_URL',

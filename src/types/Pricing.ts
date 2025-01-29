@@ -1,6 +1,6 @@
-import { OfferDiscount } from './Offer';
-import { Tax } from './Tax';
-import { UnitType } from './Unit';
+import type { OfferDiscount } from './Offer';
+import type { Tax } from './Tax';
+import type { UnitType } from './Unit';
 
 export enum PricingPer {
   UNIT = 'UNIT',

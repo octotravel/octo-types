@@ -1,7 +1,7 @@
-import { Extra } from './Extras';
-import { ContactField } from './Option';
-import { Pricing } from './Pricing';
-import { Question } from './Question';
+import type { Extra } from './Extras';
+import type { ContactField } from './Option';
+import type { Pricing } from './Pricing';
+import type { Question } from './Question';
 
 export enum UnitType {
   ADULT = 'ADULT',

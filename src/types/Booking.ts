@@ -1,17 +1,17 @@
-import { PickupPoint } from './PickupPoint';
-import { Unit } from './Unit';
-import { Availability } from './Availability';
-import { Option } from './Option';
-import { DeliveryFormat, DeliveryMethod, Product, RedemptionMethod } from './Product';
-import { Pricing } from './Pricing';
-import { Offer, OfferComparison } from './Offer';
-import { QuestionAnswer } from './Question';
-import { ResourceAlloctation } from './Resources';
-import { GiftPayment } from './Gift';
-import { ExtraItem } from './Extras';
-import { PackageBooking } from './Package';
-import { Adyen, Bridgepay, CardPayment, CardPaymentGateway, Stripe, Vivawallet } from './CardPayment';
-import { Notice } from './Content';
+import type { Availability } from './Availability';
+import { Adyen, Bridgepay, type CardPayment, type CardPaymentGateway, Stripe, Vivawallet } from './CardPayment';
+import type { Notice } from './Content';
+import type { ExtraItem } from './Extras';
+import type { GiftPayment } from './Gift';
+import type { Offer, OfferComparison } from './Offer';
+import type { Option } from './Option';
+import type { PackageBooking } from './Package';
+import type { PickupPoint } from './PickupPoint';
+import type { Pricing } from './Pricing';
+import type { DeliveryFormat, DeliveryMethod, Product, RedemptionMethod } from './Product';
+import type { QuestionAnswer } from './Question';
+import type { ResourceAlloctation } from './Resources';
+import type { Unit } from './Unit';
 
 export enum BookingStatus {
   ON_HOLD = 'ON_HOLD',

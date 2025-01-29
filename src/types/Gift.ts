@@ -1,7 +1,7 @@
-import { Cancellation, Contact, Ticket } from './Booking';
-import { Offer, OfferComparison } from './Offer';
-import { Pricing } from './Pricing';
-import { DeliveryMethod } from './Product';
+import type { Cancellation, Contact, Ticket } from './Booking';
+import type { Offer, OfferComparison } from './Offer';
+import type { Pricing } from './Pricing';
+import type { DeliveryMethod } from './Product';
 
 export interface Gift extends GiftPricing, GiftOffer {
   id: string;

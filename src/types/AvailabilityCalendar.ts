@@ -1,6 +1,6 @@
-import { AvailabilityStatus, OpeningHours } from './Availability';
-import { Offer } from './Offer';
-import { Pricing, PricingUnit } from './Pricing';
+import type { AvailabilityStatus, OpeningHours } from './Availability';
+import type { Offer } from './Offer';
+import type { Pricing, PricingUnit } from './Pricing';
 
 export interface AvailabilityCalendar extends AvailabilityCalendarPricing, AvailabilityCalendarOffers {
   localDate: string;

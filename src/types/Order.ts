@@ -1,8 +1,8 @@
-import { Booking, Contact } from './Booking';
-import { CardPayment, CardPaymentGateway } from './CardPayment';
-import { GiftPayment } from './Gift';
-import { OfferCombination } from './Offer';
-import { Pricing } from './Pricing';
+import type { Booking, Contact } from './Booking';
+import type { CardPayment, CardPaymentGateway } from './CardPayment';
+import type { GiftPayment } from './Gift';
+import type { OfferCombination } from './Offer';
+import type { Pricing } from './Pricing';
 
 export interface Order extends OrderOffers, OrderGift, OrderCardPayment {
   id: string;
