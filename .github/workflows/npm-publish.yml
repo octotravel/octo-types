@@ -6,6 +6,9 @@ on:
       - master
       - main
 
+env:
+  NODE_VERSION: 22.9.0
+
 jobs:
   publish-npm:
     name: Publish to NPM
