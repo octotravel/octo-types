@@ -26,6 +26,7 @@ export enum OrderStatus {
   CONFIRMED = 'CONFIRMED',
   CANCELLED = 'CANCELLED',
   EXPIRED = 'EXPIRED',
+  PENDING = 'PENDING',
 }
 
 export interface OrderOffers {
