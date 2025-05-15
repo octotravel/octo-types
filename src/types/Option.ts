@@ -64,6 +64,9 @@ export interface Option
   cancellationCutoff: string;
   cancellationCutoffAmount: number;
   cancellationCutoffUnit: DurationUnit;
+  availabilityCutoff: string;
+  availabilityCutoffAmount: number;
+  availabilityCutoffUnit: DurationUnit;
   requiredContactFields: ContactField[];
   visibleContactFields: ContactField[];
   restrictions: OptionRestrictions;
