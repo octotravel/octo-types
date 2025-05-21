@@ -1,5 +1,4 @@
-import type { ResultCode } from '@adyen/adyen-web/dist/types/components/types';
-import type { PaymentMethodsConfiguration } from '@adyen/adyen-web/dist/types/core/types';
+import { PaymentMethodsConfiguration, ResultCode } from '@adyen/adyen-web';
 
 export enum CardPaymentGateway {
   Adyen = 'adyen',
