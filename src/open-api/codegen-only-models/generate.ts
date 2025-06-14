@@ -88,11 +88,7 @@ async function processFile(file: string, dirs: { modelsDir: string; schemasDir: 
 function generateSchema(sourceText: string) {
   return generate({
     sourceText,
-    nameFilter: (name) => true, // Include all types
-    jsDocTagFilter: () => true, // Include all JSDoc tags
     getSchemaName: (name) => `${name.charAt(0).toLowerCase() + name.slice(1)}Schema`,
-    keepComments: false,
-    skipParseJSDoc: false,
   });
 }
 
