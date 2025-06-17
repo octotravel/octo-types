@@ -186,7 +186,7 @@ export function addRules(zodSchemasText: string, modelName: string): string {
   const ruleFunctionName = `${modelName.charAt(0).toLowerCase() + modelName.slice(1)}Rule`;
 
   const schemaRegex = /(}\))\s*;/g;
-  const refineCall = `.refine(data => ${ruleFunctionName}(data))`;
+  const refineCall = `.superRefine(${ruleFunctionName}())`;
 
   const modifiedText = zodSchemasText.replace(schemaRegex, `$1${refineCall};`);
   const importLine = `import { ${ruleFunctionName} } from '../rules/${modelName}';\n`;

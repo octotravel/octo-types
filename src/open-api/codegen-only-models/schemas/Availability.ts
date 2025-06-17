@@ -22,4 +22,4 @@ export const availabilitySchema = z
     unitPricing: z.array(pricingUnitSchema).optional(),
     pricing: z.array(pricingSchema).optional(),
   })
-  .refine((data) => availabilityRule(data));
+  .superRefine(availabilityRule());
