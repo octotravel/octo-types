@@ -27,12 +27,9 @@
     "lefthook": "lefthook install",
     "audit": "audit-ci --config ./audit-ci.json",
     "prepare": "npm run build",
-    "generate:types-codegen": "openapi --input src/open-api/openapi.yaml --output src/open-api/codegen --client none",
-    "generate:types-codegen-models": "openapi --input src/open-api/openapi.yaml --output src/open-api/codegen-only-models/ --exportCore false --exportServices false --client none",
-    "generate:types-typescript": "openapi-typescript src/open-api/openapi.yaml --output src/open-api/typescript/types.ts",
-    "generate:zod-schemas": "openapi-zod-client src/open-api/openapi.yaml --o src/open-api/zod-openapi/schemas.ts --export-schemas false",
-    "generate:zod": "ts-to-zod src/open-api/codegen-only-models/models/AvailabilityCalendar.ts src/open-api/ts-to-zod/AvailabilityCalendarSchema.ts",
-    "generate:zod-all": "ts-to-zod src/open-api/codegen-only-models/index.ts src/open-api/ts-to-zod/schema.ts"
+    "get:openapi:yaml": "ts-node src/utils/get-openapi-yaml.ts",
+    "generate:models": "openapi --input src/openapi.yaml --output src/ --exportCore false --exportServices false --client none",
+    "generate:schemas": "ts-node src/utils/generate-schemas.ts"
   },
   "types": "dist/index.d.ts",
   "dependencies": {
@@ -47,7 +44,6 @@
     "audit-ci": "7.1.0",
     "glob": "^11.0.3",
     "lefthook": "1.10.10",
-    "openapi-typescript": "^7.8.0",
     "openapi-typescript-codegen": "^0.29.0",
     "openapi-zod-client": "^1.18.3",
     "ts-node": "^10.9.2",
