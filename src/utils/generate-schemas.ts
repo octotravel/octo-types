@@ -1,4 +1,4 @@
-import { promises as fs, existsSync } from 'node:fs';
+import { existsSync, promises } from 'node:fs';
 import * as path from 'node:path';
 import * as glob from 'glob';
 import { generate } from 'ts-to-zod';
@@ -34,6 +34,9 @@ async function generateSchemas() {
 
     await Promise.all(files.map((file) => processFile(file, { modelsDir, schemasDir })));
 
+    // Update the main index.ts file with schema exports
+    await updateIndexFileWithSchemas(schemasDir);
+
     console.log('Finished generating Zod schemas');
   } catch (err) {
     console.error('Unhandled error:', err);
@@ -52,7 +55,7 @@ function setupDirectories() {
 
 async function ensureDirectoryExists(dirPath: string): Promise<void> {
   try {
-    await fs.mkdir(dirPath, { recursive: true });
+    await promises.mkdir(dirPath, { recursive: true });
     console.log(`Created directory at ${dirPath}`);
   } catch (err) {
     console.error(`Error creating directory: ${err}`);
@@ -74,7 +77,7 @@ async function findSpecificModelFiles(dir: string, modelSpecs: string[]): Promis
   for (const spec of modelSpecs) {
     const normalizedSpec = spec.endsWith('.ts') ? spec : `${spec}.ts`;
 
-    if (await fs.stat(path.join(dir, normalizedSpec)).catch(() => null)) {
+    if (await promises.stat(path.join(dir, normalizedSpec)).catch(() => null)) {
       result.push(normalizedSpec);
       continue;
     }
@@ -102,7 +105,7 @@ async function processFile(file: string, dirs: { modelsDir: string; schemasDir: 
   try {
     await ensureDirectoryExists(outputDir);
 
-    const sourceText = await fs.readFile(inputPath, 'utf-8');
+    const sourceText = await promises.readFile(inputPath, 'utf-8');
     const result = generateSchema(sourceText);
 
     if (result.errors.length > 0) {
@@ -113,7 +116,7 @@ async function processFile(file: string, dirs: { modelsDir: string; schemasDir: 
     zodSchemasText = replaceZanySchemas(zodSchemasText);
     zodSchemasText = addRules(zodSchemasText, fileName);
 
-    await fs.writeFile(outputPath, zodSchemasText);
+    await promises.writeFile(outputPath, zodSchemasText);
     console.log(`Created schema file: ${outputPath}`);
   } catch (err) {
     console.error(`Error processing ${file}:`, err);
@@ -190,6 +193,59 @@ export function addRules(zodSchemasText: string, fileName: string): string {
   const importLine = `import { ${ruleFunctionName} } from '../rules/${fileName}';\n`;
 
   return importLine + modifiedText;
+}
+
+async function updateIndexFileWithSchemas(schemasDir: string): Promise<void> {
+  try {
+    const projectRoot = process.cwd();
+    const indexPath = path.join(projectRoot, 'src', 'index.ts');
+
+    if (!existsSync(indexPath)) {
+      console.error('Index file not found at:', indexPath);
+      return;
+    }
+
+    let indexContent = await promises.readFile(indexPath, 'utf-8');
+    const schemaFiles = glob.sync('**/*.ts', {
+      cwd: schemasDir,
+    });
+
+    const schemaExports: string[] = [];
+
+    for (const schemaFile of schemaFiles) {
+      const baseName = path.basename(schemaFile, '.ts');
+      const schemaFilePath = path.join(schemasDir, schemaFile);
+      const schemaContent = await promises.readFile(schemaFilePath, 'utf-8');
+
+      const exportRegex = /export\s+const\s+(\w+Schema)\s*=/g;
+      let match: RegExpExecArray | null;
+
+      match = exportRegex.exec(schemaContent);
+      while (match !== null) {
+        const schemaName = match[1];
+        const exportStatement = `export { ${schemaName} } from './schemas/${baseName}';`;
+
+        if (!indexContent.includes(exportStatement)) {
+          schemaExports.push(exportStatement);
+        }
+        match = exportRegex.exec(schemaContent);
+      }
+    }
+
+    if (schemaExports.length > 0) {
+      if (!indexContent.includes('// Zod Schemas')) {
+        indexContent += '\n\n// Zod Schemas';
+      }
+      indexContent += `\n${schemaExports.join('\n')}`;
+
+      await promises.writeFile(indexPath, indexContent);
+      console.log(`Updated index file with ${schemaExports.length} schema exports`);
+    } else {
+      console.log('No new schema exports to add to index file');
+    }
+  } catch (err) {
+    console.error('Error updating index file with schemas:', err);
+  }
 }
 
 generateSchemas().catch((err) => console.log(err));

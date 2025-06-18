@@ -165,7 +165,7 @@ paths:
                   value:
                     error: INVALID_OPTION_ID
                     errorMessage: The optionId was missing or invalid
-                    optionId: 681fea0f-196e-45da-bec7-467bfacb1d87
+                    optionId: 681fea0f-196e-45da-bec7-467bfacb1d8
                 Invalid Product Id Response:
                   summary: Invalid Product Id Response
                   description: Invalid Product Id Response
@@ -4478,6 +4478,10 @@ components:
           type: string
           description: The option id.
           example: DEFAULT
+        localDate:
+          type: string
+          description: Start date to query for (YYYY-MM-DD). Required if `localDateEnd` is set.
+          example: '2022-05-23'
         localDateStart:
           type: string
           description: Start date to query for (YYYY-MM-DD). Required if `localDateEnd` is set.

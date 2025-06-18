@@ -1,9 +1,11 @@
-import type { Cancellation, Contact, Ticket } from './Booking';
+import { BookingCancellation } from './BookingCancellation';
+import { BookingPricing } from './BookingPricing';
+import { Contact } from './Contact';
+import type { DeliveryMethod } from './DeliveryMethod';
 import type { Offer, OfferComparison } from './Offer';
-import type { Pricing } from './Pricing';
-import type { DeliveryMethod } from './Product';
+import type { Ticket } from './Ticket';
 
-export interface Gift extends GiftPricing, GiftOffer {
+export interface Gift extends BookingPricing, GiftOffer {
   id: string;
   uuid: string;
   testMode: boolean;
@@ -19,14 +21,14 @@ export interface Gift extends GiftPricing, GiftOffer {
   amount: number;
   currency: string;
   cancellable: boolean;
-  cancellation: Nullable<Cancellation>;
+  cancellation: Nullable<BookingCancellation>;
   contact: Contact;
   recipient: Contact;
   message: Nullable<string>;
   notes: Nullable<string>;
   deliveryMethods: DeliveryMethod[];
   voucher: Nullable<Ticket>;
-  giftPayment: Nullable<GiftPayment>;
+  giftPayment: Nullable<BookingPricing>;
 }
 
 export enum GiftStatus {
@@ -41,10 +43,6 @@ export interface GiftPayment {
   giftCode: string;
   amount: number;
   currency: string;
-}
-
-interface GiftPricing {
-  pricing?: Pricing;
 }
 
 interface GiftOffer {

@@ -13,6 +13,10 @@ export type AvailabilityCheckBody = {
    */
   optionId: string;
   /**
+   * Start date to query for (YYYY-MM-DD). Required if `localDate` is set.
+   */
+  localDate?: string;
+  /**
    * Start date to query for (YYYY-MM-DD). Required if `localDateEnd` is set.
    */
   localDateStart?: string;

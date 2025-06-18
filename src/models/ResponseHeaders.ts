@@ -2,4 +2,4 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type ResponseHeaders = Record<string, any>;
+export type ResponseHeaders = Record<string, unknown>;

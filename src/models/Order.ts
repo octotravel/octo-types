@@ -1,5 +1,6 @@
-import type { Booking, Contact } from './Booking';
+import type { Booking } from './Booking';
 import type { CardPayment, CardPaymentGateway } from './CardPayment';
+import type { Contact } from './Contact';
 import type { GiftPayment } from './Gift';
 import type { OfferCombination } from './Offer';
 import type { Pricing } from './Pricing';

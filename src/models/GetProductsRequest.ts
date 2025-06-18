@@ -2,4 +2,4 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type GetProductsRequest = Record<string, any>;
+export type GetProductsRequest = Record<string, unknown>;
