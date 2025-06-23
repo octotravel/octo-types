@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 export const bookingRule = () => {
+  // biome-ignore lint/suspicious/noExplicitAny: <kek>
   return (data: any, ctx: z.RefinementCtx) => {
     if (!data.localDateTimeStart) {
       ctx.addIssue({

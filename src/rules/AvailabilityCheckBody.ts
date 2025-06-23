@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: <kek> */
 import { z } from 'zod';
 
 export const availabilityCheckBodyRule = () => {
