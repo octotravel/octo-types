@@ -34,7 +34,7 @@ export type { BookingUnitItem } from './models/BookingUnitItem';
 export type { BookingUpdateBody } from './models/BookingUpdateBody';
 export type { BookingUpdateRequest_uuid } from './models/BookingUpdateRequest_uuid';
 export { CancellationCutoffUnit } from './models/CancellationCutoffUnit';
-export { Capability } from './models/Capability';
+export { Capability, CapabilityId } from './models/Capability';
 export { CategoryLabel } from './models/CategoryLabel';
 export type { Commentary } from './models/Commentary';
 export { CommentaryFormat } from './models/CommentaryFormat';
