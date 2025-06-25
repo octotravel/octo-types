@@ -89,6 +89,7 @@ export { Order } from './models/Order';
 export type { Place } from './models/Place';
 export type { PostalAddress } from './models/PostalAddress';
 export type { Pricing } from './models/Pricing';
+export { PricingOffer } from './models/PricingOffer';
 export { PricingPer } from './models/PricingPer';
 export type { PricingUnit } from './models/PricingUnit';
 export type { Product } from './models/Product';

@@ -47,12 +47,6 @@ export interface OfferCombination {
   booking: Nullable<Booking>;
 }
 
-export interface OfferDiscount {
-  original: number;
-  retail: number;
-  includedTaxes: Tax[];
-}
-
 interface Unit {
   unitId: string;
   quantity: number;
