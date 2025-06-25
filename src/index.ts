@@ -40,6 +40,7 @@ export type { Commentary } from './models/Commentary';
 export { CommentaryFormat } from './models/CommentaryFormat';
 export type { Contact } from './models/Contact';
 export { ContactField } from './models/ContactField';
+export { Currency } from './models/Currency';
 export { DeliveryFormat } from './models/DeliveryFormat';
 export { DeliveryMethod } from './models/DeliveryMethod';
 export type { DeliveryOption } from './models/DeliveryOption';
