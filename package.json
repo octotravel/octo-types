@@ -1,6 +1,6 @@
 {
   "name": "@octocloud/types",
-  "version": "1.5.38",
+  "version": "1.5.39",
   "description": "",
   "license": "ISC",
   "author": "",
@@ -26,18 +26,28 @@
     "test": "",
     "lefthook": "lefthook install",
     "audit": "audit-ci --config ./audit-ci.json",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "get:openapi:yaml": "ts-node src/utils/get-openapi-yaml.ts",
+    "generate:models": "openapi --input src/openapi.yaml --output src/ --exportCore false --exportServices false --client none",
+    "generate:schemas": "ts-node src/utils/generate-schemas.ts"
   },
   "types": "dist/index.d.ts",
   "dependencies": {
     "@adyen/adyen-web": "6.14.0",
-    "yup": "0.32.11"
+    "yup": "0.32.11",
+    "zod": "^3.25.61"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
+    "@biomejs/biome": "2.0.0",
+    "@types/glob": "^8.1.0",
     "@types/node": "^22.9.0",
     "audit-ci": "7.1.0",
+    "glob": "^11.0.3",
     "lefthook": "1.10.10",
+    "openapi-typescript-codegen": "^0.29.0",
+    "openapi-zod-client": "^1.18.3",
+    "ts-node": "^10.9.2",
+    "ts-to-zod": "^3.15.0",
     "typescript": "^5.7.2"
   }
 }

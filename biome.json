@@ -1,9 +1,9 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.0.0/schema.json",
   "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
   "files": {
     "ignoreUnknown": false,
-    "ignore": ["__generated__"]
+    "includes": ["**", "!**/__generated__"]
   },
   "formatter": {
     "enabled": true,
@@ -13,11 +13,14 @@
     "attributePosition": "auto",
     "bracketSpacing": true
   },
-  "organizeImports": { "enabled": true },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
+      "nursery": {
+        "noFloatingPromises": "error"
+      },
       "complexity": {
         "noStaticOnlyClass": "off",
         "noForEach": "off",
@@ -25,29 +28,29 @@
       },
       "correctness": {
         "noUnusedVariables": "off",
-        "useArrayLiterals": "off"
+        "noUnusedFunctionParameters": "off"
       },
       "style": {
         "useBlockStatements": "off",
         "useImportType": "off",
         "noNonNullAssertion": "off",
         "noParameterAssign": "off",
-        "noUselessElse": "off"
+        "noUselessElse": "off",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useEnumInitializers": "error",
+        "useSelfClosingElements": "error",
+        "useSingleVarDeclarator": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useNumberNamespace": "error",
+        "noInferrableTypes": "error",
+        "useArrayLiterals": "off"
       },
       "suspicious": {
-        "noEmptyBlockStatements": "off",
-        "noExplicitAny": "off"
+        "noEmptyBlockStatements": "off"
       },
       "performance": {
         "noAccumulatingSpread": "off"
-      },
-      "nursery": {
-        "useConsistentMemberAccessibility": {
-          "level": "error",
-          "options": {
-            "accessibility": "explicit"
-          }
-        }
       }
     }
   },
