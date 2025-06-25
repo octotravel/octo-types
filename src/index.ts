@@ -78,6 +78,7 @@ export type { Media } from './models/Media';
 export { MediaRel } from './models/MediaRel';
 export { MediaType } from './models/MediaType';
 export { Offer } from './models/Offer';
+export { OfferDiscount } from './models/OfferDiscount';
 export type { OpeningHours } from './models/OpeningHours';
 export type { Option } from './models/Option';
 export type { OptionContent } from './models/OptionContent';
