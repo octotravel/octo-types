@@ -2,7 +2,7 @@ export interface GoogleOptions {
   operator: Nullable<Operator>;
   rating: Nullable<Rating>;
   landing_page: Url;
-  inventory_type: string;
+  inventory_types: string[];
   landing_page_list_view: Url;
   option_categories: OptionCategories[];
   related_locations: RelatedLocations[];
