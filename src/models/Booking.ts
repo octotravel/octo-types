@@ -98,7 +98,7 @@ export type Booking = {
   /**
    * The availability object that was booked.
    */
-  availability: Availability;
+  availability: Availability | null;
   /**
    * Customer contact details for the booking (see unit object for per ticket / unit details).
    */
