@@ -34,7 +34,8 @@ interface AvailabilityCardPaymentBodySchema {
 }
 
 export interface AvailabilityUnit extends AvailabilityUnitExtras {
-  id: string;
+  id?: string;
+  type?: string;
   quantity: number;
 }
 
@@ -43,7 +44,8 @@ interface AvailabilityUnitExtras {
 }
 
 export const availabilityUnitSchema: SchemaOf<AvailabilityUnit> = object().shape({
-  id: string().required(),
+  id: string().notRequired(),
+  type: string().notRequired(),
   quantity: number().required(),
   extras: array()
     .of(
