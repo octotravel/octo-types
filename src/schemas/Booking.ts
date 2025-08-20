@@ -62,14 +62,16 @@ export const bookingContactSchema: SchemaOf<BookingContactSchema> = object().sha
 
 export interface BookingUnitItemSchema {
   uuid?: string;
-  unitId: string;
+  unitId?: string;
+  unitType?: string;
   resellerReference?: string;
   contact?: BookingContactSchema;
 }
 
 export const bookingUnitItemSchema: SchemaOf<BookingUnitItemSchema> = object().shape({
   uuid: string().notRequired(),
-  unitId: string().required(),
+  unitType: string().notRequired(),
+  unitId: string().notRequired(),
   resellerReference: string().notRequired(),
   contact: bookingContactSchema.notRequired().default(undefined),
 });
