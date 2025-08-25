@@ -70,10 +70,10 @@ export interface AvailabilityPickup {
 }
 
 export interface AvailabilityOffers {
-  offerCode?: string;
-  offerTitle?: string;
+  offerCode?: string | null;
+  offerTitle?: string | null;
   offers?: Offer[];
-  offer?: Offer;
+  offer?: Offer | null;
 }
 
 export interface AvailabilityResources {

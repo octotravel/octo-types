@@ -48,7 +48,7 @@ export interface OfferCombination {
 }
 
 export interface OfferDiscount {
-  original: number;
+  net: number;
   retail: number;
   includedTaxes: Tax[];
 }
