@@ -21,7 +21,7 @@ export interface AvailabilityCalendarPricing {
 
 export interface AvailabilityCalendarOffers {
   offers?: Offer[];
-  offerCode?: string;
-  offerTitle?: string;
-  offer?: Offer;
+  offerCode?: string | null;
+  offerTitle?: string | null;
+  offer?: Offer | null;
 }

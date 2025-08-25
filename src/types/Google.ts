@@ -1,27 +1,28 @@
 export interface GoogleOptions {
-  operator: Nullable<Operator>;
-  rating: Nullable<Rating>;
-  landing_page: Url;
+  operator: Nullable<GoogleOperator>;
+  rating: Nullable<GoogleRating>;
+  landing_page: GoogleUrl;
   inventory_types: string[];
-  landing_page_list_view: Url;
-  option_categories: OptionCategories[];
-  related_locations: RelatedLocations[];
+  landing_page_list_view: GoogleUrl;
+  option_categories: GoogleOptionCategories[];
+  related_locations: GoogleRelatedLocations[];
 }
-interface Url {
+interface GoogleUrl {
   url: Nullable<string>;
 }
-interface Operator {
+
+interface GoogleOperator {
   name: string;
   google_business_profile_name: {
-    localized_texts: LocalizedText[];
+    localized_texts: GoogleLocalizedText[];
   };
   phone_number: string;
-  locations: Location[];
+  locations: GoogleLocation[];
 }
-interface OptionCategories {
+interface GoogleOptionCategories {
   label: string;
 }
-interface RelatedLocations {
+interface GoogleRelatedLocations {
   location: {
     location: {
       place_id: string;
@@ -29,16 +30,17 @@ interface RelatedLocations {
   };
   relation_type: string;
 }
-interface Location {
+
+interface GoogleLocation {
   location: {
     place_id: string;
   };
 }
-interface Rating {
+interface GoogleRating {
   average_value: Nullable<number>;
   rating_count: Nullable<number>;
 }
-interface LocalizedText {
+interface GoogleLocalizedText {
   text: string;
   language_code: string;
 }
