@@ -6,6 +6,7 @@ export interface GoogleOptions {
   landing_page_list_view: GoogleUrl;
   option_categories: GoogleOptionCategories[];
   related_locations: GoogleRelatedLocations[];
+  brand_name: BrandName;
 }
 interface GoogleUrl {
   url: Nullable<string>;
@@ -43,4 +44,8 @@ interface GoogleRating {
 interface GoogleLocalizedText {
   text: string;
   language_code: string;
+}
+
+interface BrandName {
+  localized_texts: GoogleLocalizedText[];
 }
