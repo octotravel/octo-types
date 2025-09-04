@@ -1,19 +1,20 @@
 {
-  "name": "@octocloud/types",
+  "name": "@ventrata/octo-types",
   "version": "1.5.43",
-  "description": "",
+  "private": false,
   "license": "ISC",
-  "author": "",
-  "homepage": "https://github.com/octotravel/octo-types#readme",
+  "files": [
+    "dist/index.d.ts",
+    "dist/models/**/*.d.ts",
+    "dist/schemas/**/*.d.ts"
+  ],
+  "types": "dist/index.d.ts",
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/octotravel/octo-types.git"
-  },
-  "bugs": {
-    "url": "https://github.com/octotravel/octo-types/issues"
+    "url": "https://github.com/ventrata/octo-types"
   },
   "main": "dist/index.js",
   "scripts": {
+    "get:openapi:yaml": "ts-node src/utils/get-openapi-yaml.ts",
     "clean": "rm -rf dist",
     "generate": "openapi-ts && rm -f src/models/index.ts",
     "build": "npx tsc",
@@ -29,7 +30,6 @@
     "test": "",
     "prepare": "npm run build"
   },
-  "types": "dist/index.d.ts",
   "peerDependencies": {
     "zod": "4.1.3"
   },
