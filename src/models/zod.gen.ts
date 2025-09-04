@@ -2,370 +2,268 @@
 
 import { z } from 'zod/v3';
 
-export const zAvailabilityStatus = z.enum([
-    'AVAILABLE',
-    'FREESALE',
-    'SOLD_OUT',
-    'LIMITED',
-    'CLOSED'
-]);
+export const zAvailabilityStatus = z.enum(['AVAILABLE', 'FREESALE', 'SOLD_OUT', 'LIMITED', 'CLOSED']);
 
 /**
  * Defines the opening hours for this availability, even for start time-based availability. Supports multiple periods for breaks in the day.
  */
 export const zOpeningHours = z.object({
-    from: z.string(),
-    to: z.string()
+  from: z.string(),
+  to: z.string(),
 });
 
 export const zTax = z.object({
-    name: z.string(),
-    retail: z.number().int(),
-    original: z.number().int(),
-    net: z.union([
-        z.number().int(),
-        z.null()
-    ])
+  name: z.string(),
+  retail: z.number().int(),
+  original: z.number().int(),
+  net: z.union([z.number().int(), z.null()]),
 });
 
 export const zPricing = z.object({
-    original: z.number().int(),
-    retail: z.number().int(),
-    net: z.union([
-        z.number().int(),
-        z.null()
-    ]),
-    currency: z.string(),
-    currencyPrecision: z.number().int(),
-    includedTaxes: z.array(zTax)
+  original: z.number().int(),
+  retail: z.number().int(),
+  net: z.union([z.number().int(), z.null()]),
+  currency: z.string(),
+  currencyPrecision: z.number().int(),
+  includedTaxes: z.array(zTax),
 });
 
-export const zPricingUnit = zPricing.and(z.object({
-    unitId: z.string()
-}));
+export const zPricingUnit = zPricing.and(
+  z.object({
+    unitId: z.string(),
+  }),
+);
 
 export const zAvailability = z.object({
-    id: z.string(),
-    localDateTimeStart: z.string(),
-    localDateTimeEnd: z.string(),
-    utcCutoffAt: z.string().datetime(),
-    allDay: z.boolean(),
-    available: z.boolean(),
-    status: zAvailabilityStatus,
-    vacancies: z.union([
-        z.number().int(),
-        z.null()
-    ]),
-    capacity: z.union([
-        z.number().int(),
-        z.null()
-    ]),
-    maxUnits: z.union([
-        z.number().int(),
-        z.null()
-    ]),
-    openingHours: z.array(zOpeningHours),
-    unitPricing: z.array(zPricingUnit).optional(),
-    pricing: zPricing.optional(),
-    title: z.union([
-        z.string(),
-        z.null()
-    ]).optional(),
-    shortDescription: z.string().optional()
+  id: z.string(),
+  localDateTimeStart: z.string(),
+  localDateTimeEnd: z.string(),
+  utcCutoffAt: z.string().datetime(),
+  allDay: z.boolean(),
+  available: z.boolean(),
+  status: zAvailabilityStatus,
+  vacancies: z.union([z.number().int(), z.null()]),
+  capacity: z.union([z.number().int(), z.null()]),
+  maxUnits: z.union([z.number().int(), z.null()]),
+  openingHours: z.array(zOpeningHours),
+  unitPricing: z.array(zPricingUnit).optional(),
+  pricing: zPricing.optional(),
+  title: z.union([z.string(), z.null()]).optional(),
+  shortDescription: z.string().optional(),
 });
 
 export const zAvailabilityCalendar = z.object({
-    localDate: z.string(),
-    available: z.boolean(),
-    status: zAvailabilityStatus,
-    vacancies: z.union([
-        z.number().int(),
-        z.null()
-    ]),
-    capacity: z.union([
-        z.number().int(),
-        z.null()
-    ]),
-    openingHours: z.array(zOpeningHours),
-    unitPricingFrom: z.array(zPricingUnit).optional(),
-    pricingFrom: zPricing.optional()
+  localDate: z.string(),
+  available: z.boolean(),
+  status: zAvailabilityStatus,
+  vacancies: z.union([z.number().int(), z.null()]),
+  capacity: z.union([z.number().int(), z.null()]),
+  openingHours: z.array(zOpeningHours),
+  unitPricingFrom: z.array(zPricingUnit).optional(),
+  pricingFrom: zPricing.optional(),
 });
 
 /**
  * A list of units.
  */
 export const zAvailabilityUnit = z.object({
-    id: z.string(),
-    quantity: z.number().int()
+  id: z.string(),
+  quantity: z.number().int(),
 });
 
 export const zAvailabilityCalendarBody = z.object({
-    productId: z.string(),
-    optionId: z.string(),
-    localDateStart: z.string().optional(),
-    localDateEnd: z.string().optional(),
-    units: z.array(zAvailabilityUnit).optional(),
-    currency: z.string().optional()
+  productId: z.string(),
+  optionId: z.string(),
+  localDateStart: z.string().optional(),
+  localDateEnd: z.string().optional(),
+  units: z.array(zAvailabilityUnit).optional(),
+  currency: z.string().optional(),
 });
 
 export const zAvailabilityCalendarPricing = z.object({
-    unitPricingFrom: z.array(zPricingUnit).optional(),
-    pricingFrom: zPricing.optional()
+  unitPricingFrom: z.array(zPricingUnit).optional(),
+  pricingFrom: zPricing.optional(),
 });
 
 export const zAvailabilityCalendarPricingBody = z.object({
-    currency: z.string().optional()
+  currency: z.string().optional(),
 });
 
 export const zAvailabilityCalendarRequest = z.object({
-    body: zAvailabilityCalendarBody
+  body: zAvailabilityCalendarBody,
 });
 
 export const zAvailabilityCheckBody = z.object({
-    productId: z.string(),
-    optionId: z.string(),
-    localDateStart: z.string().optional(),
-    localDateEnd: z.string().optional(),
-    availabilityIds: z.array(z.string()).optional(),
-    units: z.array(zAvailabilityUnit).optional(),
-    currency: z.string().optional()
+  productId: z.string(),
+  optionId: z.string(),
+  localDateStart: z.string().optional(),
+  localDateEnd: z.string().optional(),
+  availabilityIds: z.array(z.string()).optional(),
+  units: z.array(zAvailabilityUnit).optional(),
+  currency: z.string().optional(),
 });
 
 export const zAvailabilityCheckRequest = z.object({
-    body: zAvailabilityCheckBody
+  body: zAvailabilityCheckBody,
 });
 
 export const zAvailabilityContent = z.object({
-    title: z.union([
-        z.string(),
-        z.null()
-    ]).optional(),
-    shortDescription: z.string().optional()
+  title: z.union([z.string(), z.null()]).optional(),
+  shortDescription: z.string().optional(),
 });
 
 export const zAvailabilityPricing = z.object({
-    unitPricing: z.array(zPricingUnit).optional(),
-    pricing: zPricing.optional()
+  unitPricing: z.array(zPricingUnit).optional(),
+  pricing: zPricing.optional(),
 });
 
 export const zAvailabilityPricingBody = z.object({
-    currency: z.string().optional()
+  currency: z.string().optional(),
 });
 
-export const zAvailabilityType = z.enum([
-    'START_TIME',
-    'OPENING_HOURS'
-]);
+export const zAvailabilityType = z.enum(['START_TIME', 'OPENING_HOURS']);
 
 export const zBaseError = z.object({
-    error: z.string(),
-    errorMessage: z.string()
+  error: z.string(),
+  errorMessage: z.string(),
 });
 
 export const zBookingStatus = z.enum([
-    'ON_HOLD',
-    'CONFIRMED',
-    'EXPIRED',
-    'CANCELLED',
-    'REDEEMED',
-    'PENDING',
-    'REJECTED'
+  'ON_HOLD',
+  'CONFIRMED',
+  'EXPIRED',
+  'CANCELLED',
+  'REDEEMED',
+  'PENDING',
+  'REJECTED',
 ]);
 
-export const zDeliveryFormat = z.enum([
-    'PDF_URL',
-    'QRCODE',
-    'CODE128',
-    'PKPASS_URL'
-]);
+export const zDeliveryFormat = z.enum(['PDF_URL', 'QRCODE', 'CODE128', 'PKPASS_URL']);
 
-export const zDeliveryMethod = z.enum([
-    'VOUCHER',
-    'TICKET'
-]);
+export const zDeliveryMethod = z.enum(['VOUCHER', 'TICKET']);
 
-export const zRedemptionMethod = z.enum([
-    'DIGITAL',
-    'PRINT',
-    'MANIFEST'
-]);
+export const zRedemptionMethod = z.enum(['DIGITAL', 'PRINT', 'MANIFEST']);
 
-export const zDurationUnit = z.enum([
-    'minute',
-    'hour',
-    'day'
-]);
+export const zDurationUnit = z.enum(['minute', 'hour', 'day']);
 
 export const zContactField = z.enum([
-    'firstName',
-    'lastName',
-    'emailAddress',
-    'phoneNumber',
-    'country',
-    'notes',
-    'locales',
-    'allowMarketing',
-    'postalCode'
+  'firstName',
+  'lastName',
+  'emailAddress',
+  'phoneNumber',
+  'country',
+  'notes',
+  'locales',
+  'allowMarketing',
+  'postalCode',
 ]);
 
 export const zOptionRestrictions = z.object({
-    minUnits: z.union([
-        z.number().int(),
-        z.null()
-    ]),
-    maxUnits: z.union([
-        z.number().int(),
-        z.null()
-    ])
+  minUnits: z.union([z.number().int(), z.null()]),
+  maxUnits: z.union([z.number().int(), z.null()]),
 });
 
 export const zUnitType = z.enum([
-    'ADULT',
-    'YOUTH',
-    'CHILD',
-    'INFANT',
-    'FAMILY',
-    'SENIOR',
-    'STUDENT',
-    'MILITARY',
-    'OTHER'
+  'ADULT',
+  'YOUTH',
+  'CHILD',
+  'INFANT',
+  'FAMILY',
+  'SENIOR',
+  'STUDENT',
+  'MILITARY',
+  'OTHER',
 ]);
 
 export const zUnitRestrictions = z.object({
-    minAge: z.number().int(),
-    maxAge: z.number().int(),
-    idRequired: z.boolean(),
-    minQuantity: z.union([
-        z.number().int(),
-        z.null()
-    ]),
-    maxQuantity: z.union([
-        z.number().int(),
-        z.null()
-    ]),
-    paxCount: z.number().int(),
-    accompaniedBy: z.array(z.string()),
-    minHeight: z.number().int().optional(),
-    maxHeight: z.number().int().optional(),
-    heightUnit: z.string().optional(),
-    minWeight: z.number().int().optional(),
-    maxWeight: z.number().int().optional(),
-    weightUnit: z.string().optional()
+  minAge: z.number().int(),
+  maxAge: z.number().int(),
+  idRequired: z.boolean(),
+  minQuantity: z.union([z.number().int(), z.null()]),
+  maxQuantity: z.union([z.number().int(), z.null()]),
+  paxCount: z.number().int(),
+  accompaniedBy: z.array(z.string()),
+  minHeight: z.number().int().optional(),
+  maxHeight: z.number().int().optional(),
+  heightUnit: z.string().optional(),
+  minWeight: z.number().int().optional(),
+  maxWeight: z.number().int().optional(),
+  weightUnit: z.string().optional(),
 });
 
 export const zFeatureType = z.enum([
-    'INCLUSION',
-    'EXCLUSION',
-    'HIGHLIGHT',
-    'PREBOOKING_INFORMATION',
-    'PREARRIVAL_INFORMATION',
-    'REDEMPTION_INSTRUCTION',
-    'ACCESSIBILITY_INFORMATION',
-    'ADDITIONAL_INFORMATION',
-    'BOOKING_TERM',
-    'CANCELLATION_TERM'
+  'INCLUSION',
+  'EXCLUSION',
+  'HIGHLIGHT',
+  'PREBOOKING_INFORMATION',
+  'PREARRIVAL_INFORMATION',
+  'REDEMPTION_INSTRUCTION',
+  'ACCESSIBILITY_INFORMATION',
+  'ADDITIONAL_INFORMATION',
+  'BOOKING_TERM',
+  'CANCELLATION_TERM',
 ]);
 
 export const zFeature = z.object({
-    shortDescription: z.union([
-        z.string(),
-        z.null()
-    ]),
-    type: zFeatureType
+  shortDescription: z.union([z.string(), z.null()]),
+  type: zFeatureType,
 });
 
 export const zUnit = z.object({
-    id: z.string(),
-    internalName: z.string(),
-    reference: z.union([
-        z.string(),
-        z.null()
-    ]),
-    type: zUnitType,
-    restrictions: zUnitRestrictions,
-    requiredContactFields: z.array(zContactField),
-    pricingFrom: z.array(zPricing).optional(),
-    pricing: z.array(zPricing).optional(),
-    title: z.union([
-        z.string(),
-        z.null()
-    ]).optional(),
-    shortDescription: z.string().optional(),
-    features: z.array(zFeature).optional()
+  id: z.string(),
+  internalName: z.string(),
+  reference: z.union([z.string(), z.null()]),
+  type: zUnitType,
+  restrictions: zUnitRestrictions,
+  requiredContactFields: z.array(zContactField),
+  pricingFrom: z.array(zPricing).optional(),
+  pricing: z.array(zPricing).optional(),
+  title: z.union([z.string(), z.null()]).optional(),
+  shortDescription: z.string().optional(),
+  features: z.array(zFeature).optional(),
 });
 
 export const zFaq = z.object({
-    question: z.string(),
-    answer: z.string()
+  question: z.string(),
+  answer: z.string(),
 });
 
 export const zMediaType = z.enum([
-    'image/jpeg',
-    'image/png',
-    'video/mp4',
-    'video/avi',
-    'external/youtube',
-    'external/vimeo'
+  'image/jpeg',
+  'image/png',
+  'video/mp4',
+  'video/avi',
+  'external/youtube',
+  'external/vimeo',
 ]);
 
-export const zMediaRel = z.enum([
-    'LOGO',
-    'COVER',
-    'GALLERY'
-]);
+export const zMediaRel = z.enum(['LOGO', 'COVER', 'GALLERY']);
 
 export const zMedia = z.object({
-    src: z.string().url(),
-    type: zMediaType,
-    rel: zMediaRel,
-    title: z.union([
-        z.string(),
-        z.null()
-    ]),
-    caption: z.union([
-        z.string(),
-        z.null()
-    ]),
-    copyright: z.union([
-        z.string(),
-        z.null()
-    ])
+  src: z.string().url(),
+  type: zMediaType,
+  rel: zMediaRel,
+  title: z.union([z.string(), z.null()]),
+  caption: z.union([z.string(), z.null()]),
+  copyright: z.union([z.string(), z.null()]),
 });
 
 export const zLocationType = z.enum([
-    'START',
-    'ITINERARY_ITEM',
-    'POINT_OF_INTEREST',
-    'ADMISSION_INCLUDED',
-    'END',
-    'REDEMPTION'
+  'START',
+  'ITINERARY_ITEM',
+  'POINT_OF_INTEREST',
+  'ADMISSION_INCLUDED',
+  'END',
+  'REDEMPTION',
 ]);
 
 export const zPostalAddress = z.object({
-    streetAddress: z.union([
-        z.string(),
-        z.null()
-    ]),
-    addressLocality: z.union([
-        z.string(),
-        z.null()
-    ]),
-    addressRegion: z.union([
-        z.string(),
-        z.null()
-    ]),
-    postalCode: z.union([
-        z.string(),
-        z.null()
-    ]),
-    addressCountry: z.union([
-        z.string(),
-        z.null()
-    ]),
-    postOfficeBoxNumber: z.union([
-        z.string(),
-        z.null()
-    ])
+  streetAddress: z.union([z.string(), z.null()]),
+  addressLocality: z.union([z.string(), z.null()]),
+  addressRegion: z.union([z.string(), z.null()]),
+  postalCode: z.union([z.string(), z.null()]),
+  addressCountry: z.union([z.string(), z.null()]),
+  postOfficeBoxNumber: z.union([z.string(), z.null()]),
 });
 
 /**
@@ -380,438 +278,291 @@ export const zPostalAddress = z.object({
  * amapPlaceId: A unique identifier for locations on Amap (China-based mapping platform).
  */
 export const zIdentifiers = z.object({
-    googlePlaceId: z.union([
-        z.string(),
-        z.null()
-    ]),
-    applePlaceId: z.union([
-        z.string(),
-        z.null()
-    ]),
-    tripadvisorLocationId: z.union([
-        z.string(),
-        z.null()
-    ]),
-    yelpPlaceId: z.union([
-        z.string(),
-        z.null()
-    ]),
-    facebookPlaceId: z.union([
-        z.string(),
-        z.null()
-    ]),
-    foursquarePlaceId: z.union([
-        z.string(),
-        z.null()
-    ]),
-    baiduPlaceId: z.union([
-        z.string(),
-        z.null()
-    ]),
-    amapPlaceId: z.union([
-        z.string(),
-        z.null()
-    ])
+  googlePlaceId: z.union([z.string(), z.null()]),
+  applePlaceId: z.union([z.string(), z.null()]),
+  tripadvisorLocationId: z.union([z.string(), z.null()]),
+  yelpPlaceId: z.union([z.string(), z.null()]),
+  facebookPlaceId: z.union([z.string(), z.null()]),
+  foursquarePlaceId: z.union([z.string(), z.null()]),
+  baiduPlaceId: z.union([z.string(), z.null()]),
+  amapPlaceId: z.union([z.string(), z.null()]),
 });
 
 export const zPlace = z.object({
-    latitude: z.number(),
-    longitude: z.number(),
-    postalAddress: zPostalAddress,
-    identifiers: zIdentifiers,
-    sameAs: z.array(z.string())
+  latitude: z.number(),
+  longitude: z.number(),
+  postalAddress: zPostalAddress,
+  identifiers: zIdentifiers,
+  sameAs: z.array(z.string()),
 });
 
 export const zLocation = z.object({
-    title: z.union([
-        z.string(),
-        z.null()
-    ]),
-    shortDescription: z.union([
-        z.string(),
-        z.null()
-    ]),
-    types: z.array(zLocationType),
-    minutesTo: z.union([
-        z.number().int(),
-        z.null()
-    ]),
-    minutesAt: z.union([
-        z.number().int(),
-        z.null()
-    ]),
-    place: zPlace
+  title: z.union([z.string(), z.null()]),
+  shortDescription: z.union([z.string(), z.null()]),
+  types: z.array(zLocationType),
+  minutesTo: z.union([z.number().int(), z.null()]),
+  minutesAt: z.union([z.number().int(), z.null()]),
+  place: zPlace,
 });
 
 export const zCategoryLabel = z.enum([
-    'multi-day',
-    'city-cards',
-    'adults-only',
-    'animals',
-    'audio-guide',
-    'beaches',
-    'bike-tours',
-    'boat-tours',
-    'classes',
-    'day-trips',
-    'family-friendly',
-    'fast-track',
-    'food',
-    'guided-tours',
-    'history',
-    'hop-on-hop-off',
-    'literature',
-    'live-music',
-    'museums',
-    'nightlife',
-    'outdoors',
-    'private-tours',
-    'romantic',
-    'recurring-events',
-    'self-guided',
-    'small-group-tours',
-    'sports',
-    'theme-parks',
-    'walking-tours',
-    'wheelchair-accessible',
-    'accommodation-included',
-    'trip-difficulty-easy',
-    'trip-difficulty-medium',
-    'trip-difficulty-hard'
+  'multi-day',
+  'city-cards',
+  'adults-only',
+  'animals',
+  'audio-guide',
+  'beaches',
+  'bike-tours',
+  'boat-tours',
+  'classes',
+  'day-trips',
+  'family-friendly',
+  'fast-track',
+  'food',
+  'guided-tours',
+  'history',
+  'hop-on-hop-off',
+  'literature',
+  'live-music',
+  'museums',
+  'nightlife',
+  'outdoors',
+  'private-tours',
+  'romantic',
+  'recurring-events',
+  'self-guided',
+  'small-group-tours',
+  'sports',
+  'theme-parks',
+  'walking-tours',
+  'wheelchair-accessible',
+  'accommodation-included',
+  'trip-difficulty-easy',
+  'trip-difficulty-medium',
+  'trip-difficulty-hard',
 ]);
 
-export const zCommentaryFormat = z.enum([
-    'IN_PERSON',
-    'RECORDED_AUDIO',
-    'WRITTEN',
-    'OTHER'
-]);
+export const zCommentaryFormat = z.enum(['IN_PERSON', 'RECORDED_AUDIO', 'WRITTEN', 'OTHER']);
 
 export const zCommentary = z.object({
-    format: zCommentaryFormat,
-    language: z.string()
+  format: zCommentaryFormat,
+  language: z.string(),
 });
 
 export const zOption = z.object({
-    id: z.string(),
-    default: z.boolean(),
-    internalName: z.string(),
-    reference: z.union([
-        z.string(),
-        z.null()
-    ]),
-    availabilityLocalStartTimes: z.array(z.string()).min(1),
-    cancellationCutoff: z.string(),
-    cancellationCutoffAmount: z.number().int(),
-    cancellationCutoffUnit: zDurationUnit,
-    requiredContactFields: z.array(zContactField),
-    restrictions: zOptionRestrictions,
-    units: z.array(zUnit),
-    pricingFrom: z.array(zPricing).optional(),
-    pricing: z.array(zPricing).optional(),
-    title: z.string().optional(),
-    shortDescription: z.union([
-        z.string(),
-        z.null()
-    ]).optional(),
-    description: z.union([
-        z.string(),
-        z.null()
-    ]).optional(),
-    features: z.array(zFeature).optional(),
-    faqs: z.array(zFaq).optional(),
-    media: z.array(zMedia).optional(),
-    locations: z.array(zLocation).optional(),
-    categoryLabels: z.array(zCategoryLabel).optional(),
-    durationMinutesFrom: z.number().int().optional(),
-    durationMinutesTo: z.union([
-        z.number().int(),
-        z.null()
-    ]).optional(),
-    commentary: z.array(zCommentary).optional()
+  id: z.string(),
+  default: z.boolean(),
+  internalName: z.string(),
+  reference: z.union([z.string(), z.null()]),
+  availabilityLocalStartTimes: z.array(z.string()).min(1),
+  cancellationCutoff: z.string(),
+  cancellationCutoffAmount: z.number().int(),
+  cancellationCutoffUnit: zDurationUnit,
+  requiredContactFields: z.array(zContactField),
+  restrictions: zOptionRestrictions,
+  units: z.array(zUnit),
+  pricingFrom: z.array(zPricing).optional(),
+  pricing: z.array(zPricing).optional(),
+  title: z.string().optional(),
+  shortDescription: z.union([z.string(), z.null()]).optional(),
+  description: z.union([z.string(), z.null()]).optional(),
+  features: z.array(zFeature).optional(),
+  faqs: z.array(zFaq).optional(),
+  media: z.array(zMedia).optional(),
+  locations: z.array(zLocation).optional(),
+  categoryLabels: z.array(zCategoryLabel).optional(),
+  durationMinutesFrom: z.number().int().optional(),
+  durationMinutesTo: z.union([z.number().int(), z.null()]).optional(),
+  commentary: z.array(zCommentary).optional(),
 });
 
-export const zPricingPer = z.enum([
-    'BOOKING',
-    'UNIT'
-]);
+export const zPricingPer = z.enum(['BOOKING', 'UNIT']);
 
 export const zProduct = z.object({
-    id: z.string(),
-    internalName: z.string(),
-    reference: z.union([
-        z.string(),
-        z.null()
-    ]),
-    locale: z.string(),
-    timeZone: z.string().optional(),
-    allowFreesale: z.boolean(),
-    instantConfirmation: z.boolean(),
-    instantDelivery: z.boolean(),
-    availabilityRequired: z.boolean(),
-    availabilityType: zAvailabilityType,
-    deliveryFormats: z.array(zDeliveryFormat),
-    deliveryMethods: z.array(zDeliveryMethod),
-    redemptionMethod: zRedemptionMethod,
-    options: z.array(zOption),
-    defaultCurrency: z.string().optional(),
-    availableCurrencies: z.array(z.string()).optional(),
-    pricingPer: zPricingPer.optional(),
-    title: z.string().optional(),
-    shortDescription: z.union([
-        z.string(),
-        z.null()
-    ]).optional(),
-    description: z.union([
-        z.string(),
-        z.null()
-    ]).optional(),
-    features: z.array(zFeature).optional(),
-    faqs: z.array(zFaq).optional(),
-    media: z.array(zMedia).optional(),
-    locations: z.array(zLocation).optional(),
-    categoryLabels: z.array(zCategoryLabel).optional(),
-    durationMinutesFrom: z.number().int().optional(),
-    durationMinutesTo: z.union([
-        z.number().int(),
-        z.null()
-    ]).optional(),
-    commentary: z.array(zCommentary).optional()
+  id: z.string(),
+  internalName: z.string(),
+  reference: z.union([z.string(), z.null()]),
+  locale: z.string(),
+  timeZone: z.string().optional(),
+  allowFreesale: z.boolean(),
+  instantConfirmation: z.boolean(),
+  instantDelivery: z.boolean(),
+  availabilityRequired: z.boolean(),
+  availabilityType: zAvailabilityType,
+  deliveryFormats: z.array(zDeliveryFormat),
+  deliveryMethods: z.array(zDeliveryMethod),
+  redemptionMethod: zRedemptionMethod,
+  options: z.array(zOption),
+  defaultCurrency: z.string().optional(),
+  availableCurrencies: z.array(z.string()).optional(),
+  pricingPer: zPricingPer.optional(),
+  title: z.string().optional(),
+  shortDescription: z.union([z.string(), z.null()]).optional(),
+  description: z.union([z.string(), z.null()]).optional(),
+  features: z.array(zFeature).optional(),
+  faqs: z.array(zFaq).optional(),
+  media: z.array(zMedia).optional(),
+  locations: z.array(zLocation).optional(),
+  categoryLabels: z.array(zCategoryLabel).optional(),
+  durationMinutesFrom: z.number().int().optional(),
+  durationMinutesTo: z.union([z.number().int(), z.null()]).optional(),
+  commentary: z.array(zCommentary).optional(),
 });
 
-export const zRefund = z.enum([
-    'FULL',
-    'PARTIAL',
-    'NONE'
-]);
+export const zRefund = z.enum(['FULL', 'PARTIAL', 'NONE']);
 
 export const zBookingCancellation = z.object({
-    refund: zRefund,
-    reason: z.union([
-        z.string(),
-        z.null()
-    ]),
-    utcCancelledAt: z.string().datetime()
+  refund: zRefund,
+  reason: z.union([z.string(), z.null()]),
+  utcCancelledAt: z.string().datetime(),
 });
 
 export const zContact = z.object({
-    fullName: z.union([
-        z.string(),
-        z.null()
-    ]),
-    firstName: z.union([
-        z.string(),
-        z.null()
-    ]),
-    lastName: z.union([
-        z.string(),
-        z.null()
-    ]),
-    emailAddress: z.union([
-        z.string().email(),
-        z.null()
-    ]),
-    phoneNumber: z.union([
-        z.string(),
-        z.null()
-    ]),
-    locales: z.array(z.string()),
-    postalCode: z.union([
-        z.string(),
-        z.null()
-    ]),
-    country: z.union([
-        z.string(),
-        z.null()
-    ]),
-    notes: z.union([
-        z.string(),
-        z.null()
-    ])
+  fullName: z.union([z.string(), z.null()]),
+  firstName: z.union([z.string(), z.null()]),
+  lastName: z.union([z.string(), z.null()]),
+  emailAddress: z.union([z.string().email(), z.null()]),
+  phoneNumber: z.union([z.string(), z.null()]),
+  locales: z.array(z.string()),
+  postalCode: z.union([z.string(), z.null()]),
+  country: z.union([z.string(), z.null()]),
+  notes: z.union([z.string(), z.null()]),
 });
 
 export const zDeliveryOption = z.object({
-    deliveryFormat: zDeliveryFormat,
-    deliveryValue: z.string()
+  deliveryFormat: zDeliveryFormat,
+  deliveryValue: z.string(),
 });
 
 export const zTicket = z.object({
-    redemptionMethod: zRedemptionMethod,
-    utcRedeemedAt: z.union([
-        z.string(),
-        z.null()
-    ]),
-    deliveryOptions: z.array(zDeliveryOption)
+  redemptionMethod: zRedemptionMethod,
+  utcRedeemedAt: z.union([z.string(), z.null()]),
+  deliveryOptions: z.array(zDeliveryOption),
 });
 
 export const zUnitItem = z.object({
-    uuid: z.string(),
-    resellerReference: z.union([
-        z.string(),
-        z.null()
-    ]),
-    supplierReference: z.union([
-        z.string(),
-        z.null()
-    ]),
-    unitId: z.string(),
-    unit: zUnit.optional(),
-    status: zBookingStatus,
-    utcRedeemedAt: z.union([
-        z.string().datetime(),
-        z.null()
-    ]),
-    contact: zContact,
-    ticket: z.union([
-        zTicket,
-        z.null()
-    ]),
-    pricing: zPricing.optional()
+  uuid: z.string(),
+  resellerReference: z.union([z.string(), z.null()]),
+  supplierReference: z.union([z.string(), z.null()]),
+  unitId: z.string(),
+  unit: zUnit.optional(),
+  status: zBookingStatus,
+  utcRedeemedAt: z.union([z.string().datetime(), z.null()]),
+  contact: zContact,
+  ticket: z.union([zTicket, z.null()]),
+  pricing: zPricing.optional(),
 });
 
 export const zBooking = z.object({
-    id: z.string(),
-    uuid: z.string().uuid(),
-    testMode: z.boolean(),
-    resellerReference: z.union([
-        z.string(),
-        z.null()
-    ]),
-    supplierReference: z.union([
-        z.string(),
-        z.null()
-    ]),
-    status: zBookingStatus,
-    utcCreatedAt: z.string().datetime(),
-    utcUpdatedAt: z.string().datetime(),
-    utcExpiresAt: z.union([
-        z.string().datetime(),
-        z.null()
-    ]),
-    utcRedeemedAt: z.union([
-        z.string().datetime(),
-        z.null()
-    ]),
-    utcConfirmedAt: z.union([
-        z.string().datetime(),
-        z.null()
-    ]),
-    productId: z.string(),
-    product: zProduct.optional(),
-    optionId: z.string(),
-    option: zOption.optional(),
-    cancellable: z.boolean(),
-    cancellation: z.union([
-        zBookingCancellation,
-        z.null()
-    ]),
-    freesale: z.boolean(),
-    availabilityId: z.union([
-        z.string(),
-        z.null()
-    ]),
-    availability: z.union([
-        zAvailability,
-        z.null()
-    ]),
-    contact: zContact,
-    notes: z.union([
-        z.string(),
-        z.null()
-    ]),
-    deliveryMethods: z.array(zDeliveryMethod),
-    voucher: z.union([
-        zTicket,
-        z.null()
-    ]),
-    unitItems: z.array(zUnitItem),
-    pricing: zPricing.optional()
+  id: z.string(),
+  uuid: z.string().uuid(),
+  testMode: z.boolean(),
+  resellerReference: z.union([z.string(), z.null()]),
+  supplierReference: z.union([z.string(), z.null()]),
+  status: zBookingStatus,
+  utcCreatedAt: z.string().datetime(),
+  utcUpdatedAt: z.string().datetime(),
+  utcExpiresAt: z.union([z.string().datetime(), z.null()]),
+  utcRedeemedAt: z.union([z.string().datetime(), z.null()]),
+  utcConfirmedAt: z.union([z.string().datetime(), z.null()]),
+  productId: z.string(),
+  product: zProduct.optional(),
+  optionId: z.string(),
+  option: zOption.optional(),
+  cancellable: z.boolean(),
+  cancellation: z.union([zBookingCancellation, z.null()]),
+  freesale: z.boolean(),
+  availabilityId: z.union([z.string(), z.null()]),
+  availability: z.union([zAvailability, z.null()]),
+  contact: zContact,
+  notes: z.union([z.string(), z.null()]),
+  deliveryMethods: z.array(zDeliveryMethod),
+  voucher: z.union([zTicket, z.null()]),
+  unitItems: z.array(zUnitItem),
+  pricing: zPricing.optional(),
 });
 
 export const zBookingCancellationBody = z.object({
-    reason: z.string().optional(),
-    force: z.boolean().optional()
+  reason: z.string().optional(),
+  force: z.boolean().optional(),
 });
 
 export const zBookingContact = z.object({
-    fullName: z.string().optional(),
-    firstName: z.string().optional(),
-    lastName: z.string().optional(),
-    emailAddress: z.string().email().optional(),
-    phoneNumber: z.string().optional(),
-    locales: z.array(z.string()).optional(),
-    postalCode: z.string().optional(),
-    country: z.string().optional(),
-    notes: z.string().optional()
+  fullName: z.string().optional(),
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
+  emailAddress: z.string().email().optional(),
+  phoneNumber: z.string().optional(),
+  locales: z.array(z.string()).optional(),
+  postalCode: z.string().optional(),
+  country: z.string().optional(),
+  notes: z.string().optional(),
 });
 
 export const zBookingUnitItem = z.object({
-    uuid: z.string().uuid().optional(),
-    unitId: z.string()
+  uuid: z.string().uuid().optional(),
+  unitId: z.string(),
 });
 
 export const zBookingConfirmationBody = z.object({
-    emailReceipt: z.boolean().optional(),
-    resellerReference: z.string().optional(),
-    contact: zBookingContact,
-    unitItems: z.array(zBookingUnitItem).optional()
+  emailReceipt: z.boolean().optional(),
+  resellerReference: z.string().optional(),
+  contact: zBookingContact,
+  unitItems: z.array(zBookingUnitItem).optional(),
 });
 
 export const zBookingPricing = z.object({
-    pricing: zPricing.optional()
+  pricing: zPricing.optional(),
 });
 
 export const zBookingReservationBody = z.object({
-    uuid: z.string().uuid().optional(),
-    productId: z.string(),
-    optionId: z.string(),
-    availabilityId: z.string().optional(),
-    expirationMinutes: z.number().int().optional(),
-    notes: z.string().optional(),
-    unitItems: z.array(zBookingUnitItem),
-    currency: z.string().optional()
+  uuid: z.string().uuid().optional(),
+  productId: z.string(),
+  optionId: z.string(),
+  availabilityId: z.string().optional(),
+  expirationMinutes: z.number().int().optional(),
+  notes: z.string().optional(),
+  unitItems: z.array(zBookingUnitItem),
+  currency: z.string().optional(),
 });
 
 export const zBookingReservationPricingBody = z.object({
-    currency: z.string().optional()
+  currency: z.string().optional(),
 });
 
 export const zBookingReservationRequest = z.object({
-    body: zBookingReservationBody
+  body: zBookingReservationBody,
 });
 
 export const zBookingUpdateBody = z.object({
-    resellerReference: z.string().optional(),
-    productId: z.string().optional(),
-    optionId: z.string().optional(),
-    availabilityId: z.string().optional(),
-    expirationMinutes: z.number().int().optional(),
-    notes: z.string().optional(),
-    emailReceipt: z.boolean().optional(),
-    unitItems: z.array(zBookingUnitItem).optional(),
-    contact: zBookingContact.optional()
+  resellerReference: z.string().optional(),
+  productId: z.string().optional(),
+  optionId: z.string().optional(),
+  availabilityId: z.string().optional(),
+  expirationMinutes: z.number().int().optional(),
+  notes: z.string().optional(),
+  emailReceipt: z.boolean().optional(),
+  unitItems: z.array(zBookingUnitItem).optional(),
+  contact: zBookingContact.optional(),
 });
 
 export const zCapabilityId = z.enum([
-    'octo/adjustments',
-    'octo/cart',
-    'octo/content',
-    'octo/mappings',
-    'octo/packages',
-    'octo/pickups',
-    'octo/pricing',
-    'octo/questions'
+  'octo/adjustments',
+  'octo/cart',
+  'octo/content',
+  'octo/mappings',
+  'octo/packages',
+  'octo/pickups',
+  'octo/pricing',
+  'octo/questions',
 ]);
 
 export const zCapability = z.object({
-    id: zCapabilityId,
-    revision: z.number().int(),
-    required: z.boolean(),
-    dependencies: z.array(zCapabilityId),
-    docs: z.union([
-        z.string(),
-        z.null()
-    ])
+  id: zCapabilityId,
+  revision: z.number().int(),
+  required: z.boolean(),
+  dependencies: z.array(zCapabilityId),
+  docs: z.union([z.string(), z.null()]),
 });
 
 export const zErrorBadRequest = zBaseError;
@@ -820,32 +571,42 @@ export const zErrorForbidden = zBaseError;
 
 export const zErrorInternalServerError = zBaseError;
 
-export const zErrorInvalidAvailabilityId = zBaseError.and(z.object({
-    availabilityId: z.string()
-}));
+export const zErrorInvalidAvailabilityId = zBaseError.and(
+  z.object({
+    availabilityId: z.string(),
+  }),
+);
 
-export const zErrorInvalidBookingUuid = zBaseError.and(z.object({
-    uuid: z.string()
-}));
+export const zErrorInvalidBookingUuid = zBaseError.and(
+  z.object({
+    uuid: z.string(),
+  }),
+);
 
-export const zErrorInvalidOptionId = zBaseError.and(z.object({
-    optionId: z.string()
-}));
+export const zErrorInvalidOptionId = zBaseError.and(
+  z.object({
+    optionId: z.string(),
+  }),
+);
 
-export const zErrorInvalidProductId = zBaseError.and(z.object({
-    productId: z.string()
-}));
+export const zErrorInvalidProductId = zBaseError.and(
+  z.object({
+    productId: z.string(),
+  }),
+);
 
-export const zErrorInvalidUnitId = zBaseError.and(z.object({
-    unitId: z.string()
-}));
+export const zErrorInvalidUnitId = zBaseError.and(
+  z.object({
+    unitId: z.string(),
+  }),
+);
 
 export const zErrorUnauthorized = zBaseError;
 
 export const zErrorUnprocessableEntity = zBaseError;
 
 export const zExtendReservationBody = z.object({
-    expirationMinutes: z.number().int().optional()
+  expirationMinutes: z.number().int().optional(),
 });
 
 export const zGetProductsRequest = z.record(z.unknown());
@@ -853,60 +614,42 @@ export const zGetProductsRequest = z.record(z.unknown());
 export const zGetSupplierRequest = z.record(z.unknown());
 
 export const zOptionContent = z.object({
-    title: z.string().optional(),
-    shortDescription: z.union([
-        z.string(),
-        z.null()
-    ]).optional(),
-    description: z.union([
-        z.string(),
-        z.null()
-    ]).optional(),
-    features: z.array(zFeature).optional(),
-    faqs: z.array(zFaq).optional(),
-    media: z.array(zMedia).optional(),
-    locations: z.array(zLocation).optional(),
-    categoryLabels: z.array(zCategoryLabel).optional(),
-    durationMinutesFrom: z.number().int().optional(),
-    durationMinutesTo: z.union([
-        z.number().int(),
-        z.null()
-    ]).optional(),
-    commentary: z.array(zCommentary).optional()
+  title: z.string().optional(),
+  shortDescription: z.union([z.string(), z.null()]).optional(),
+  description: z.union([z.string(), z.null()]).optional(),
+  features: z.array(zFeature).optional(),
+  faqs: z.array(zFaq).optional(),
+  media: z.array(zMedia).optional(),
+  locations: z.array(zLocation).optional(),
+  categoryLabels: z.array(zCategoryLabel).optional(),
+  durationMinutesFrom: z.number().int().optional(),
+  durationMinutesTo: z.union([z.number().int(), z.null()]).optional(),
+  commentary: z.array(zCommentary).optional(),
 });
 
 export const zOptionPricing = z.object({
-    pricingFrom: z.array(zPricing).optional(),
-    pricing: z.array(zPricing).optional()
+  pricingFrom: z.array(zPricing).optional(),
+  pricing: z.array(zPricing).optional(),
 });
 
 export const zProductContent = z.object({
-    title: z.string().optional(),
-    shortDescription: z.union([
-        z.string(),
-        z.null()
-    ]).optional(),
-    description: z.union([
-        z.string(),
-        z.null()
-    ]).optional(),
-    features: z.array(zFeature).optional(),
-    faqs: z.array(zFaq).optional(),
-    media: z.array(zMedia).optional(),
-    locations: z.array(zLocation).optional(),
-    categoryLabels: z.array(zCategoryLabel).optional(),
-    durationMinutesFrom: z.number().int().optional(),
-    durationMinutesTo: z.union([
-        z.number().int(),
-        z.null()
-    ]).optional(),
-    commentary: z.array(zCommentary).optional()
+  title: z.string().optional(),
+  shortDescription: z.union([z.string(), z.null()]).optional(),
+  description: z.union([z.string(), z.null()]).optional(),
+  features: z.array(zFeature).optional(),
+  faqs: z.array(zFaq).optional(),
+  media: z.array(zMedia).optional(),
+  locations: z.array(zLocation).optional(),
+  categoryLabels: z.array(zCategoryLabel).optional(),
+  durationMinutesFrom: z.number().int().optional(),
+  durationMinutesTo: z.union([z.number().int(), z.null()]).optional(),
+  commentary: z.array(zCommentary).optional(),
 });
 
 export const zProductPricing = z.object({
-    defaultCurrency: z.string().optional(),
-    availableCurrencies: z.array(z.string()).optional(),
-    pricingPer: zPricingPer.optional()
+  defaultCurrency: z.string().optional(),
+  availableCurrencies: z.array(z.string()).optional(),
+  pricingPer: zPricingPer.optional(),
 });
 
 export const zResponseHeaders = z.record(z.unknown());
@@ -914,69 +657,48 @@ export const zResponseHeaders = z.record(z.unknown());
 export const zResponseHeadersContent = z.record(z.unknown());
 
 export const zRestrictionsContent = z.object({
-    minHeight: z.number().int().optional(),
-    maxHeight: z.number().int().optional(),
-    heightUnit: z.string().optional(),
-    minWeight: z.number().int().optional(),
-    maxWeight: z.number().int().optional(),
-    weightUnit: z.string().optional()
+  minHeight: z.number().int().optional(),
+  maxHeight: z.number().int().optional(),
+  heightUnit: z.string().optional(),
+  minWeight: z.number().int().optional(),
+  maxWeight: z.number().int().optional(),
+  weightUnit: z.string().optional(),
 });
 
 export const zSupplierContact = z.object({
-    website: z.union([
-        z.string(),
-        z.null()
-    ]),
-    email: z.union([
-        z.string().email(),
-        z.null()
-    ]),
-    telephone: z.union([
-        z.string(),
-        z.null()
-    ]),
-    address: z.union([
-        z.string(),
-        z.null()
-    ])
+  website: z.union([z.string(), z.null()]),
+  email: z.union([z.string().email(), z.null()]),
+  telephone: z.union([z.string(), z.null()]),
+  address: z.union([z.string(), z.null()]),
 });
 
 export const zSupplier = z.object({
-    id: z.string(),
-    name: z.string(),
-    endpoint: z.string().url(),
-    contact: zSupplierContact,
-    shortDescription: z.union([
-        z.string(),
-        z.null()
-    ]).optional(),
-    media: z.array(zMedia).optional()
+  id: z.string(),
+  name: z.string(),
+  endpoint: z.string().url(),
+  contact: zSupplierContact,
+  shortDescription: z.union([z.string(), z.null()]).optional(),
+  media: z.array(zMedia).optional(),
 });
 
 export const zSupplierContent = z.object({
-    shortDescription: z.union([
-        z.string(),
-        z.null()
-    ]).optional(),
-    media: z.array(zMedia).optional()
+  shortDescription: z.union([z.string(), z.null()]).optional(),
+  media: z.array(zMedia).optional(),
 });
 
 export const zUnitContent = z.object({
-    title: z.union([
-        z.string(),
-        z.null()
-    ]).optional(),
-    shortDescription: z.string().optional(),
-    features: z.array(zFeature).optional()
+  title: z.union([z.string(), z.null()]).optional(),
+  shortDescription: z.string().optional(),
+  features: z.array(zFeature).optional(),
 });
 
 export const zUnitItemPricing = z.object({
-    pricing: zPricing.optional()
+  pricing: zPricing.optional(),
 });
 
 export const zUnitPricing = z.object({
-    pricingFrom: z.array(zPricing).optional(),
-    pricing: z.array(zPricing).optional()
+  pricingFrom: z.array(zPricing).optional(),
+  pricing: z.array(zPricing).optional(),
 });
 
 /**
@@ -1055,13 +777,13 @@ export const zRequestHeadersOctoCapabilities = z.string();
 export const zRequestHeadersContent = z.string();
 
 export const zAvailabilitiesAvailabilityCheckData = z.object({
-    body: zAvailabilityCheckBody,
-    path: z.never().optional(),
-    query: z.never().optional(),
-    headers: z.object({
-        'Octo-Capabilities': z.string(),
-        'Accept-Language': z.string().optional()
-    })
+  body: zAvailabilityCheckBody,
+  path: z.never().optional(),
+  query: z.never().optional(),
+  headers: z.object({
+    'Octo-Capabilities': z.string(),
+    'Accept-Language': z.string().optional(),
+  }),
 });
 
 /**
@@ -1070,13 +792,13 @@ export const zAvailabilitiesAvailabilityCheckData = z.object({
 export const zAvailabilitiesAvailabilityCheckResponse = z.array(zAvailability);
 
 export const zAvailabilitiesAvailabilityCalendarData = z.object({
-    body: zAvailabilityCalendarBody,
-    path: z.never().optional(),
-    query: z.never().optional(),
-    headers: z.object({
-        'Octo-Capabilities': z.string(),
-        'Accept-Language': z.string().optional()
-    })
+  body: zAvailabilityCalendarBody,
+  path: z.never().optional(),
+  query: z.never().optional(),
+  headers: z.object({
+    'Octo-Capabilities': z.string(),
+    'Accept-Language': z.string().optional(),
+  }),
 });
 
 /**
@@ -1085,21 +807,23 @@ export const zAvailabilitiesAvailabilityCalendarData = z.object({
 export const zAvailabilitiesAvailabilityCalendarResponse = z.array(zAvailabilityCalendar);
 
 export const zBookingsGetBookingsData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.object({
-        resellerReference: z.string().optional(),
-        supplierReference: z.string().optional(),
-        localDate: z.string().optional(),
-        localDateStart: z.string().optional(),
-        localDateEnd: z.string().optional(),
-        productId: z.string().optional(),
-        optionId: z.string().optional()
-    }).optional(),
-    headers: z.object({
-        'Octo-Capabilities': z.string(),
-        'Accept-Language': z.string().optional()
+  body: z.never().optional(),
+  path: z.never().optional(),
+  query: z
+    .object({
+      resellerReference: z.string().optional(),
+      supplierReference: z.string().optional(),
+      localDate: z.string().optional(),
+      localDateStart: z.string().optional(),
+      localDateEnd: z.string().optional(),
+      productId: z.string().optional(),
+      optionId: z.string().optional(),
     })
+    .optional(),
+  headers: z.object({
+    'Octo-Capabilities': z.string(),
+    'Accept-Language': z.string().optional(),
+  }),
 });
 
 /**
@@ -1108,13 +832,13 @@ export const zBookingsGetBookingsData = z.object({
 export const zBookingsGetBookingsResponse = z.array(zBooking);
 
 export const zBookingsBookingReservationData = z.object({
-    body: zBookingReservationBody,
-    path: z.never().optional(),
-    query: z.never().optional(),
-    headers: z.object({
-        'Octo-Capabilities': z.string(),
-        'Accept-Language': z.string().optional()
-    })
+  body: zBookingReservationBody,
+  path: z.never().optional(),
+  query: z.never().optional(),
+  headers: z.object({
+    'Octo-Capabilities': z.string(),
+    'Accept-Language': z.string().optional(),
+  }),
 });
 
 /**
@@ -1123,15 +847,15 @@ export const zBookingsBookingReservationData = z.object({
 export const zBookingsBookingReservationResponse = zBooking;
 
 export const zBookingsGetBookingData = z.object({
-    body: z.never().optional(),
-    path: z.object({
-        uuid: z.string()
-    }),
-    query: z.never().optional(),
-    headers: z.object({
-        'Octo-Capabilities': z.string(),
-        'Accept-Language': z.string().optional()
-    })
+  body: z.never().optional(),
+  path: z.object({
+    uuid: z.string(),
+  }),
+  query: z.never().optional(),
+  headers: z.object({
+    'Octo-Capabilities': z.string(),
+    'Accept-Language': z.string().optional(),
+  }),
 });
 
 /**
@@ -1140,15 +864,15 @@ export const zBookingsGetBookingData = z.object({
 export const zBookingsGetBookingResponse = zBooking;
 
 export const zBookingsBookingUpdateData = z.object({
-    body: zBookingUpdateBody,
-    path: z.object({
-        uuid: z.string()
-    }),
-    query: z.never().optional(),
-    headers: z.object({
-        'Octo-Capabilities': z.string(),
-        'Accept-Language': z.string().optional()
-    })
+  body: zBookingUpdateBody,
+  path: z.object({
+    uuid: z.string(),
+  }),
+  query: z.never().optional(),
+  headers: z.object({
+    'Octo-Capabilities': z.string(),
+    'Accept-Language': z.string().optional(),
+  }),
 });
 
 /**
@@ -1157,15 +881,15 @@ export const zBookingsBookingUpdateData = z.object({
 export const zBookingsBookingUpdateResponse = zBooking;
 
 export const zBookingsBookingCancellationData = z.object({
-    body: zBookingCancellationBody,
-    path: z.object({
-        uuid: z.string()
-    }),
-    query: z.never().optional(),
-    headers: z.object({
-        'Octo-Capabilities': z.string(),
-        'Accept-Language': z.string().optional()
-    })
+  body: zBookingCancellationBody,
+  path: z.object({
+    uuid: z.string(),
+  }),
+  query: z.never().optional(),
+  headers: z.object({
+    'Octo-Capabilities': z.string(),
+    'Accept-Language': z.string().optional(),
+  }),
 });
 
 /**
@@ -1174,15 +898,15 @@ export const zBookingsBookingCancellationData = z.object({
 export const zBookingsBookingCancellationResponse = zBooking;
 
 export const zBookingsBookingConfirmationData = z.object({
-    body: zBookingConfirmationBody,
-    path: z.object({
-        uuid: z.string()
-    }),
-    query: z.never().optional(),
-    headers: z.object({
-        'Octo-Capabilities': z.string(),
-        'Accept-Language': z.string().optional()
-    })
+  body: zBookingConfirmationBody,
+  path: z.object({
+    uuid: z.string(),
+  }),
+  query: z.never().optional(),
+  headers: z.object({
+    'Octo-Capabilities': z.string(),
+    'Accept-Language': z.string().optional(),
+  }),
 });
 
 /**
@@ -1191,15 +915,15 @@ export const zBookingsBookingConfirmationData = z.object({
 export const zBookingsBookingConfirmationResponse = zBooking;
 
 export const zBookingsExtendReservationData = z.object({
-    body: zExtendReservationBody,
-    path: z.object({
-        uuid: z.string()
-    }),
-    query: z.never().optional(),
-    headers: z.object({
-        'Octo-Capabilities': z.string(),
-        'Accept-Language': z.string().optional()
-    })
+  body: zExtendReservationBody,
+  path: z.object({
+    uuid: z.string(),
+  }),
+  query: z.never().optional(),
+  headers: z.object({
+    'Octo-Capabilities': z.string(),
+    'Accept-Language': z.string().optional(),
+  }),
 });
 
 /**
@@ -1208,13 +932,13 @@ export const zBookingsExtendReservationData = z.object({
 export const zBookingsExtendReservationResponse = zBooking;
 
 export const zProductsGetProductsData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.never().optional(),
-    headers: z.object({
-        'Octo-Capabilities': z.string(),
-        'Accept-Language': z.string().optional()
-    })
+  body: z.never().optional(),
+  path: z.never().optional(),
+  query: z.never().optional(),
+  headers: z.object({
+    'Octo-Capabilities': z.string(),
+    'Accept-Language': z.string().optional(),
+  }),
 });
 
 /**
@@ -1223,15 +947,15 @@ export const zProductsGetProductsData = z.object({
 export const zProductsGetProductsResponse = z.array(zProduct);
 
 export const zProductsGetProductData = z.object({
-    body: z.never().optional(),
-    path: z.object({
-        id: z.string()
-    }),
-    query: z.never().optional(),
-    headers: z.object({
-        'Octo-Capabilities': z.string(),
-        'Accept-Language': z.string().optional()
-    })
+  body: z.never().optional(),
+  path: z.object({
+    id: z.string(),
+  }),
+  query: z.never().optional(),
+  headers: z.object({
+    'Octo-Capabilities': z.string(),
+    'Accept-Language': z.string().optional(),
+  }),
 });
 
 /**
@@ -1240,13 +964,13 @@ export const zProductsGetProductData = z.object({
 export const zProductsGetProductResponse = zProduct;
 
 export const zSuppliersGetData = z.object({
-    body: z.never().optional(),
-    path: z.never().optional(),
-    query: z.never().optional(),
-    headers: z.object({
-        'Octo-Capabilities': z.string(),
-        'Accept-Language': z.string().optional()
-    })
+  body: z.never().optional(),
+  path: z.never().optional(),
+  query: z.never().optional(),
+  headers: z.object({
+    'Octo-Capabilities': z.string(),
+    'Accept-Language': z.string().optional(),
+  }),
 });
 
 /**
