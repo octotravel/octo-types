@@ -1,15 +1,16 @@
 {
-  "name": "@ventrata/octo-types",
+  "name": "@octocloud/types",
   "version": "1.5.44",
-  "private": false,
+  "description": "",
   "license": "ISC",
-  "files": [
-    "dist/index.d.ts",
-    "dist/models/**/*.d.ts"
-  ],
-  "types": "dist/index.d.ts",
+  "author": "",
+  "homepage": "https://github.com/octotravel/octo-types#readme",
   "repository": {
-    "url": "https://github.com/ventrata/octo-types"
+    "type": "git",
+    "url": "git+https://github.com/octotravel/octo-types.git"
+  },
+  "bugs": {
+    "url": "https://github.com/octotravel/octo-types/issues"
   },
   "main": "dist/index.js",
   "scripts": {

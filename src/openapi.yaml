@@ -5093,6 +5093,14 @@ components:
           example: false
       example:
         reason: this product sucks
+    BookingCancellationPathParams:
+      type: object
+      required:
+        - uuid
+      properties:
+        uuid:
+          type: string
+          description: The UUID of the booking
     BookingConfirmationBody:
       type: object
       required:
@@ -5142,6 +5150,14 @@ components:
             - en-GB
             - en-US
           country: GB
+    BookingConfirmationPathParams:
+      type: object
+      required:
+        - uuid
+      properties:
+        uuid:
+          type: string
+          description: The UUID of the booking
     BookingContact:
       type: object
       properties:
@@ -5325,6 +5341,10 @@ components:
           type: string
           description: A unique UUID to identify the unit, same as the booking uuid except per unit.
           example: adult_697e3ce8-1860-4cbf-80ad-95857df1f640
+        resellerReference:
+          type: string
+        contact:
+          $ref: '#/components/schemas/BookingContact'
       example:
         uuid: 3b1bc2ee-3155-4738-9471-f49842a07327
         unitId: adult_697e3ce8-1860-4cbf-80ad-95857df1f640
@@ -5404,6 +5424,14 @@ components:
             - en-GB
             - en-US
           country: GB
+    BookingUpdatePathParams:
+      type: object
+      required:
+        - uuid
+      properties:
+        uuid:
+          type: string
+          description: The UUID of the booking
     CapabilityId:
       type: string
       enum:
@@ -5727,6 +5755,14 @@ components:
           type: integer
       example:
         expirationMinutes: 15
+    ExtendReservationPathParams:
+      type: object
+      required:
+        - uuid
+      properties:
+        uuid:
+          type: string
+          description: The UUID of the booking
     FAQ:
       type: object
       required:
