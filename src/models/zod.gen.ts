@@ -487,6 +487,10 @@ export const zBookingCancellationBody = z.object({
   force: z.boolean().optional(),
 });
 
+export const zBookingCancellationPathParams = z.object({
+  uuid: z.string(),
+});
+
 export const zBookingContact = z.object({
   fullName: z.string().optional(),
   firstName: z.string().optional(),
@@ -502,6 +506,8 @@ export const zBookingContact = z.object({
 export const zBookingUnitItem = z.object({
   uuid: z.string().uuid().optional(),
   unitId: z.string(),
+  resellerReference: z.string().optional(),
+  contact: zBookingContact.optional(),
 });
 
 export const zBookingConfirmationBody = z.object({
@@ -509,6 +515,10 @@ export const zBookingConfirmationBody = z.object({
   resellerReference: z.string().optional(),
   contact: zBookingContact,
   unitItems: z.array(zBookingUnitItem).optional(),
+});
+
+export const zBookingConfirmationPathParams = z.object({
+  uuid: z.string(),
 });
 
 export const zBookingPricing = z.object({
@@ -544,6 +554,10 @@ export const zBookingUpdateBody = z.object({
   emailReceipt: z.boolean().optional(),
   unitItems: z.array(zBookingUnitItem).optional(),
   contact: zBookingContact.optional(),
+});
+
+export const zBookingUpdatePathParams = z.object({
+  uuid: z.string(),
 });
 
 export const zCapabilityId = z.enum([
@@ -599,6 +613,10 @@ export const zErrorUnprocessableEntity = zBaseError;
 
 export const zExtendReservationBody = z.object({
   expirationMinutes: z.number().int().optional(),
+});
+
+export const zExtendReservationPathParams = z.object({
+  uuid: z.string(),
 });
 
 export const zGetProductsRequest = z.record(z.unknown());

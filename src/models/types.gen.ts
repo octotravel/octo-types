@@ -403,6 +403,13 @@ export type BookingCancellationBody = {
   force?: boolean;
 };
 
+export type BookingCancellationPathParams = {
+  /**
+   * The UUID of the booking
+   */
+  uuid: string;
+};
+
 export type BookingConfirmationBody = {
   /**
    * Whether you want OCTO Cloud to email the guest a copy of their receipt and tickets. (defaults to false)
@@ -420,6 +427,13 @@ export type BookingConfirmationBody = {
    * An array of unit items that will be included in the booking. This allows you to provide contact details or a reseller reference for each unit item. Be careful to make sure you include ALL unit items that you also had in the original booking reservation request, if you provide more or less than in the booking reservation call this will change the number of unit items being purchased also.
    */
   unitItems?: Array<BookingUnitItem>;
+};
+
+export type BookingConfirmationPathParams = {
+  /**
+   * The UUID of the booking
+   */
+  uuid: string;
 };
 
 export type BookingContact = {
@@ -533,6 +547,8 @@ export type BookingUnitItem = {
    * A unique UUID to identify the unit, same as the booking uuid except per unit.
    */
   unitId: string;
+  resellerReference?: string;
+  contact?: BookingContact;
 };
 
 export type BookingUpdateBody = {
@@ -572,6 +588,13 @@ export type BookingUpdateBody = {
    * Contact details for the main guest who will attend the tour/attraction. Contact BODY can be applied to both the booking object (the main reservation) or the unit object (individual ticket holders - if the supplier requires this information).
    */
   contact?: BookingContact;
+};
+
+export type BookingUpdatePathParams = {
+  /**
+   * The UUID of the booking
+   */
+  uuid: string;
 };
 
 export enum CapabilityId {
@@ -777,6 +800,13 @@ export type ErrorUnprocessableEntity = BaseError;
 
 export type ExtendReservationBody = {
   expirationMinutes?: number;
+};
+
+export type ExtendReservationPathParams = {
+  /**
+   * The UUID of the booking
+   */
+  uuid: string;
 };
 
 export type Faq = {
