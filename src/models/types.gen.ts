@@ -512,6 +512,14 @@ export type BookingReservationBody = {
    */
   unitItems: Array<BookingUnitItem>;
   /**
+   * Your reference for this booking. Also known as a Voucher Number.
+   */
+  resellerReference?: string;
+  /**
+   * Contact details for the main guest who will attend the tour/attraction. Contact BODY can be applied to both the booking object (the main reservation) or the unit object (individual ticket holders - if the supplier requires this information).
+   */
+  contact?: BookingContact;
+  /**
    * Can be used only when pricing capability is used.
    */
   currency?: string;
@@ -597,6 +605,29 @@ export type BookingUpdatePathParams = {
   uuid: string;
 };
 
+export type Capability = {
+  /**
+   * Unique identifier of the capability.
+   */
+  id: CapabilityId;
+  /**
+   * Revision number for the capability.
+   */
+  revision: number;
+  /**
+   * Whether this capability is required.
+   */
+  required: boolean;
+  /**
+   * List of dependent capability IDs.
+   */
+  dependencies: Array<CapabilityId>;
+  /**
+   * Optional documentation or description for this capability.
+   */
+  docs: string | null;
+};
+
 export enum CapabilityId {
   OCTO_ADJUSTMENTS = 'octo/adjustments',
   OCTO_CART = 'octo/cart',
@@ -605,7 +636,9 @@ export enum CapabilityId {
   OCTO_PACKAGES = 'octo/packages',
   OCTO_PICKUPS = 'octo/pickups',
   OCTO_PRICING = 'octo/pricing',
+  OCTO_OFFERS = 'octo/offers',
   OCTO_QUESTIONS = 'octo/questions',
+  OCTO_WEBHOOKS = 'octo/webhooks',
 }
 
 export enum CategoryLabel {
@@ -723,6 +756,7 @@ export enum DeliveryFormat {
   QRCODE = 'QRCODE',
   CODE128 = 'CODE128',
   PKPASS_URL = 'PKPASS_URL',
+  AZTECCODE = 'AZTECCODE',
 }
 
 export enum DeliveryMethod {
@@ -884,6 +918,14 @@ export type Identifiers = {
   foursquarePlaceId: string | null;
   baiduPlaceId: string | null;
   amapPlaceId: string | null;
+};
+
+export type ListCapabilitiesRequest = {
+  [key: string]: unknown;
+};
+
+export type ListCapabilitiesRequestHeaders = {
+  [key: string]: unknown;
 };
 
 export type Location = {
@@ -2300,6 +2342,28 @@ export type BookingsExtendReservationResponses = {
 
 export type BookingsExtendReservationResponse =
   BookingsExtendReservationResponses[keyof BookingsExtendReservationResponses];
+
+export type CapabilitiesGetData = {
+  body?: never;
+  headers?: {
+    /**
+     * This optional request header allows to specify preferred languages for content in the response. A language code that specifies the language of the product content. This code must conform to the BCP 47 standard, following RFC 5646 and RFC 4647 specifications for language tags. Examples include en-US for American English, fr-FR for French (France), and es-ES for Spanish (Spain). This header supports a comma-separated list of language tags with optional quality values (q) to indicate priority, such as en-US, fr-CA;q=0.8, fr;q=0.7, which prioritizes U.S. English, followed by Canadian French, and general French. This header is defined in the HTTP/1.1 specification (RFC 7231) and is commonly used for internationalized websites and services to enhance user experience. For more details, visit MDN Web Docs: Accept-Language - HTTP | MDN. Note this only determines preference and does not guarantee location has content available in the desired language.
+     */
+    'Accept-Language'?: string;
+  };
+  path?: never;
+  query?: never;
+  url: '/capabilities/';
+};
+
+export type CapabilitiesGetResponses = {
+  /**
+   * The request has succeeded.
+   */
+  200: Array<Capability>;
+};
+
+export type CapabilitiesGetResponse = CapabilitiesGetResponses[keyof CapabilitiesGetResponses];
 
 export type ProductsGetProductsData = {
   body?: never;

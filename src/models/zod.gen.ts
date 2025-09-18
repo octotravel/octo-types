@@ -138,7 +138,7 @@ export const zBookingStatus = z.enum([
   'REJECTED',
 ]);
 
-export const zDeliveryFormat = z.enum(['PDF_URL', 'QRCODE', 'CODE128', 'PKPASS_URL']);
+export const zDeliveryFormat = z.enum(['PDF_URL', 'QRCODE', 'CODE128', 'PKPASS_URL', 'AZTECCODE']);
 
 export const zDeliveryMethod = z.enum(['VOUCHER', 'TICKET']);
 
@@ -533,6 +533,8 @@ export const zBookingReservationBody = z.object({
   expirationMinutes: z.number().int().optional(),
   notes: z.string().optional(),
   unitItems: z.array(zBookingUnitItem),
+  resellerReference: z.string().optional(),
+  contact: zBookingContact.optional(),
   currency: z.string().optional(),
 });
 
@@ -568,8 +570,18 @@ export const zCapabilityId = z.enum([
   'octo/packages',
   'octo/pickups',
   'octo/pricing',
+  'octo/offers',
   'octo/questions',
+  'octo/webhooks',
 ]);
+
+export const zCapability = z.object({
+  id: zCapabilityId,
+  revision: z.number().int(),
+  required: z.boolean(),
+  dependencies: z.array(zCapabilityId),
+  docs: z.union([z.string(), z.null()]),
+});
 
 export const zErrorBadRequest = zBaseError;
 
@@ -622,6 +634,10 @@ export const zExtendReservationPathParams = z.object({
 export const zGetProductsRequest = z.record(z.unknown());
 
 export const zGetSupplierRequest = z.record(z.unknown());
+
+export const zListCapabilitiesRequest = z.record(z.unknown());
+
+export const zListCapabilitiesRequestHeaders = z.record(z.unknown());
 
 export const zOptionContent = z.object({
   title: z.string().optional(),
@@ -940,6 +956,22 @@ export const zBookingsExtendReservationData = z.object({
  * The request has succeeded.
  */
 export const zBookingsExtendReservationResponse = zBooking;
+
+export const zCapabilitiesGetData = z.object({
+  body: z.never().optional(),
+  path: z.never().optional(),
+  query: z.never().optional(),
+  headers: z
+    .object({
+      'Accept-Language': z.string().optional(),
+    })
+    .optional(),
+});
+
+/**
+ * The request has succeeded.
+ */
+export const zCapabilitiesGetResponse = z.array(zCapability);
 
 export const zProductsGetProductsData = z.object({
   body: z.never().optional(),

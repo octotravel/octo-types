@@ -7,6 +7,7 @@ tags:
   - name: Products
   - name: Availability
   - name: Bookings
+  - name: Capabilities
 paths:
   /availability/:
     post:
@@ -2710,6 +2711,62 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ExtendReservationBody'
+  /capabilities/:
+    get:
+      operationId: Capabilities_get
+      summary: List capabilities
+      description: List capabiliteis
+      parameters:
+        - $ref: '#/components/parameters/RequestHeadersContent'
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            Octo-Capabilities:
+              required: true
+              description: A list of the Capabilities (their IDs) initialized with your request.
+              schema:
+                type: string
+            Content-Language:
+              required: false
+              description: 'This response header indicates the language of the content being returned in the response. The OCTO specification allows only one language to be returned per response. This code must conform to the BCP 47 standard, following RFC 5646 and RFC 4647 specifications for language tags. Examples include en-US for American English, fr-FR for French (France), and es-ES for Spanish (Spain).  To obtain content in multiple languages, separate requests must be made for each desired language. This header is defined in the HTTP/1.1 specification (RFC 7231). For more information, see MDN Web Docs: Content-Language - HTTP | MDN. This response header is required when using Content capability.'
+              schema:
+                type: string
+                x-capability-data:
+                  capability: octo/content
+                  required: true
+              x-capability-data:
+                capability: octo/content
+                required: true
+            Available-Languages:
+              required: false
+              description: This response header is used to inform of the languages in which content is available, helping understand the language options without needing additional requests. This code must conform to the BCP 47 standard, following RFC 5646 and RFC 4647 specifications for language tags. Examples include en-US for American English, fr-FR for French (France), and es-ES for Spanish (Spain).  Although not a standard HTTP header, it is commonly used in APIs to list available languages, such as en-US, fr-CA, es-ES, indicating that content can be requested in U.S. English, Canadian French, or Spanish. This response header is required when using Content capability.
+              schema:
+                type: string
+                x-capability-data:
+                  capability: octo/content
+                  required: true
+              x-capability-data:
+                capability: octo/content
+                required: true
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Capability'
+              examples:
+                Capabilities:
+                  summary: Capabilities
+                  description: Capabilities
+                  value:
+                    - id: octo/pricing
+                      revision: 3
+                      required: true
+                      dependencies: []
+                      docs: This capability enables booking creation.
+      tags:
+        - Capabilities
   /products/:
     get:
       operationId: Products_GetProducts
@@ -5279,6 +5336,25 @@ components:
           example:
             - uuid: 3b1bc2ee-3155-4738-9471-f49842a07327
               unitId: adult_697e3ce8-1860-4cbf-80ad-95857df1f640
+        resellerReference:
+          type: string
+          description: Your reference for this booking. Also known as a Voucher Number.
+          example: VOUCHER-0123
+        contact:
+          allOf:
+            - $ref: '#/components/schemas/BookingContact'
+          description: Contact details for the main guest who will attend the tour/attraction. Contact BODY can be applied to both the booking object (the main reservation) or the unit object (individual ticket holders - if the supplier requires this information).
+          example:
+            fullName: John Doe
+            firstName: John
+            lastName: Doe
+            emailAddress: johndoe@email.com
+            phoneNumber: '+447840739436'
+            locales:
+              - en
+              - en-GB
+              - en-US
+            country: GB
         currency:
           type: string
           description: Can be used only when pricing capability is used.
@@ -5432,6 +5508,46 @@ components:
         uuid:
           type: string
           description: The UUID of the booking
+    Capability:
+      type: object
+      required:
+        - id
+        - revision
+        - required
+        - dependencies
+        - docs
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/CapabilityId'
+          description: Unique identifier of the capability.
+          example: octo/pricing
+        revision:
+          type: integer
+          format: int32
+          description: Revision number for the capability.
+          example: 3
+        required:
+          type: boolean
+          description: Whether this capability is required.
+          example: true
+        dependencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/CapabilityId'
+          description: List of dependent capability IDs.
+          example: []
+        docs:
+          type: string
+          nullable: true
+          description: Optional documentation or description for this capability.
+          example: This capability enables booking creation.
+      example:
+        id: octo/pricing
+        revision: 3
+        required: true
+        dependencies: []
+        docs: This capability enables booking creation.
     CapabilityId:
       type: string
       enum:
@@ -5442,7 +5558,9 @@ components:
         - octo/packages
         - octo/pickups
         - octo/pricing
+        - octo/offers
         - octo/questions
+        - octo/webhooks
     CategoryLabel:
       type: string
       enum:
@@ -5604,6 +5722,7 @@ components:
         - QRCODE
         - CODE128
         - PKPASS_URL
+        - AZTECCODE
       example: QRCODE
     DeliveryMethod:
       type: string
@@ -5885,6 +6004,10 @@ components:
         foursquarePlaceId: null
         baiduPlaceId: null
         amapPlaceId: null
+    ListCapabilitiesRequest:
+      type: object
+    ListCapabilitiesRequestHeaders:
+      type: object
     Location:
       type: object
       required:
