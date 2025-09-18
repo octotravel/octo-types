@@ -9,10 +9,6 @@
     "declaration": true,
     "outDir": "dist"
   },
-  "include": [
-    "src/models/*.ts",
-    "src/index.ts",
-    "src/global.d.ts"
-  ],
+  "include": ["src/models/*.ts", "src/schemas/*.ts", "src/index.ts", "src/global.d.ts"],
   "exclude": ["node_modules"]
 }

@@ -1,6 +1,7 @@
 import { array, bool, number, object, string } from 'yup';
 import type { SchemaOf } from 'yup';
-import { PaymentMethodsConfiguration, ResultCode } from "@adyen/adyen-web";
+import { PaymentMethodsConfiguration, ResultCode } from '@adyen/adyen-web';
+import { BookingCancellationBody, BookingConfirmationBody, BookingContact, BookingUnitItem } from "../models/types.gen";
 
 export interface GetBookingPathParamsSchema {
   uuid: string;
@@ -72,17 +73,16 @@ export interface BookingContactSchema {
   allowMarketing?: boolean | null;
 }
 
-export const bookingContactSchema: SchemaOf<BookingContactSchema> = object().shape({
-  fullName: string().notRequired().nullable(),
-  firstName: string().notRequired().nullable(),
-  lastName: string().notRequired().nullable(),
-  emailAddress: string().notRequired().nullable(),
-  phoneNumber: string().notRequired().nullable(),
-  country: string().notRequired().nullable(),
-  notes: string().notRequired().nullable(),
+export const bookingContactSchema: SchemaOf<BookingContact> = object().shape({
+  fullName: string().notRequired(),
+  firstName: string().notRequired(),
+  lastName: string().notRequired(),
+  emailAddress: string().notRequired(),
+  phoneNumber: string().notRequired(),
+  country: string().notRequired(),
+  notes: string().notRequired(),
   locales: array().of(string()).notRequired(),
-  postalCode: string().notRequired().nullable(),
-  allowMarketing: bool().notRequired().nullable(),
+  postalCode: string().notRequired(),
 });
 
 export interface BookingUnitItemSchema {
@@ -93,10 +93,9 @@ export interface BookingUnitItemSchema {
   contact?: BookingContactSchema;
 }
 
-export const bookingUnitItemSchema: SchemaOf<BookingUnitItemSchema> = object().shape({
+export const bookingUnitItemSchema: SchemaOf<BookingUnitItem> = object().shape({
   uuid: string().notRequired(),
-  unitType: string().notRequired(),
-  unitId: string().notRequired(),
+  unitId: string().required(),
   resellerReference: string().notRequired(),
   contact: bookingContactSchema.notRequired().default(undefined),
 });
@@ -115,8 +114,8 @@ export interface CreateBookingBodySchema
   expirationMinutes?: number;
   notes?: string | null;
   emailReceipt?: boolean;
-  unitItems: BookingUnitItemSchema[];
-  contact?: BookingContactSchema;
+  unitItems: BookingUnitItem[];
+  contact?: BookingContact;
   currency?: string | null;
 }
 
@@ -381,18 +380,11 @@ export interface ConfirmBookingBodySchema extends BookingPickupBodySchema, Booki
   contact: BookingContactSchema;
 }
 
-export const confirmBookingBodySchema: SchemaOf<ConfirmBookingBodySchema> = object().shape({
+export const confirmBookingBodySchema: SchemaOf<BookingConfirmationBody> = object().shape({
   resellerReference: string().notRequired(),
-  productId: string().notRequired(),
-  optionId: string().notRequired(),
-  availabilityId: string().notRequired(),
-  expirationMinutes: number().integer().notRequired(),
-  notes: string().notRequired().nullable(),
   emailReceipt: bool().notRequired(),
   unitItems: array().of(bookingUnitItemSchema).notRequired(),
-  contact: bookingContactSchema.required().default(undefined),
-  ...bookingPickupBodySchema.fields,
-  ...bookingCardPaymentBodySchema.fields,
+  contact: bookingContactSchema.required(),
 });
 
 export interface ConfirmBookingPathParamsSchema {
@@ -409,10 +401,9 @@ export interface CancelBookingBodySchema {
   emailReceipt?: boolean;
 }
 
-export const cancelBookingBodySchema: SchemaOf<CancelBookingBodySchema> = object().shape({
-  reason: string().nullable().notRequired(),
+export const cancelBookingBodySchema: SchemaOf<BookingCancellationBody> = object().shape({
+  reason: string().notRequired(),
   force: bool().notRequired(),
-  emailReceipt: bool().notRequired(),
 });
 
 export interface CancelBookingPathParamsSchema {
