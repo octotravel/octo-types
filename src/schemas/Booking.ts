@@ -1,6 +1,6 @@
 import { array, bool, number, object, string } from 'yup';
 import type { SchemaOf } from 'yup';
-import { Adyen, Bridgepay, Paypal, Paytr, Stripe, Vivawallet } from "../../types/CardPayment";
+import { PaymentMethodsConfiguration, ResultCode } from "@adyen/adyen-web";
 
 export interface GetBookingPathParamsSchema {
   uuid: string;
@@ -438,3 +438,51 @@ export interface ExtendBookingPathParamsSchema {
 export const extendBookingPathParamsSchema: SchemaOf<ExtendBookingPathParamsSchema> = object().shape({
   uuid: string().required(),
 });
+
+export interface Adyen {
+  environment: string;
+  clientKey: string;
+  session: Nullable<{
+    id: string;
+    returnUrl: string;
+    sessionData: string;
+  }>;
+  paymentResult?: ResultCode;
+  paymentMethodsConfiguration: PaymentMethodsConfiguration;
+}
+
+export interface Vivawallet {
+  orderCode: string;
+}
+
+export interface Bridgepay {
+  publicKey: string;
+  token?: string;
+}
+
+export interface Stripe {
+  version: string;
+  paymentIntent: {
+    id: string;
+    publishableKey: string;
+    clientSecret: string;
+    amount: number;
+    currency: string;
+  };
+  setupIntent?: {
+    id: string;
+    publishableKey: string;
+    clientSecret: string;
+  };
+}
+
+export interface Paytr {
+  id: Nullable<string>;
+  iframeUrl: Nullable<string>;
+  error: Nullable<string>;
+}
+
+export interface Paypal {
+  orderId: string;
+  clientId: string;
+}
