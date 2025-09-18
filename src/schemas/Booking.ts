@@ -1,6 +1,6 @@
 import { array, bool, number, object, string } from 'yup';
 import type { SchemaOf } from 'yup';
-import { PaymentMethodsConfiguration, ResultCode } from "@adyen/adyen-web";
+import { PaymentMethodsConfiguration, ResultCode } from '@adyen/adyen-web';
 
 export interface GetBookingPathParamsSchema {
   uuid: string;

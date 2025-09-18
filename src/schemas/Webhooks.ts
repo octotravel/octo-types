@@ -1,5 +1,5 @@
 import { type SchemaOf, array, boolean, mixed, object, string } from 'yup';
-import { CapabilityId } from "../models/types.gen";
+import { CapabilityId } from '../models/types.gen';
 
 export enum WebhookEvent {
   BookingUpdate = 'booking_update',

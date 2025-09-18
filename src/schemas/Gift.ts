@@ -1,7 +1,7 @@
-import { boolean, number, object, string } from 'yup';
+import { number, object, string } from 'yup';
 import type { SchemaOf } from 'yup';
 import { bookingContactSchema } from './Booking';
-import { Contact } from "../models/types.gen";
+import { Contact } from '../models/types.gen';
 
 export interface GiftReservationBodySchema {
   uuid?: string;

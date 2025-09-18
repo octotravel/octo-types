@@ -2,8 +2,8 @@ import { array, bool, number, object, string } from 'yup';
 import type { SchemaOf } from 'yup';
 
 export interface AvailabilityExtraUnit {
-    id: string;
-    quantity: number;
+  id: string;
+  quantity: number;
 }
 
 export interface AvailabilityBodySchema
