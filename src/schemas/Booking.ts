@@ -1,8 +1,34 @@
 import { array, bool, number, object, string } from 'yup';
 import type { SchemaOf } from 'yup';
+import { Adyen, Bridgepay, Paypal, Paytr, Stripe, Vivawallet } from "../../types/CardPayment";
 
 export interface GetBookingPathParamsSchema {
   uuid: string;
+}
+
+export enum CardPaymentGateway {
+  Adyen = 'adyen',
+  Vivawallet = 'vivawallet',
+  Bridgepay = 'bridgepay',
+  Stripe = 'stripe',
+  External = 'external',
+  Paypal = 'paypal',
+  Paytr = 'paytr',
+}
+
+export interface CardPayment<T extends CardPaymentGateway> {
+  gateway: T;
+  balance?: number;
+  surcharge?: number;
+  amount: T extends CardPaymentGateway.External ? number : never;
+  currency: T extends CardPaymentGateway.External ? string : never;
+  notes: T extends CardPaymentGateway.External ? string : never;
+  adyen: T extends CardPaymentGateway.Adyen ? Adyen : never;
+  vivawallet: T extends CardPaymentGateway.Vivawallet ? Vivawallet : never;
+  bridgepay: T extends CardPaymentGateway.Bridgepay ? Bridgepay : never;
+  stripe: T extends CardPaymentGateway.Stripe ? Stripe : never;
+  paytr: T extends CardPaymentGateway.Paytr ? Paytr : never;
+  paypal: T extends CardPaymentGateway.Paypal ? Paypal : never;
 }
 
 export const getBookingPathParamsSchema: SchemaOf<GetBookingPathParamsSchema> = object().shape({

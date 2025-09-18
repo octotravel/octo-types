@@ -1,6 +1,10 @@
 import { type SchemaOf, array, boolean, mixed, object, string } from 'yup';
-import { CapabilityId } from '../types/Capability';
-import { WebhookEvent } from '../types/Webhook';
+import { CapabilityId } from "../models/types.gen";
+
+export enum WebhookEvent {
+  BookingUpdate = 'booking_update',
+  AvailabilityUpdate = 'availability_update',
+}
 
 export interface CreateWebhookBodyParamsSchema {
   url?: string;
