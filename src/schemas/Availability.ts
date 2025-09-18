@@ -1,7 +1,7 @@
 import { array, bool, number, object, string } from 'yup';
 import type { SchemaOf } from 'yup';
 
-interface AvailabilityExtraUnit {
+export interface AvailabilityExtraUnit {
     id: string;
     quantity: number;
 }
