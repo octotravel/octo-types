@@ -1,7 +1,7 @@
 import { boolean, number, object, string } from 'yup';
 import type { SchemaOf } from 'yup';
 import { bookingContactSchema, CardPaymentGateway } from './Booking';
-import { Contact } from "../models/types.gen";
+import { Contact } from '../models/types.gen';
 
 export interface CreateOrderBodySchema {
   currency?: string;

@@ -1,6 +1,7 @@
 import { array, number, object, string } from 'yup';
 import type { SchemaOf } from 'yup';
-import { AvailabilityExtraUnit, type AvailabilityUnit, availabilityUnitSchema} from './Availability';
+import { AvailabilityExtraUnit, availabilityUnitSchema } from './Availability';
+import { AvailabilityCalendarBody, AvailabilityUnit } from '../models/types.gen';
 
 interface AvailabilityCalendarCapabilitiesBodySchema {
   currency?: string | null;
@@ -31,14 +32,14 @@ export interface AvailabilityCalendarBodySchema extends AvailabilityCalendarCapa
   units?: AvailabilityUnit[];
 }
 
-export const availabilityCalendarBodySchema: SchemaOf<AvailabilityCalendarBodySchema> = object()
+export const availabilityCalendarBodySchema: SchemaOf<AvailabilityCalendarBody> = object()
   .shape({
     productId: string().required(),
     optionId: string().required(),
     localDateStart: string().required(),
     localDateEnd: string().required(),
-    units: array().of(availabilityUnitSchema).notRequired().nullable(),
-    ...availabilityCalendarCapabilitiesBodySchema.fields,
+    units: array().of(availabilityUnitSchema).notRequired(),
+    currency: string().notRequired(),
   })
   .test('', 'cannot request more than 1 year of availability', ({ localDateStart, localDateEnd }) => {
     if (localDateStart && localDateEnd) {
