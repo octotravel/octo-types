@@ -24,6 +24,14 @@ const availabilityCalendarCapabilitiesBodySchema: SchemaOf<AvailabilityCalendarC
   },
 );
 
+export interface AvailabilityCalendarBodySchema extends AvailabilityCalendarCapabilitiesBodySchema {
+  productId: string;
+  optionId: string;
+  localDateStart: string;
+  localDateEnd: string;
+  units?: AvailabilityUnit[];
+}
+
 export const availabilityCalendarBodySchema: SchemaOf<AvailabilityCalendarBody> = object()
   .shape({
     productId: string().required(),
@@ -31,7 +39,7 @@ export const availabilityCalendarBodySchema: SchemaOf<AvailabilityCalendarBody> 
     localDateStart: string().required(),
     localDateEnd: string().required(),
     units: array().of(availabilityUnitSchema).notRequired(),
-    currency: string().notRequired()
+    currency: string().notRequired(),
   })
   .test('', 'cannot request more than 1 year of availability', ({ localDateStart, localDateEnd }) => {
     if (localDateStart && localDateEnd) {
