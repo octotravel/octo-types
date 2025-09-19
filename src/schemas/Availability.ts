@@ -1,6 +1,10 @@
 import { array, bool, number, object, string } from 'yup';
 import type { SchemaOf } from 'yup';
-import type { AvailabilityExtraUnit } from '../types/Extras';
+
+export interface AvailabilityExtraUnit {
+  id: string;
+  quantity: number;
+}
 
 export interface AvailabilityBodySchema
   extends AvailabilityPickupBodySchema,
@@ -33,7 +37,7 @@ interface AvailabilityCardPaymentBodySchema {
   currency?: string | null;
 }
 
-export interface AvailabilityUnit extends AvailabilityUnitExtras {
+interface AvailabilityUnit extends AvailabilityUnitExtras {
   id?: string;
   type?: string;
   quantity: number;

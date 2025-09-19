@@ -1,6 +1,7 @@
 import { array, object, string } from 'yup';
 import type { SchemaOf } from 'yup';
-import { type AvailabilityUnit, availabilityUnitSchema } from './Availability';
+import { availabilityUnitSchema } from './Availability';
+import { AvailabilityUnit } from '../models/types.gen';
 
 export interface AvailabilityResourcesBodySchema {
   productId: string;
