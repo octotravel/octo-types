@@ -38,7 +38,7 @@ export const availabilityCalendarBodySchema: SchemaOf<AvailabilityCalendarBodySc
     optionId: string().required(),
     localDateStart: string().required(),
     localDateEnd: string().required(),
-    units: array().of(availabilityUnitSchema).notRequired().nullable(),
+    units: array().of(availabilityUnitSchema).notRequired(),
     ...availabilityCalendarCapabilitiesBodySchema.fields,
   })
   .test('', 'cannot request more than 1 year of availability', ({ localDateStart, localDateEnd }) => {
