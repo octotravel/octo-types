@@ -2,7 +2,7 @@ import { array, bool, number, object, string } from 'yup';
 import type { SchemaOf } from 'yup';
 import { PaymentMethodsConfiguration, ResultCode } from '@adyen/adyen-web';
 import { BookingCancellationBody, BookingConfirmationBody, BookingContact, BookingUnitItem } from '../models/types.gen';
-import { Nullable } from "../global";
+import { Nullable } from '../global';
 
 export interface GetBookingPathParamsSchema {
   uuid: string;

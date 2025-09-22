@@ -1,5 +1,6 @@
 import { array, bool, number, object, string } from 'yup';
 import type { SchemaOf } from 'yup';
+import { Nullable } from '../global';
 
 export interface AvailabilityExtraUnit {
   id: string;
