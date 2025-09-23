@@ -14,7 +14,7 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "get:openapi:yaml": "ts-node src/utils/get-openapi-yaml.ts",
+    "get-openapi": "ts-node src/utils/GetOpenApi.ts",
     "clean": "rm -rf dist",
     "generate": "openapi-ts && rm -f src/models/index.ts",
     "build": "npx tsc",
