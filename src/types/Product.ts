@@ -10,6 +10,7 @@ export enum DeliveryFormat {
   CODE128 = 'CODE128',
   PKPASS_URL = 'PKPASS_URL',
   AZTECCODE = 'AZTECCODE',
+  GOOGLE_WALLET_URL = 'GOOGLE_WALLET_URL',
 }
 
 export enum DeliveryMethod {
