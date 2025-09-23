@@ -28,7 +28,7 @@
     "lint:fix": "biome lint --write .",
     "audit": "npm audit",
     "test": "",
-    "prepare": "npm run build"
+    "prepare": "npm run clean && npm run build"
   },
   "peerDependencies": {
     "yup": "0.32.11",
