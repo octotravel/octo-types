@@ -4409,6 +4409,7 @@ components:
               quantity: 1
         currency:
           type: string
+          nullable: true
           description: Can be used only when pricing capability is used.
           example: USD
       example:
@@ -4498,6 +4499,7 @@ components:
       properties:
         currency:
           type: string
+          nullable: true
           description: Can be used only when pricing capability is used.
           example: USD
     AvailabilityCalendarRequest:
@@ -4559,6 +4561,7 @@ components:
               quantity: 1
         currency:
           type: string
+          nullable: true
           description: Can be used only when pricing capability is used.
           example: USD
       example:
@@ -4684,6 +4687,7 @@ components:
       properties:
         currency:
           type: string
+          nullable: true
           description: Can be used only when pricing capability is used.
           example: USD
     AvailabilityStatus:
@@ -5258,6 +5262,7 @@ components:
           example: GB
         notes:
           type: string
+          nullable: true
           description: Optional notes for the booking.
           example: Optional notes
       example:
@@ -5326,6 +5331,7 @@ components:
           example: 30
         notes:
           type: string
+          nullable: true
           description: Optional notes for the booking.
           example: Optional notes
         unitItems:
@@ -5357,6 +5363,7 @@ components:
             country: GB
         currency:
           type: string
+          nullable: true
           description: Can be used only when pricing capability is used.
           example: USD
       example:
@@ -5373,6 +5380,7 @@ components:
       properties:
         currency:
           type: string
+          nullable: true
           description: Can be used only when pricing capability is used.
           example: USD
     BookingReservationRequest:
@@ -5449,6 +5457,7 @@ components:
           example: 15
         notes:
           type: string
+          nullable: true
           description: Optional notes for the booking.
           example: Optional notes
         emailReceipt:
@@ -5945,6 +5954,14 @@ components:
         - BOOKING_TERM
         - CANCELLATION_TERM
       example: CANCELLATION_TERM
+    GetProductPathParams:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The id of the product
     GetProductsRequest:
       type: object
     GetSupplierRequest:

@@ -134,7 +134,7 @@ export type AvailabilityCalendarBody = {
   /**
    * Can be used only when pricing capability is used.
    */
-  currency?: string;
+  currency?: string | null;
 };
 
 export type AvailabilityCalendarPricing = {
@@ -152,7 +152,7 @@ export type AvailabilityCalendarPricingBody = {
   /**
    * Can be used only when pricing capability is used.
    */
-  currency?: string;
+  currency?: string | null;
 };
 
 export type AvailabilityCalendarRequest = {
@@ -187,7 +187,7 @@ export type AvailabilityCheckBody = {
   /**
    * Can be used only when pricing capability is used.
    */
-  currency?: string;
+  currency?: string | null;
 };
 
 export type AvailabilityCheckRequest = {
@@ -220,7 +220,7 @@ export type AvailabilityPricingBody = {
   /**
    * Can be used only when pricing capability is used.
    */
-  currency?: string;
+  currency?: string | null;
 };
 
 export enum AvailabilityStatus {
@@ -472,7 +472,7 @@ export type BookingContact = {
   /**
    * Optional notes for the booking.
    */
-  notes?: string;
+  notes?: string | null;
 };
 
 export type BookingPricing = {
@@ -506,7 +506,7 @@ export type BookingReservationBody = {
   /**
    * Optional notes for the booking.
    */
-  notes?: string;
+  notes?: string | null;
   /**
    * An list of unit items that will be included in the booking.
    */
@@ -522,14 +522,14 @@ export type BookingReservationBody = {
   /**
    * Can be used only when pricing capability is used.
    */
-  currency?: string;
+  currency?: string | null;
 };
 
 export type BookingReservationPricingBody = {
   /**
    * Can be used only when pricing capability is used.
    */
-  currency?: string;
+  currency?: string | null;
 };
 
 export type BookingReservationRequest = {
@@ -583,7 +583,7 @@ export type BookingUpdateBody = {
   /**
    * Optional notes for the booking.
    */
-  notes?: string;
+  notes?: string | null;
   /**
    * Whether you want OCTO Cloud to email the guest a copy of their receipt and tickets. (defaults to false).
    */
@@ -889,6 +889,13 @@ export enum FeatureType {
   BOOKING_TERM = 'BOOKING_TERM',
   CANCELLATION_TERM = 'CANCELLATION_TERM',
 }
+
+export type GetProductPathParams = {
+  /**
+   * The id of the product
+   */
+  id: string;
+};
 
 export type GetProductsRequest = {
   [key: string]: unknown;
