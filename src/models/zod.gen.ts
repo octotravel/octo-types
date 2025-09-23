@@ -77,7 +77,7 @@ export const zAvailabilityCalendarBody = z.object({
   localDateStart: z.string().optional(),
   localDateEnd: z.string().optional(),
   units: z.array(zAvailabilityUnit).optional(),
-  currency: z.string().optional(),
+  currency: z.union([z.string(), z.null()]).optional(),
 });
 
 export const zAvailabilityCalendarPricing = z.object({
@@ -86,7 +86,7 @@ export const zAvailabilityCalendarPricing = z.object({
 });
 
 export const zAvailabilityCalendarPricingBody = z.object({
-  currency: z.string().optional(),
+  currency: z.union([z.string(), z.null()]).optional(),
 });
 
 export const zAvailabilityCalendarRequest = z.object({
@@ -100,7 +100,7 @@ export const zAvailabilityCheckBody = z.object({
   localDateEnd: z.string().optional(),
   availabilityIds: z.array(z.string()).optional(),
   units: z.array(zAvailabilityUnit).optional(),
-  currency: z.string().optional(),
+  currency: z.union([z.string(), z.null()]).optional(),
 });
 
 export const zAvailabilityCheckRequest = z.object({
@@ -118,7 +118,7 @@ export const zAvailabilityPricing = z.object({
 });
 
 export const zAvailabilityPricingBody = z.object({
-  currency: z.string().optional(),
+  currency: z.union([z.string(), z.null()]).optional(),
 });
 
 export const zAvailabilityType = z.enum(['START_TIME', 'OPENING_HOURS']);
@@ -500,7 +500,7 @@ export const zBookingContact = z.object({
   locales: z.array(z.string()).optional(),
   postalCode: z.string().optional(),
   country: z.string().optional(),
-  notes: z.string().optional(),
+  notes: z.union([z.string(), z.null()]).optional(),
 });
 
 export const zBookingUnitItem = z.object({
@@ -531,15 +531,15 @@ export const zBookingReservationBody = z.object({
   optionId: z.string(),
   availabilityId: z.string().optional(),
   expirationMinutes: z.number().int().optional(),
-  notes: z.string().optional(),
+  notes: z.union([z.string(), z.null()]).optional(),
   unitItems: z.array(zBookingUnitItem),
   resellerReference: z.string().optional(),
   contact: zBookingContact.optional(),
-  currency: z.string().optional(),
+  currency: z.union([z.string(), z.null()]).optional(),
 });
 
 export const zBookingReservationPricingBody = z.object({
-  currency: z.string().optional(),
+  currency: z.union([z.string(), z.null()]).optional(),
 });
 
 export const zBookingReservationRequest = z.object({
@@ -552,7 +552,7 @@ export const zBookingUpdateBody = z.object({
   optionId: z.string().optional(),
   availabilityId: z.string().optional(),
   expirationMinutes: z.number().int().optional(),
-  notes: z.string().optional(),
+  notes: z.union([z.string(), z.null()]).optional(),
   emailReceipt: z.boolean().optional(),
   unitItems: z.array(zBookingUnitItem).optional(),
   contact: zBookingContact.optional(),
@@ -629,6 +629,10 @@ export const zExtendReservationBody = z.object({
 
 export const zExtendReservationPathParams = z.object({
   uuid: z.string(),
+});
+
+export const zGetProductPathParams = z.object({
+  id: z.string(),
 });
 
 export const zGetProductsRequest = z.record(z.unknown());
