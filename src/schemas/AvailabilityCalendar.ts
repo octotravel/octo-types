@@ -1,45 +1,16 @@
-import { array, number, object, string } from 'yup';
+import { array, object, string } from 'yup';
 import type { SchemaOf } from 'yup';
-import type { AvailabilityExtraUnit } from '../types/Extras';
-import { type AvailabilityUnit, availabilityUnitSchema } from './Availability';
+import { availabilityUnitSchema } from './Availability';
+import { AvailabilityCalendarBody } from '../models/types.gen';
 
-interface AvailabilityCalendarCapabilitiesBodySchema {
-  currency?: string | null;
-  extras?: AvailabilityExtraUnit[];
-  offerCode?: string;
-}
-
-const availabilityCalendarCapabilitiesBodySchema: SchemaOf<AvailabilityCalendarCapabilitiesBodySchema> = object().shape(
-  {
-    currency: string().notRequired().nullable(),
-    extras: array()
-      .of(
-        object().shape({
-          id: string().required(),
-          quantity: number().required(),
-        }),
-      )
-      .notRequired(),
-    offerCode: string().notRequired(),
-  },
-);
-
-export interface AvailabilityCalendarBodySchema extends AvailabilityCalendarCapabilitiesBodySchema {
-  productId: string;
-  optionId: string;
-  localDateStart: string;
-  localDateEnd: string;
-  units?: AvailabilityUnit[];
-}
-
-export const availabilityCalendarBodySchema: SchemaOf<AvailabilityCalendarBodySchema> = object()
+export const availabilityCalendarBodySchema: SchemaOf<AvailabilityCalendarBody> = object()
   .shape({
     productId: string().required(),
     optionId: string().required(),
     localDateStart: string().required(),
     localDateEnd: string().required(),
-    units: array().of(availabilityUnitSchema).notRequired().nullable(),
-    ...availabilityCalendarCapabilitiesBodySchema.fields,
+    units: array().of(availabilityUnitSchema).notRequired(),
+    currency: string().notRequired(),
   })
   .test('', 'cannot request more than 1 year of availability', ({ localDateStart, localDateEnd }) => {
     if (localDateStart && localDateEnd) {

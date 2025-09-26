@@ -1,10 +1,7 @@
 import { object, string } from 'yup';
 import type { SchemaOf } from 'yup';
+import { GetProductPathParams } from '../models/types.gen';
 
-export interface GetProductPathParamsSchema {
-  id: string;
-}
-
-export const getProductPathParamsSchema: SchemaOf<GetProductPathParamsSchema> = object().shape({
+export const getProductPathParamsSchema: SchemaOf<GetProductPathParams> = object().shape({
   id: string().required(),
 });

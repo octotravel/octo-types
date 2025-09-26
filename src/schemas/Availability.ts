@@ -1,83 +1,22 @@
-import { array, bool, number, object, string } from 'yup';
+import { AvailabilityUnit } from './../models/types.gen';
+import { array, number, object, string } from 'yup';
 import type { SchemaOf } from 'yup';
-import type { AvailabilityExtraUnit } from '../types/Extras';
-
-export interface AvailabilityBodySchema
-  extends AvailabilityPickupBodySchema,
-    AvailabilityOfferBodySchema,
-    AvailabilityExtrasBodySchema,
-    AvailabilityCardPaymentBodySchema {
-  productId: string;
-  optionId: string;
-  localDate?: string;
-  localDateStart?: string;
-  localDateEnd?: string;
-  availabilityIds?: string[];
-  units?: AvailabilityUnit[];
-}
-
-interface AvailabilityOfferBodySchema {
-  offerCode?: string;
-}
-
-interface AvailabilityPickupBodySchema {
-  pickupRequested?: Nullable<boolean>;
-  pickupPointId?: Nullable<string>;
-}
-
-interface AvailabilityExtrasBodySchema {
-  extras?: AvailabilityExtraUnit[];
-}
-
-interface AvailabilityCardPaymentBodySchema {
-  currency?: string | null;
-}
-
-export interface AvailabilityUnit extends AvailabilityUnitExtras {
-  id?: string;
-  type?: string;
-  quantity: number;
-}
-
-interface AvailabilityUnitExtras {
-  extras?: AvailabilityExtraUnit[];
-}
+import { AvailabilityCheckBody } from '../models/types.gen';
 
 export const availabilityUnitSchema: SchemaOf<AvailabilityUnit> = object().shape({
-  id: string().notRequired(),
-  type: string().notRequired(),
+  id: string().required(),
   quantity: number().required(),
-  extras: array()
-    .of(
-      object().shape({
-        id: string().required(),
-        quantity: number().required(),
-      }),
-    )
-    .notRequired(),
 });
 
-export const availabilityBodySchema: SchemaOf<AvailabilityBodySchema> = object()
+export const availabilityBodySchema: SchemaOf<AvailabilityCheckBody> = object()
   .shape({
     productId: string().required(),
     optionId: string().required(),
-    localDate: string().notRequired(),
     localDateStart: string().notRequired(),
     localDateEnd: string().notRequired(),
     availabilityIds: array().of(string()).notRequired().min(1),
     units: array().of(availabilityUnitSchema).notRequired().nullable(),
-    pickupRequested: bool().notRequired().nullable(),
-    pickupPointId: string().notRequired().nullable(),
-    offerCode: string().notRequired(),
-    extras: array()
-      .of(
-        object().shape({
-          id: string().required(),
-          quantity: number().required(),
-        }),
-      )
-      .notRequired(),
-    currency: string().notRequired().nullable(),
+    currency: string().notRequired(),
   })
   .test(
     '',
