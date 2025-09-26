@@ -19,15 +19,15 @@ export const getBookingPathParamsSchema: SchemaOf<BookingConfirmationPathParams>
 });
 
 export const bookingContactSchema: SchemaOf<BookingContact> = object().shape({
-  fullName: string().notRequired(),
-  firstName: string().notRequired(),
-  lastName: string().notRequired(),
-  emailAddress: string().notRequired(),
-  phoneNumber: string().notRequired(),
-  country: string().notRequired(),
-  notes: string().notRequired(),
+  fullName: string().nullable().notRequired(),
+  firstName: string().nullable().notRequired(),
+  lastName: string().nullable().notRequired(),
+  emailAddress: string().nullable().notRequired(),
+  phoneNumber: string().nullable().notRequired(),
+  country: string().nullable().notRequired(),
+  notes: string().nullable().notRequired(),
   locales: array().of(string()).notRequired(),
-  postalCode: string().notRequired(),
+  postalCode: string().nullable().notRequired(),
 });
 
 export const bookingUnitItemSchema: SchemaOf<BookingUnitItem> = object().shape({
@@ -79,7 +79,7 @@ export const confirmBookingPathParamsSchema: SchemaOf<BookingConfirmationPathPar
 });
 
 export const cancelBookingBodySchema: SchemaOf<BookingCancellationBody> = object().shape({
-  reason: string().notRequired(),
+  reason: string().nullable().notRequired(),
   force: bool().notRequired(),
 });
 

@@ -396,7 +396,7 @@ export type BookingCancellationBody = {
   /**
    * A text value describing why the cancellation happened.
    */
-  reason?: string;
+  reason?: string | null;
   /**
    * Whether you want OCTO Cloud to email the guest a copy of their receipt and tickets. (defaults to false)
    */
@@ -440,23 +440,23 @@ export type BookingContact = {
   /**
    * The full name of the booking holder or the ticket holder. Can also be retrieved as an alias for the concatenation of `firstName` and `lastName`
    */
-  fullName?: string;
+  fullName?: string | null;
   /**
    * The first name of the booking holder or the ticket holder.
    */
-  firstName?: string;
+  firstName?: string | null;
   /**
    * The last name of the booking holder or the ticket holder.
    */
-  lastName?: string;
+  lastName?: string | null;
   /**
    * The email address of the booking holder or the ticket holder.
    */
-  emailAddress?: string;
+  emailAddress?: string | null;
   /**
    * The phone number of the booking holder or the ticket holder.
    */
-  phoneNumber?: string;
+  phoneNumber?: string | null;
   /**
    * An array of locale values, equivalent to navigator.languages in a browsers environment.
    */
@@ -464,11 +464,11 @@ export type BookingContact = {
   /**
    * The PO Box of the booking holder or the ticket holder.
    */
-  postalCode?: string;
+  postalCode?: string | null;
   /**
    * The country of the booking holder or the ticket holder.
    */
-  country?: string;
+  country?: string | null;
   /**
    * Optional notes for the booking.
    */
