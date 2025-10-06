@@ -37,7 +37,7 @@
     "@biomejs/biome": "1.9.4",
     "@types/node": "^22.9.0",
     "audit-ci": "7.1.0",
-    "lefthook": "1.10.10",
+    "lefthook": "1.13.6",
     "typescript": "^5.7.2"
   }
 }
