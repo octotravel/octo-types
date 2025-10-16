@@ -890,6 +890,28 @@ export enum FeatureType {
   CANCELLATION_TERM = 'CANCELLATION_TERM',
 }
 
+export type GetBookingsQueryParams = {
+  /**
+   * The reseller reference on the booking
+   */
+  resellerReference?: string;
+  /**
+   * The reference provided by the supplier
+   */
+  supplierReference?: string;
+};
+
+export type GetBookingsRequest = {
+  /**
+   * The reseller reference on the booking
+   */
+  resellerReference?: string;
+  /**
+   * The reference provided by the supplier
+   */
+  supplierReference?: string;
+};
+
 export type GetProductPathParams = {
   /**
    * The id of the product
@@ -1874,39 +1896,14 @@ export type ExtendReservationRequestUuid = string;
 export type GetBookingRequestUuid = string;
 
 /**
- * All bookings made for a specific date
- */
-export type GetBookingsRequestLocalDate = string;
-
-/**
- * Last date of a date range search
- */
-export type GetBookingsRequestLocalDateEnd = string;
-
-/**
- * First date of a date range search
- */
-export type GetBookingsRequestLocalDateStart = string;
-
-/**
- * The option id to filter by
- */
-export type GetBookingsRequestOptionId = string;
-
-/**
- * The product id to filter by
- */
-export type GetBookingsRequestProductId = string;
-
-/**
  * The reseller reference on the booking
  */
-export type GetBookingsRequestResellerReference = string;
+export type GetBookingsQueryResellerReference = string;
 
 /**
  * The reference provided by the supplier
  */
-export type GetBookingsRequestSupplierReference = string;
+export type GetBookingsQuerySupplierReference = string;
 
 /**
  * The product id
@@ -2031,26 +2028,6 @@ export type BookingsGetBookingsData = {
      * The reference provided by the supplier
      */
     supplierReference?: string;
-    /**
-     * All bookings made for a specific date
-     */
-    localDate?: string;
-    /**
-     * First date of a date range search
-     */
-    localDateStart?: string;
-    /**
-     * Last date of a date range search
-     */
-    localDateEnd?: string;
-    /**
-     * The product id to filter by
-     */
-    productId?: string;
-    /**
-     * The option id to filter by
-     */
-    optionId?: string;
   };
   url: '/bookings/';
 };

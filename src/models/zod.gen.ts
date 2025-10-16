@@ -483,7 +483,7 @@ export const zBooking = z.object({
 });
 
 export const zBookingCancellationBody = z.object({
-  reason: z.string().optional(),
+  reason: z.union([z.string(), z.null()]).optional(),
   force: z.boolean().optional(),
 });
 
@@ -492,14 +492,14 @@ export const zBookingCancellationPathParams = z.object({
 });
 
 export const zBookingContact = z.object({
-  fullName: z.string().optional(),
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
-  emailAddress: z.string().email().optional(),
-  phoneNumber: z.string().optional(),
+  fullName: z.union([z.string(), z.null()]).optional(),
+  firstName: z.union([z.string(), z.null()]).optional(),
+  lastName: z.union([z.string(), z.null()]).optional(),
+  emailAddress: z.union([z.string().email(), z.null()]).optional(),
+  phoneNumber: z.union([z.string(), z.null()]).optional(),
   locales: z.array(z.string()).optional(),
-  postalCode: z.string().optional(),
-  country: z.string().optional(),
+  postalCode: z.union([z.string(), z.null()]).optional(),
+  country: z.union([z.string(), z.null()]).optional(),
   notes: z.union([z.string(), z.null()]).optional(),
 });
 
@@ -631,6 +631,16 @@ export const zExtendReservationPathParams = z.object({
   uuid: z.string(),
 });
 
+export const zGetBookingsQueryParams = z.object({
+  resellerReference: z.string().optional(),
+  supplierReference: z.string().optional(),
+});
+
+export const zGetBookingsRequest = z.object({
+  resellerReference: z.string().optional(),
+  supplierReference: z.string().optional(),
+});
+
 export const zGetProductPathParams = z.object({
   id: z.string(),
 });
@@ -757,39 +767,14 @@ export const zExtendReservationRequestUuid = z.string();
 export const zGetBookingRequestUuid = z.string();
 
 /**
- * All bookings made for a specific date
- */
-export const zGetBookingsRequestLocalDate = z.string();
-
-/**
- * Last date of a date range search
- */
-export const zGetBookingsRequestLocalDateEnd = z.string();
-
-/**
- * First date of a date range search
- */
-export const zGetBookingsRequestLocalDateStart = z.string();
-
-/**
- * The option id to filter by
- */
-export const zGetBookingsRequestOptionId = z.string();
-
-/**
- * The product id to filter by
- */
-export const zGetBookingsRequestProductId = z.string();
-
-/**
  * The reseller reference on the booking
  */
-export const zGetBookingsRequestResellerReference = z.string();
+export const zGetBookingsQueryResellerReference = z.string();
 
 /**
  * The reference provided by the supplier
  */
-export const zGetBookingsRequestSupplierReference = z.string();
+export const zGetBookingsQuerySupplierReference = z.string();
 
 /**
  * The product id
@@ -843,11 +828,6 @@ export const zBookingsGetBookingsData = z.object({
     .object({
       resellerReference: z.string().optional(),
       supplierReference: z.string().optional(),
-      localDate: z.string().optional(),
-      localDateStart: z.string().optional(),
-      localDateEnd: z.string().optional(),
-      productId: z.string().optional(),
-      optionId: z.string().optional(),
     })
     .optional(),
   headers: z.object({
