@@ -6,6 +6,10 @@ on:
       - master
       - main
 
+permissions:
+  id-token: write  # Required for OIDC
+  contents: read
+
 env:
   NODE_VERSION: 22.9.0
 
