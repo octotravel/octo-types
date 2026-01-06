@@ -1,6 +1,6 @@
 {
   "name": "@octocloud/types",
-  "version": "1.5.47",
+  "version": "2.0.3",
   "description": "",
   "license": "ISC",
   "author": "",
@@ -14,6 +14,9 @@
   },
   "main": "dist/index.js",
   "scripts": {
+    "get:openapi:yaml": "ts-node src/utils/get-openapi-yaml.ts",
+    "clean": "rm -rf dist",
+    "generate": "openapi-ts && rm -f src/models/index.ts",
     "build": "npx tsc",
     "build:dry": "tsc --noEmit",
     "build:dry:ci": "tsc --noEmit",
@@ -23,21 +26,20 @@
     "format:fix": "biome format --write .",
     "lint": "biome lint",
     "lint:fix": "biome lint --write .",
+    "audit": "npm audit",
     "test": "",
-    "lefthook": "lefthook install",
-    "audit": "audit-ci --config ./audit-ci.json",
     "prepare": "npm run build"
   },
-  "types": "dist/index.d.ts",
   "dependencies": {
-    "@adyen/adyen-web": "6.14.0",
-    "yup": "0.32.11"
+    "yup": "0.32.11",
+    "zod": "4.1.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
-    "@types/node": "^22.9.0",
+    "@biomejs/biome": "2.2.0",
+    "@hey-api/openapi-ts": "0.90.1",
+    "@types/node": "22.9.0",
     "audit-ci": "7.1.0",
-    "lefthook": "1.10.10",
-    "typescript": "^5.7.2"
+    "ts-node": "10.9.2",
+    "typescript": "5.7.2"
   }
 }
