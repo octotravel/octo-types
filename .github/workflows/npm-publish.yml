@@ -10,9 +10,6 @@ permissions:
   id-token: write  # Required for OIDC
   contents: read
 
-env:
-  NODE_VERSION: 22.9.0
-
 jobs:
   publish-npm:
     name: Publish to NPM
@@ -20,13 +17,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup node
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: '24'
           registry-url: 'https://registry.npmjs.org'
 
       - uses: actions/cache@v4
