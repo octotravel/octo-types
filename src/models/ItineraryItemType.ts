@@ -1,0 +1,10 @@
+/* generated using openapi-typescript-codegen -- do not edit */
+/* istanbul ignore file */
+/* tslint:disable */
+/* eslint-disable */
+export enum ItineraryItemType {
+	START = 'START',
+	POI = 'POI',
+	END = 'END',
+	EVENT = 'EVENT',
+}

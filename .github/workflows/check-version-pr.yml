@@ -3,7 +3,6 @@ name: Check version
 on:
   pull_request:
     branches:
-      - master
       - main
 
 env:
