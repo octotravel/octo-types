@@ -1,0 +1,14 @@
+/* generated using openapi-typescript-codegen -- do not edit */
+/* istanbul ignore file */
+/* tslint:disable */
+/* eslint-disable */
+export type GetBookingsRequest = {
+  /**
+   * The reseller reference on the booking
+   */
+  resellerReference?: string;
+  /**
+   * The reference provided by the supplier
+   */
+  supplierReference?: string;
+};

@@ -4475,6 +4475,43 @@ components:
                 quantity: 2
               - id: child_797e3ce8-1860-4cbf-80ad-95857df1f640
                 quantity: 1
+    AvailabilityCalendarSchema:
+      type: object
+      required:
+        - productId
+        - optionId
+      properties:
+        productId:
+          type: string
+          description: The product id.
+          example: 6b903d44-dc24-4ca4-ae71-6bde6c4f4854
+        optionId:
+          type: string
+          description: The option id.
+          example: DEFAULT
+        localDateStart:
+          type: string
+          description: Start date to query for (YYYY-MM-DD).
+          example: "2022-05-23"
+        localDateEnd:
+          type: string
+          description: End date to query for (YYYY-MM-DD).
+          example: "2022-05-29"
+        units:
+          type: array
+          items:
+            $ref: "#/components/schemas/AvailabilityUnit"
+          description: A list of units.
+          example:
+            - id: adult_697e3ce8-1860-4cbf-80ad-95857df1f640
+              quantity: 2
+            - id: child_797e3ce8-1860-4cbf-80ad-95857df1f640
+              quantity: 1
+        currency:
+          type: string
+          nullable: true
+          description: Can be used only when pricing capability is used.
+          example: USD
     AvailabilityCheckBody:
       type: object
       required:
@@ -4542,6 +4579,50 @@ components:
                 quantity: 2
               - id: child_797e3ce8-1860-4cbf-80ad-95857df1f640
                 quantity: 1
+    AvailabilityCheckSchema:
+      type: object
+      required:
+        - productId
+        - optionId
+      properties:
+        productId:
+          type: string
+          description: The product id.
+          example: 6b903d44-dc24-4ca4-ae71-6bde6c4f4854
+        optionId:
+          type: string
+          description: The option id.
+          example: DEFAULT
+        localDateStart:
+          type: string
+          description: Start date to query for (YYYY-MM-DD). Required if `localDateEnd` is set.
+          example: "2022-05-23"
+        localDateEnd:
+          type: string
+          description: End date to query for (YYYY-MM-DD). Required if `localDateStart` is set.
+          example: "2022-05-29"
+        availabilityIds:
+          type: array
+          items:
+            type: string
+          description: Filter the results by the given ids.
+          example:
+            - "2022-05-23T00:00:00+01:00"
+        units:
+          type: array
+          items:
+            $ref: "#/components/schemas/AvailabilityUnit"
+          description: A list of units.
+          example:
+            - id: adult_697e3ce8-1860-4cbf-80ad-95857df1f640
+              quantity: 2
+            - id: child_797e3ce8-1860-4cbf-80ad-95857df1f640
+              quantity: 1
+        currency:
+          type: string
+          nullable: true
+          description: Can be used only when pricing capability is used.
+          example: USD
     AvailabilityContent:
       type: object
       properties:
@@ -5118,6 +5199,23 @@ components:
         uuid:
           type: string
           description: The UUID of the booking
+    BookingCancellationSchema:
+      type: object
+      required:
+        - uuid
+      properties:
+        uuid:
+          type: string
+          description: The UUID of the booking
+        reason:
+          type: string
+          nullable: true
+          description: A text value describing why the cancellation happened.
+          example: Whether you want OCTO Cloud to email the guest a copy of their receipt and tickets. (defaults to false)
+        force:
+          type: boolean
+          description: Whether you want OCTO Cloud to email the guest a copy of their receipt and tickets. (defaults to false)
+          example: false
     BookingConfirmationBody:
       type: object
       required:
@@ -5175,6 +5273,46 @@ components:
         uuid:
           type: string
           description: The UUID of the booking
+    BookingConfirmationSchema:
+      type: object
+      required:
+        - uuid
+        - contact
+      properties:
+        uuid:
+          type: string
+          description: The UUID of the booking
+        emailReceipt:
+          type: boolean
+          description: Whether you want OCTO Cloud to email the guest a copy of their receipt and tickets. (defaults to false)
+          example: true
+        resellerReference:
+          type: string
+          description: Your reference for this booking. Also known as a Voucher Number.
+          example: VOUCHER-0123
+        contact:
+          allOf:
+            - $ref: "#/components/schemas/BookingContact"
+          description: Contact details for the main guest who will attend the tour/attraction. Contact BODY can be applied to both the booking object (the main reservation) or the unit object (individual ticket holders - if the supplier requires this information).
+          example:
+            fullName: John Doe
+            firstName: John
+            lastName: Doe
+            emailAddress: johndoe@email.com
+            phoneNumber: "+447840739436"
+            locales:
+              - en
+              - en-GB
+              - en-US
+            country: GB
+        unitItems:
+          type: array
+          items:
+            $ref: "#/components/schemas/BookingUnitItem"
+          description: An array of unit items that will be included in the booking. This allows you to provide contact details or a reseller reference for each unit item. Be careful to make sure you include ALL unit items that you also had in the original booking reservation request, if you provide more or less than in the booking reservation call this will change the number of unit items being purchased also.
+          example:
+            - uuid: 3b1bc2ee-3155-4738-9471-f49842a07327
+              unitId: adult_697e3ce8-1860-4cbf-80ad-95857df1f640
     BookingContact:
       type: object
       properties:
@@ -5363,6 +5501,71 @@ components:
               - unitId: adult_697e3ce8-1860-4cbf-80ad-95857df1f640
               - unitId: child_797e3ce8-1860-4cbf-80ad-95857df1f640
               - unitId: infant_897e3ce8-1860-4cbf-80ad-95857df1f640
+    BookingReservationSchema:
+      type: object
+      required:
+        - productId
+        - optionId
+        - unitItems
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: A unique UUID to identify the booking. Setting this value acts like an idempotency key preventing you from double booking.
+          example: 559aed3d-6d5b-4fe0-bfca-99f5e7218a56
+        productId:
+          type: string
+          description: The product ID for this booking.
+          example: 6b903d44-dc24-4ca4-ae71-6bde6c4f4854
+        optionId:
+          type: string
+          description: The option ID for this booking.
+          example: DEFAULT
+        availabilityId:
+          type: string
+          description: The availability ID for the selected timeslot.
+          example: "2022-05-23T00:00:00+01:00"
+        expirationMinutes:
+          type: integer
+          description: How many minutes to reserve the availability, otherwise defaults to the supplier default amount.
+          example: 30
+        notes:
+          type: string
+          nullable: true
+          description: Optional notes for the booking.
+          example: Optional notes
+        unitItems:
+          type: array
+          items:
+            $ref: "#/components/schemas/BookingUnitItem"
+          description: An list of unit items that will be included in the booking.
+          example:
+            - uuid: 3b1bc2ee-3155-4738-9471-f49842a07327
+              unitId: adult_697e3ce8-1860-4cbf-80ad-95857df1f640
+        resellerReference:
+          type: string
+          description: Your reference for this booking. Also known as a Voucher Number.
+          example: VOUCHER-0123
+        contact:
+          allOf:
+            - $ref: "#/components/schemas/BookingContact"
+          description: Contact details for the main guest who will attend the tour/attraction. Contact BODY can be applied to both the booking object (the main reservation) or the unit object (individual ticket holders - if the supplier requires this information).
+          example:
+            fullName: John Doe
+            firstName: John
+            lastName: Doe
+            emailAddress: johndoe@email.com
+            phoneNumber: "+447840739436"
+            locales:
+              - en
+              - en-GB
+              - en-US
+            country: GB
+        currency:
+          type: string
+          nullable: true
+          description: Can be used only when pricing capability is used.
+          example: USD
     BookingStatus:
       type: string
       enum:
@@ -5480,6 +5683,66 @@ components:
         uuid:
           type: string
           description: The UUID of the booking
+    BookingUpdateSchema:
+      type: object
+      required:
+        - uuid
+      properties:
+        uuid:
+          type: string
+          description: The UUID of the booking
+        resellerReference:
+          type: string
+          description: Your reference for this booking. Also known as a Voucher Number.
+          example: VOUCHER-0123
+        productId:
+          type: string
+          description: The product ID.
+          example: 6b903d44-dc24-4ca4-ae71-6bde6c4f4854
+        optionId:
+          type: string
+          description: The option id.
+          example: DEFAULT
+        availabilityId:
+          type: string
+          description: The availability ID for the selected timeslot.
+          example: "2022-05-23T00:00:00+01:00"
+        expirationMinutes:
+          type: integer
+          description: How many minutes to reserve the availability, otherwise defaults to the supplier default amount.
+          example: 15
+        notes:
+          type: string
+          nullable: true
+          description: Optional notes for the booking.
+          example: Optional notes
+        emailReceipt:
+          type: boolean
+          description: Whether you want OCTO Cloud to email the guest a copy of their receipt and tickets. (defaults to false).
+          example: true
+        unitItems:
+          type: array
+          items:
+            $ref: "#/components/schemas/BookingUnitItem"
+          description: An array of unit items in the booking. To retain or modify existing unit items, you must include the unit item with the associated uuid, otherwise that unit item will be removed.
+          example:
+            - uuid: 3b1bc2ee-3155-4738-9471-f49842a07327
+              unitId: adult_697e3ce8-1860-4cbf-80ad-95857df1f640
+        contact:
+          allOf:
+            - $ref: "#/components/schemas/BookingContact"
+          description: Contact details for the main guest who will attend the tour/attraction. Contact BODY can be applied to both the booking object (the main reservation) or the unit object (individual ticket holders - if the supplier requires this information).
+          example:
+            fullName: John Doe
+            firstName: John
+            lastName: Doe
+            emailAddress: johndoe@email.com
+            phoneNumber: "+447840739436"
+            locales:
+              - en
+              - en-GB
+              - en-US
+            country: GB
     Capability:
       type: object
       required:
@@ -5854,6 +6117,16 @@ components:
         uuid:
           type: string
           description: The UUID of the booking
+    ExtendReservationSchema:
+      type: object
+      required:
+        - uuid
+      properties:
+        uuid:
+          type: string
+          description: The UUID of the booking
+        expirationMinutes:
+          type: integer
     FAQ:
       type: object
       required:
@@ -5917,6 +6190,22 @@ components:
         - BOOKING_TERM
         - CANCELLATION_TERM
       example: CANCELLATION_TERM
+    GetBookingPathParams:
+      type: object
+      required:
+        - uuid
+      properties:
+        uuid:
+          type: string
+          description: The UUID of the booking
+    GetBookingSchema:
+      type: object
+      required:
+        - uuid
+      properties:
+        uuid:
+          type: string
+          description: The UUID of the booking
     GetBookingsQueryParams:
       type: object
       properties:
@@ -5935,7 +6224,24 @@ components:
         supplierReference:
           type: string
           description: The reference provided by the supplier
+    GetBookingsSchema:
+      type: object
+      properties:
+        resellerReference:
+          type: string
+          description: The reseller reference on the booking
+        supplierReference:
+          type: string
+          description: The reference provided by the supplier
     GetProductPathParams:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: The id of the product
+    GetProductSchema:
       type: object
       required:
         - id
@@ -5945,7 +6251,11 @@ components:
           description: The id of the product
     GetProductsRequest:
       type: object
+    GetProductsSchema:
+      type: object
     GetSupplierRequest:
+      type: object
+    GetSupplierSchema:
       type: object
     Identifiers:
       type: object
