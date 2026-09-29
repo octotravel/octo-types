@@ -1,79 +1,79 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.5.14/schema.json",
-	"vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
-	"files": {
-		"ignoreUnknown": false,
-		"includes": ["**", "!**/__generated__"]
-	},
-	"formatter": {
-		"enabled": true,
-		"useEditorconfig": true,
-		"formatWithErrors": false,
-		"lineWidth": 120,
-		"attributePosition": "auto",
-		"bracketSpacing": true
-	},
-	"assist": { "actions": { "source": { "organizeImports": "off" } } },
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"preset": "recommended",
-			"nursery": {
-				"noFloatingPromises": "error"
-			},
-			"complexity": {
-				"noStaticOnlyClass": "off",
-				"noForEach": "off",
-				"useLiteralKeys": "off",
-				"useDateNow": "off"
-			},
-			"correctness": {
-				"noUnusedVariables": "off",
-				"noUnusedFunctionParameters": "off"
-			},
-			"style": {
-				"useBlockStatements": "off",
-				"useImportType": "off",
-				"noNonNullAssertion": "off",
-				"noParameterAssign": "off",
-				"noUselessElse": "off",
-				"useArrayLiterals": "off",
-				"useConsistentMemberAccessibility": {
-					"level": "error",
-					"options": {
-						"accessibility": "explicit"
-					}
-				}
-			},
-			"suspicious": {
-				"noEmptyBlockStatements": "off",
-				"noExplicitAny": "off",
-				"noImplicitAnyLet": "off"
-			},
-			"performance": {
-				"noAccumulatingSpread": "off"
-			}
-		}
-	},
-	"javascript": {
-		"parser": {
-			"unsafeParameterDecoratorsEnabled": true
-		},
-		"formatter": {
-			"jsxQuoteStyle": "double",
-			"quoteProperties": "asNeeded",
-			"trailingCommas": "all",
-			"semicolons": "always",
-			"arrowParentheses": "always",
-			"bracketSameLine": false,
-			"quoteStyle": "single",
-			"attributePosition": "auto",
-			"bracketSpacing": true
-		}
-	},
-	"json": {
-		"formatter": {
-			"trailingCommas": "none"
-		}
-	}
+  "$schema": "https://biomejs.dev/schemas/2.2.0/schema.json",
+  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+  "files": {
+    "ignoreUnknown": false,
+    "includes": ["**", "!**/__generated__"]
+  },
+  "formatter": {
+    "enabled": true,
+    "useEditorconfig": true,
+    "formatWithErrors": false,
+    "lineWidth": 120,
+    "attributePosition": "auto",
+    "bracketSpacing": true
+  },
+  "assist": { "actions": { "source": { "organizeImports": "off" } } },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "nursery": {
+        "noFloatingPromises": "error"
+      },
+      "complexity": {
+        "noStaticOnlyClass": "off",
+        "noForEach": "off",
+        "useLiteralKeys": "off",
+        "useDateNow": "off"
+      },
+      "correctness": {
+        "noUnusedVariables": "off",
+        "noUnusedFunctionParameters": "off"
+      },
+      "style": {
+        "useBlockStatements": "off",
+        "useImportType": "off",
+        "noNonNullAssertion": "off",
+        "noParameterAssign": "off",
+        "noUselessElse": "off",
+        "useArrayLiterals": "off",
+        "useConsistentMemberAccessibility": {
+          "level": "error",
+          "options": {
+            "accessibility": "explicit"
+          }
+        }
+      },
+      "suspicious": {
+        "noEmptyBlockStatements": "off",
+        "noExplicitAny": "off",
+        "noImplicitAnyLet": "off"
+      },
+      "performance": {
+        "noAccumulatingSpread": "off"
+      }
+    }
+  },
+  "javascript": {
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true
+    },
+    "formatter": {
+      "jsxQuoteStyle": "double",
+      "quoteProperties": "asNeeded",
+      "trailingCommas": "all",
+      "semicolons": "always",
+      "arrowParentheses": "always",
+      "bracketSameLine": false,
+      "quoteStyle": "single",
+      "attributePosition": "auto",
+      "bracketSpacing": true
+    }
+  },
+  "json": {
+    "formatter": {
+      "trailingCommas": "none"
+    }
+  }
 }

@@ -1,9 +1,6 @@
-node_modules/
-dist/
-coverage/
-.env
-.DS_Store
-*.log
+node_modules
+coverage
+dist
 .idea
-
-
+.vscode
+.cache
