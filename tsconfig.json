@@ -4,11 +4,13 @@
     "module": "CommonJS",
     "strict": true,
     "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "declaration": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "rootDir": "./src"
   },
-  "include": ["src/models/*.ts", "src/schemas/*.ts", "src/index.ts", "src/global.d.ts"],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
 }
